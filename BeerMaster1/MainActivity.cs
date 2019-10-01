@@ -9,7 +9,7 @@ using Android.Widget;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using System.Data.SqlClient;
 using System.Data;
-
+//kommentttt
 namespace BeerMaster1
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
