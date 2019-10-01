@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Runtime;
@@ -9,6 +10,8 @@ using Android.Widget;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using System.Data.SqlClient;
 using System.Data;
+using System.Net.Http;
+using Newtonsoft.Json;
 //kommentttt
 namespace BeerMaster1
 {
@@ -21,9 +24,10 @@ namespace BeerMaster1
             base.OnCreate(savedInstanceState);
             
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            Login();
             SetContentView(Resource.Layout.activity_main);
 
-    }
+        }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -32,7 +36,20 @@ namespace BeerMaster1
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        public async void Login()
+        {
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
-	}
+            // Pass the handler to httpclient(from you are calling api)
+            var client = new HttpClient(clientHandler);
+            var respone = await client.GetStringAsync("http://10.0.2.2:44384/api/ToDoItems");
+
+            var allresponse = JsonConvert.DeserializeObject <List<ToDoItems>>(respone);
+        }
+
+        
+    }
+
 }
 
