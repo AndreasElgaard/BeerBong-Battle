@@ -19,20 +19,17 @@ namespace Sensor
         public bool Detected()
         {
             bool result = false;
-            int counter; 
+            int counter = 0; 
             var magneticGpioPin = Pi.Gpio[6];
             magneticGpioPin.PinMode = GpioPinDriveMode.Input;
 
             while (counter > 1)
             {
-                
+                if (magneticGpioPin.Read() == true)
+                {
+                    counter++;
+                }
             }
-            if (magneticGpioPin.Read() == false)
-            {
-                Console.WriteLine("No laser detected");
-
-            }
-
             return result; 
         }
     }
