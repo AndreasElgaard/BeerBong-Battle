@@ -11,7 +11,7 @@ namespace Sensor
 {
     interface ISensor
     {
-        bool Initiate();
+        void Initiate();
         bool Detected();  
     }
 }
