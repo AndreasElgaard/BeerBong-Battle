@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace RaspberryPiStates
 {
-    class EmptyState
+    class EmptyState : RaspberryPiStates
     {
+        public override bool IsFull()
+        {
+            return false;
+        }
+
+        public override double Timer()
+        {
+            return -1;
+        }
     }
 }

@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RaspberryPiStates\RaspberryPiStates.cs" />
     <Compile Include="Sensor\LaserSensor.cs" />
+    <Compile Include="Sensor\LaserSensorBottom.cs" />
     <Compile Include="Sensor\MagnetSensor.cs" />
   </ItemGroup>
   <ItemGroup>

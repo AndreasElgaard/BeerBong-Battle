@@ -9,6 +9,6 @@ namespace RaspberryPiStates
     public abstract class RaspberryPiStates
     {
         public abstract bool IsFull();
-        public abstract bool Timer(); 
+        public abstract double Timer(); 
     }
 }

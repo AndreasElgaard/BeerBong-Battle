@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace RaspberryPiStates
 {
-    class FullState
+    class FullState : RaspberryPiStates
     {
+
     }
 }
