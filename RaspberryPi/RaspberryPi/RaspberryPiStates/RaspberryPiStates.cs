@@ -10,12 +10,6 @@ namespace RaspberryPiStates
 {
     public abstract class RaspberryPiStates
     {
-        private int currentState = 0;
         public abstract bool IsFull();
-
-        public void SetState(int index)
-        {
-            currentState = index; 
-        }
     }
 }

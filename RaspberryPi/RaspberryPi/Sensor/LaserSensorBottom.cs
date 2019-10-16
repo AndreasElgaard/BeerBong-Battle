@@ -18,16 +18,16 @@ namespace Sensor
         }
         public bool Detected()
         {
-            var Laser_Bot = Pi.Gpio[8];
+            var Laser_Bot = Pi.Gpio[6];
             Laser_Bot.PinMode = GpioPinDriveMode.Input;
             if (Laser_Bot.Read() == true)
             {
-                Console.WriteLine("Laser detected");
+                Console.WriteLine("Laser detected - From Bottom sensor");
                 return true;
             }
             else
             {
-                Console.WriteLine("No laser detected");
+                Console.WriteLine("No laser detected - From bottom sensor");
                 return false;
             }
         }

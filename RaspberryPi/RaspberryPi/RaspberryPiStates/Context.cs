@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RaspberryPiStates
 {
+
     public class Context
     {
         private RaspberryPiStates _currentState;
@@ -28,7 +29,7 @@ namespace RaspberryPiStates
         public bool IsFull()
         {
             _currentState.IsFull();
-            return false; 
+            return false;
         }
     }
 }

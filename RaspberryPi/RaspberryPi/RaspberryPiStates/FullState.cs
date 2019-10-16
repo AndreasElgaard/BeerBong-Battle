@@ -17,7 +17,8 @@ namespace RaspberryPiStates
         Stopwatch time = new Stopwatch();
         public override bool IsFull()
         {
-            if (LaserBot.Detected() == false && LaserTop.Detected() == false)
+            Console.WriteLine("This is Fullstate");
+            if (LaserBot.Detected() && LaserTop.Detected() == false)
             {
                 Console.WriteLine("BeerBong is full and you can start drinking!");
                 return true; 

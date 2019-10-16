@@ -14,12 +14,12 @@ namespace RaspberryPiStates
         LaserSensorTop LaserTop = new LaserSensorTop();
         public override bool IsFull()
         {
-            if (LaserBot.Detected() == true && LaserTop.Detected() == true)
+            Console.WriteLine("This is EmptyState");
+            if (LaserBot.Detected() && LaserTop.Detected() == true)
             {
                 Console.WriteLine("BeerBong is NOT full please refill your beerbong");
                 return false;
             }
-
             else
             {
                 Console.WriteLine("BeerBong is full");

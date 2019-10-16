@@ -22,12 +22,12 @@ namespace Sensor
             Laser_Top.PinMode = GpioPinDriveMode.Input;
             if (Laser_Top.Read() == true)
             {
-                Console.WriteLine("Laser detected"); 
+                Console.WriteLine("Laser detected - From top sensor"); 
                 return true;
             }
             else
             {
-                Console.WriteLine("No laser detected");
+                Console.WriteLine("No laser detected - from top sensor");
                 return false;
             }
         }

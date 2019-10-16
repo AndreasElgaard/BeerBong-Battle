@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace RaspberryPi.Bluetooth
         private SerialPortStream bt;
         public void Init()
         {
-            bt = new SerialPortStream("/dev/rfcomm0", 9600, 8, Parity.None, StopBits.One);
+            bt = new SerialPortStream("/dev/rfcomm0", 9600, 8, RJCP.IO.Ports.Parity.None, RJCP.IO.Ports.StopBits.One);
             bt.Open();
 
         }

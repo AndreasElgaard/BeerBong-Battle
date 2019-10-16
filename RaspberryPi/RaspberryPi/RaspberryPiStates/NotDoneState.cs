@@ -14,7 +14,8 @@ namespace RaspberryPiStates
 
         public override bool IsFull()
         {
-            if (LaserBot.Detected() == false && LaserTop.Detected() == true)
+            Console.WriteLine("This is NotDoneState");
+            if (LaserBot.Detected() && LaserTop.Detected() == true)
             {
                 Console.WriteLine("You are not finished drinking!");
                 return false;
