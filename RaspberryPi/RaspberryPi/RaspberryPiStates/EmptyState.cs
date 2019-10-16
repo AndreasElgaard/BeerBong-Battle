@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace RaspberryPiStates
 {
@@ -11,7 +12,7 @@ namespace RaspberryPiStates
     {
         public override bool IsFull()
         {
-            return false;
+            return true; 
         }
 
         public override double Timer()
