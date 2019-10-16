@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace RaspberryPiStates
 {
     class EmptyState : RaspberryPiStates
+
     {
         public override bool IsFull()
         {
