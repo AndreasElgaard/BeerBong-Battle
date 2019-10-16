@@ -13,27 +13,47 @@ namespace RaspberryPi
 {
     public class Program
     {
-        public LaserSensorTop LaserTop;
-        private LaserSensorBottom LaserBot;
-        private MagnetSensor MagSen;
-        private RaspberryPiStates.RaspberryPiStates currentState_;
-
         static void Main(string[] args)
         {
-            //Program start = new Program();
-            //start.Init();
             MagnetSensor Magnet = new MagnetSensor();
             LaserSensorBottom LaserBot = new LaserSensorBottom();
             LaserSensorTop LaserTop = new LaserSensorTop();
+            Context context = new Context();
             Magnet.Initiate();
-            Magnet.Detected();
-        }
-        public void Init()
-        {
-            LaserTop = new LaserSensorTop();
-            LaserBot = new LaserSensorBottom();
-            MagSen = new MagnetSensor();
-            currentState_ = new EmptyState();
+            LaserTop.Initiate();
+            LaserBot.Initiate();
+
+            while (true)
+            {
+                while (true)
+                {
+                    if (context.IsFull() == false)
+                    {
+                        context.IsFull();
+                        context.setState(new EmptyState());
+                    }
+                    else
+                    {
+                        context.IsFull();
+                        context.setState(new FullState());
+                        break; 
+                    }
+                }
+                Console.WriteLine("Congratulatio" +
+                                  "ns");
+                context.IsFull();
+                break; 
+                //if (context.IsFull() == true)
+                //{
+                //    emptyState.IsFull();
+                //    context.setState(new FullState());
+                //}
+
+                //if (fullState.IsFull() == true)
+                //{
+
+                //}
+            }
         }
     }
 }

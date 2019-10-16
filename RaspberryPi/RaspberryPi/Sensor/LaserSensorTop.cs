@@ -19,13 +19,11 @@ namespace Sensor
         public bool Detected()
         { 
             var Laser_Top = Pi.Gpio[7];
-            //TimeSpan
             Laser_Top.PinMode = GpioPinDriveMode.Input;
-            //GPIO_21.ReadValue();
             if (Laser_Top.Read() == true)
             {
-                    Console.WriteLine("Laser detected");
-                    return true;
+                Console.WriteLine("Laser detected"); 
+                return true;
             }
             else
             {
