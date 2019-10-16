@@ -18,19 +18,21 @@ namespace Sensor
         }
         public bool Detected()
         {
-            bool result = false;
-            int counter = 0; 
-            var magneticGpioPin = Pi.Gpio[6];
-            magneticGpioPin.PinMode = GpioPinDriveMode.Input;
-
-            while (counter > 1)
+            var magnet = Pi.Gpio[17];
+            //TimeSpan
+            magnet.PinMode = GpioPinDriveMode.Input;
+            //GPIO_21.ReadValue();
+            if (magnet.Read() == true)
             {
-                if (magneticGpioPin.Read() == true)
-                {
-                    counter++;
-                }
+                Console.WriteLine("Magnet detected");
+                return true;
             }
-            return result; 
+
+            else 
+            {
+                Console.WriteLine("No mangnet detected");
+                return false;
+            }
         }
     }
 }

@@ -9,33 +9,28 @@ using Unosquare.WiringPi;
 
 namespace Sensor
 {
-    class LaserSensor
+    public class LaserSensorTop : ISensor
     {
         
         public void Initiate()
         {
             Pi.Init<BootstrapWiringPi>();
         }
-        public bool Detect()
+        public bool Detected()
         { 
             var Laser_Top = Pi.Gpio[7];
             //TimeSpan
             Laser_Top.PinMode = GpioPinDriveMode.Input;
             //GPIO_21.ReadValue();
-            while (true)
+            if (Laser_Top.Read() == true)
             {
-                if (Laser_Top.Read() == false)
-                {
-                    Console.WriteLine("No laser detected");
-                    //System.Threading.Thread.Sleep(1000);
-                    return false;
-                }
-                if (Laser_Top.Read() == true)
-                {
                     Console.WriteLine("Laser detected");
-                    //System.Threading.Thread.Sleep(1000);
                     return true;
-                }
+            }
+            else
+            {
+                Console.WriteLine("No laser detected");
+                return false;
             }
         }
 
