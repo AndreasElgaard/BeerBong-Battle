@@ -15,12 +15,11 @@ namespace RaspberryPi.Bluetooth
         {
             bt = new SerialPortStream("/dev/rfcomm0", 9600, 8, Parity.None, StopBits.One);
             bt.Open();
-
         }
 
-        public void SendByte(byte[] a)
+        public void SendBDAta(string data)
         {
-            bt.Write(a,0,8);
+            bt.WriteLine(data);
         }
 
         public int ReceviceByte()
