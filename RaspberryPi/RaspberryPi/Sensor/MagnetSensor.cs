@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Unosquare.RaspberryIO;
 using Unosquare.RaspberryIO.Abstractions;
 using Unosquare.WiringPi;
-using RaspberryPiStates;
 
 namespace Sensor
 {
@@ -19,16 +18,14 @@ namespace Sensor
         public bool Detected()
         {
             var magnet = Pi.Gpio[17];
-            //TimeSpan
             magnet.PinMode = GpioPinDriveMode.Input;
-            //GPIO_21.ReadValue();
             if (magnet.Read() == true)
             {
                 Console.WriteLine("Magnet detected");
                 return true;
             }
 
-            else 
+            else
             {
                 Console.WriteLine("No mangnet detected");
                 return false;

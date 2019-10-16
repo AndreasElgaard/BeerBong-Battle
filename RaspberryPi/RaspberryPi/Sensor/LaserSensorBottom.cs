@@ -15,14 +15,11 @@ namespace Sensor
         public void Initiate()
         {
             Pi.Init<BootstrapWiringPi>();
-            
         }
         public bool Detected()
         {
             var Laser_Bot = Pi.Gpio[8];
-            //TimeSpan
             Laser_Bot.PinMode = GpioPinDriveMode.Input;
-            //GPIO_21.ReadValue();
             if (Laser_Bot.Read() == true)
             {
                 Console.WriteLine("Laser detected");

@@ -3,26 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 using Sensor;
 
 namespace RaspberryPiStates
 {
-    public class EmptyState : RaspberryPiStates
+    public class NotDoneState : RaspberryPiStates
     {
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
+
         public override bool IsFull()
         {
-            if (LaserBot.Detected() == true && LaserTop.Detected() == true)
+            if (LaserBot.Detected() == false && LaserTop.Detected() == true)
             {
-                Console.WriteLine("BeerBong is NOT full please refill your beerbong");
+                Console.WriteLine("You are not finished drinking!");
+                return false;
+            }
+
+            if (LaserBot.Detected() == true && LaserTop.Detected() == false)
+            {
+                Console.WriteLine("We got a problem, this should not happen");
                 return false;
             }
 
             else
             {
-                Console.WriteLine("BeerBong is full");
+                Console.WriteLine("BeerBong is empty");
                 return true; 
             }
         }

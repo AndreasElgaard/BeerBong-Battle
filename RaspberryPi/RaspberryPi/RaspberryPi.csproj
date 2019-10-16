@@ -69,8 +69,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RaspberryPiStates\Context.cs" />
     <Compile Include="RaspberryPiStates\EmptyState.cs" />
     <Compile Include="RaspberryPiStates\FullState.cs" />
+    <Compile Include="RaspberryPiStates\NotDoneState.cs" />
     <Compile Include="Sensor\ISensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
