@@ -153,6 +153,7 @@
     <Compile Include="Sensor\LaserSensorTop.cs" />
     <Compile Include="Sensor\LaserSensorBottom.cs" />
     <Compile Include="Sensor\MagnetSensor.cs" />
+    <Compile Include="Timer\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
