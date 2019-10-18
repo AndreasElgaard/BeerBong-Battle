@@ -13,22 +13,29 @@ namespace RaspberryPiStates
     {
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
+        MagnetSensor Magnet = new MagnetSensor();
         StopWatch.StopWatch Timer = new StopWatch.StopWatch();
 
         public override bool IsFull()
         {
             Console.WriteLine("This is NotDoneState");
-            if (LaserBot.Detected() == false)
+            if (Magnet.Detected() == false)
             {
-                Console.WriteLine("You are not finished drinking - timer continues");
-                return false;
+                if (LaserBot.Detected() == false)
+                {
+                    Console.WriteLine("You are not finished drinking - timer continues");
+                    return false;
+                }
             }
-            else
+            //Also possible just to use an else loop
+            if (Magnet.Detected() == false && LaserBot.Detected() == true)
             {
                 Timer.StopTimer();
                 Console.WriteLine("BeerBong is empty - stop timer");
                 return true; 
             }
+
+            return false; 
         }
     }
 }

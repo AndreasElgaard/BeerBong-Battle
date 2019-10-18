@@ -17,6 +17,9 @@ namespace RaspberryPi
 {
     public class Program
     {
+        public void Init()
+        {
+        }
         static void Main(string[] args)
         {
             MagnetSensor Magnet = new MagnetSensor();
@@ -29,56 +32,53 @@ namespace RaspberryPi
             Magnet.Initiate();
             LaserTop.Initiate();
             LaserBot.Initiate();
-            LaserBot.Detected();
             context.setState(emptyState);
 
-            //while (true)
-            //{
-            //    while (ReferenceEquals(context.getState(), emptyState))
-            //    {
-            //        if (context.IsFull() == false)
-            //        {
-            //            context.setState(emptyState);
-            //            Thread.Sleep(5000);
-            //        }
+            while (true)
+            {
+                while (ReferenceEquals(context.getState(), emptyState))
+                {
+                    if (context.IsFull() == false)
+                    {
+                        context.setState(emptyState);
+                        Thread.Sleep(5000);
+                    }
+                    else
+                    {
+                        context.setState(fullState);
+                        Thread.Sleep(5000);
+                    }
+                }
 
-            //        //Console.WriteLine("tester1");
-            //        else
-            //        {
-            //            context.setState(fullState);
-            //            Thread.Sleep(5000);
-            //        }
-            //    }
+                while (ReferenceEquals(context.getState(), fullState))
+                {
+                    if (context.IsFull() == true)
+                    {
+                        context.setState(fullState);
+                        Thread.Sleep(5000);
+                    }
+                    else
+                    {
+                        context.setState(notDoneState);
+                        Thread.Sleep(5000);
+                    }
+                }
 
-            //    while (ReferenceEquals(context.getState(), fullState))
-            //    {
-            //        if (context.IsFull() == true)
-            //        {
-            //            context.setState(fullState);
-            //            Thread.Sleep(5000);
-            //        }
-            //        else
-            //        {
-            //            context.setState(notDoneState);
-            //            Thread.Sleep(5000);
-            //        }
-            //    }
+                while (ReferenceEquals(context.getState(), notDoneState))
+                {
+                    if (context.IsFull() == false)
+                    {
+                        context.setState(notDoneState);
+                        Thread.Sleep(5000);
+                    }
 
-            //    while (ReferenceEquals(context.getState(), notDoneState))
-            //    {
-            //        if (context.IsFull() == false)
-            //        {
-            //            context.setState(notDoneState);
-            //            Thread.Sleep(5000);
-            //        }
-
-            //        else
-            //        {
-            //            context.setState(emptyState);
-            //            Thread.Sleep(5000);
-            //        }
-            //    }
-            //}
+                    else
+                    {
+                        context.setState(emptyState);
+                        Thread.Sleep(5000);
+                    }
+                }
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ namespace RaspberryPiStates
     {
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
+        MagnetSensor Magnet = new MagnetSensor();
         StopWatch.StopWatch Timer = new StopWatch.StopWatch();
         public override bool IsFull()
         {
@@ -22,11 +23,17 @@ namespace RaspberryPiStates
                 Console.WriteLine("BeerBong is full and you can start drinking!");
                 return true; 
             }
-            else
+
+            if (Magnet.Detected() == true)
             {
-               Timer.StartTimer();
+                Timer.StartTimer();
                 Console.WriteLine("You have started drinking START TIMER");
                 return false;
+            }
+            else
+            {
+                Console.WriteLine("This should not happen");
+                return true; 
             }
         }
 
