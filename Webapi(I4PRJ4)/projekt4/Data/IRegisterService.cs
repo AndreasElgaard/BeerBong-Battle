@@ -15,7 +15,7 @@ namespace projekt4.Data
 
         Task<Register> CreateAsync(Register register);
 
-        Task<Register> UpdateAsync(Register register);
+        Task<Register> UpdateAsync(Register register, int id);
 
         Task<Register> DeleteAsync(int id);
     }
