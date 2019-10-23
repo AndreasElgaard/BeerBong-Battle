@@ -18,7 +18,7 @@ namespace RaspberryPi.Bluetooth
             bt.Open();
         }
 
-        public void SendBDAta(string data)
+        public void SendBData(string data)
         {
             bt.WriteLine(data);
         }
