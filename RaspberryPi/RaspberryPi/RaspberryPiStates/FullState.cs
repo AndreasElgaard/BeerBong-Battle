@@ -24,7 +24,7 @@ namespace RaspberryPiStates
             Console.WriteLine("This is Fullstate");
             if (LaserTop.Detected() == false)
             {
-                bt.SendBData("Fullstate - Beerbong is ready");
+                bt.SendData("Fullstate - Beerbong is ready");
                 Console.WriteLine("BeerBong is full and you can start drinking!");
                 return true; 
             }
@@ -32,7 +32,7 @@ namespace RaspberryPiStates
             if (LaserTop.Detected() == true && Magnet.Detected() == true)
             {
                 Timer.StartTimer();
-                bt.SendBData("Fullstate - You have started drinking");
+                bt.SendData("Fullstate - You have started drinking");
                 Console.WriteLine("You have started drinking START TIMER");
                 return false;
             }

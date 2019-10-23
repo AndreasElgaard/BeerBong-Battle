@@ -25,7 +25,7 @@ namespace RaspberryPiStates
             Console.WriteLine("This is NotDoneState");
             if (Magnet.Detected() && LaserBot.Detected() == false)
             {
-                bt.SendBData("NotDoneState - You are not finished drinking and timer continues");
+                bt.SendData("NotDoneState - You are not finished drinking and timer continues");
                 Console.WriteLine("You are not finished drinking - timer continues");
                 return false;
             }
@@ -33,7 +33,7 @@ namespace RaspberryPiStates
             if (Magnet.Detected() == false && LaserBot.Detected() == true)
             {
                 string result = Timer.StopTimer();
-                bt.SendBData(result);
+                bt.SendData(result);
                 Console.WriteLine("BeerBong is empty - stop timer");
                 return true; 
             }
