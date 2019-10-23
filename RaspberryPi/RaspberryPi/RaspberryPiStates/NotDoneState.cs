@@ -18,7 +18,7 @@ namespace RaspberryPiStates
         MagnetSensor Magnet = new MagnetSensor();
         Bluetooth bt = new Bluetooth();
 
-        public override bool IsFull(StopWatch1 Timer)
+        public override bool IsFull(MyStopWatch Timer)
         {
             bt.Init();
             Console.WriteLine("This is NotDoneState");

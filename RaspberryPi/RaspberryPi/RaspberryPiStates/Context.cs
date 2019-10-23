@@ -28,7 +28,7 @@ namespace RaspberryPiStates
             return _currentState;
         }
 
-        public bool IsFull(StopWatch1 timer)
+        public bool IsFull(MyStopWatch timer)
         {
             return _currentState.IsFull(timer);
         }

@@ -19,7 +19,7 @@ namespace RaspberryPiStates
         Bluetooth bt = new Bluetooth();
         //StopWatch1 Timer = new StopWatch1();
 
-        public override bool IsFull(StopWatch1 Timer)
+        public override bool IsFull(MyStopWatch Timer)
         {
             bt.Init();
             Console.WriteLine("This is Fullstate");

@@ -18,8 +18,9 @@ namespace TestRaspberryPi
         private ISensor _Sensor ;
         private Program _uut;
         private RaspberryPiStates.RaspberryPiStates _States;
-        private StopWatch1 _StopWatch;
-        private Bluetooth _Bluetooth; 
+        private MyStopWatch _StopWatch;
+        private Bluetooth _Bluetooth;
+        private Context _Context; 
         //private LaserSensorBottom uutBotSensor;
         //private LaserSensorTop uutTopSensor;
         [SetUp]
@@ -29,10 +30,25 @@ namespace TestRaspberryPi
             _Sensor = Substitute.For<ISensor>(); 
             _uut = new Program();
             _States = Substitute.For<RaspberryPiStates.RaspberryPiStates>();
-            _StopWatch = Substitute.For<StopWatch1>();
+            _Context = Substitute.For<Context>();
+            _StopWatch = Substitute.For<MyStopWatch>();
             _Bluetooth = Substitute.For<Bluetooth>(); 
             //uutBotSensor = new LaserSensorBottom();
             //uutTopSensor = new LaserSensorTop();
+        }
+
+        [Test]
+        public void Test_Top_Sensor_ifHigh_or_ifLow()
+        {
+            _Sensor.Detected().Returns(false);
+        }
+
+        [Test]
+        public void Test_What_state()
+        {
+
+            RaspberryPiStates.RaspberryPiStates result = _Context.getState();
+            Assert.That(result,Is.EqualTo(new EmptyState()));
         }
     }
 }

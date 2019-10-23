@@ -12,6 +12,6 @@ namespace RaspberryPiStates
 {
     public abstract class RaspberryPiStates
     {
-        public abstract bool IsFull(StopWatch1 Timer);
+        public abstract bool IsFull(MyStopWatch Timer);
     }
 }

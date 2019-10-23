@@ -19,16 +19,13 @@ namespace RaspberryPi
 {
     public class Program
     {
-        public void Init()
-        {
-        }
         static void Main(string[] args)
         {
             MagnetSensor Magnet = new MagnetSensor();
             LaserSensorBottom LaserBot = new LaserSensorBottom();
             LaserSensorTop LaserTop = new LaserSensorTop();
             Context context = new Context();
-            StopWatch1 timer = new StopWatch1();
+            MyStopWatch timer = new MyStopWatch();
             RaspberryPiStates.RaspberryPiStates emptyState = new EmptyState();
             RaspberryPiStates.RaspberryPiStates fullState = new FullState();
             RaspberryPiStates.RaspberryPiStates notDoneState = new NotDoneState();

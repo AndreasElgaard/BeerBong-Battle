@@ -13,7 +13,7 @@ namespace RaspberryPiStates
     {
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
-        public override bool IsFull(StopWatch1 Timer)
+        public override bool IsFull(MyStopWatch Timer)
         {
             Console.WriteLine("This is EmptyState");
             if (LaserTop.Detected() == true)
