@@ -6,11 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using Sensor;
+using StopWatch;
 
 namespace RaspberryPiStates
 {
     public abstract class RaspberryPiStates
     {
-        public abstract bool IsFull();
+        public abstract bool IsFull(StopWatch1 Timer);
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RaspberryPi.Bluetooth;
 using Sensor;
-
+using StopWatch;
 
 
 namespace RaspberryPiStates
@@ -16,10 +16,9 @@ namespace RaspberryPiStates
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
-        StopWatch.StopWatch Timer = new StopWatch.StopWatch();
         Bluetooth bt = new Bluetooth();
 
-        public override bool IsFull()
+        public override bool IsFull(StopWatch1 Timer)
         {
             bt.Init();
             Console.WriteLine("This is NotDoneState");

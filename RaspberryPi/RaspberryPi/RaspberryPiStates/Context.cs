@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StopWatch;
 
 namespace RaspberryPiStates
 {
@@ -27,9 +28,9 @@ namespace RaspberryPiStates
             return _currentState;
         }
 
-        public bool IsFull()
+        public bool IsFull(StopWatch1 timer)
         {
-            return _currentState.IsFull();
+            return _currentState.IsFull(timer);
         }
     }
 }
