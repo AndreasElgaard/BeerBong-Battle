@@ -12,6 +12,7 @@ using Unosquare.WiringPi;
 using System.Timers;
 using RaspberryPiStates;
 using Sensor;
+using RaspberryPi.Bluetooth;
 
 namespace RaspberryPi
 {

@@ -3,38 +3,47 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using RJCP.IO.Ports;
+using Unosquare.WiringPi;
+using Unosquare.RaspberryIO;
+using Unosquare.RaspberryIO.Abstractions;
 
 namespace RaspberryPi.Bluetooth
 {
-    class Bluetooth
+    public class Bluetooth
     {
-        private SerialPortStream bt;
+        private SerialPort Bt;
+
+
         public void Init()
         {
-            bt = new SerialPortStream("/dev/rfcomm0", 9600, 8, RJCP.IO.Ports.Parity.None, RJCP.IO.Ports.StopBits.One);
-            bt.Open();
+            Bt = new SerialPort("/dev/rfcomm0",9600);
+            Bt.Open();
         }
 
-        public void SendBData(string data)
+        public void SendData(string data)
         {
-            bt.WriteLine(data);
+            Bt.WriteLine(data);
         }
 
-        public int ReceviceByte()
+        public string ReceviceByte()
         {
-            if (bt.BytesToRead != 0)
+            if (Bt.ReadBufferSize != 0)
             {
-                int data;
-                data = bt.ReadByte();
+                string data;
+                data = Bt.ReadLine();
                 return data;
             }
-            else
-            {
-                return -1;
-            }
+
+            return "No data received";
+
+        }
+
+        public void closeBT()
+        {
+            Bt.Close();
         }
     }
 }

@@ -7,16 +7,12 @@ namespace projekt4.Model
 {
     public partial class BBMContext : DbContext
     {
-        public BBMContext()
-        {
-        }
-
         public BBMContext(DbContextOptions<BBMContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Bruger> Bruger { get; set; }
+        //public virtual DbSet<Bruger> Bruger { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,6 +37,7 @@ namespace projekt4.Model
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-        public DbSet<projekt4.Model.Register> Register { get; set; }
+        public DbSet<Register> Register { get; set; }
+        public DbSet<Bruger> Brguers { get; set; }
     }
 }
