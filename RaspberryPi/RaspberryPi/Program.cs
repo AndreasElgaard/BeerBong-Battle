@@ -10,6 +10,7 @@ using Unosquare.WiringPi;
 using System.Timers;
 using RaspberryPiStates;
 using Sensor;
+using RaspberryPi.Bluetooth;
 
 namespace RaspberryPi
 {
@@ -42,7 +43,7 @@ namespace RaspberryPi
 
                 while (context.getState() == new FullState())
                 {
-                    if (context.IsFull() == true )
+                    if (context.IsFull() == true)
                     {
                         context.setState(new FullState());
                         Thread.Sleep(5000);
