@@ -41,7 +41,7 @@ namespace RaspberryPiStates
             {
                 Console.WriteLine("This should not happen");
                 
-                throw new Exception("error in fullstate");
+                throw new Exception ("error in fullstate");
                 
             }
         }
