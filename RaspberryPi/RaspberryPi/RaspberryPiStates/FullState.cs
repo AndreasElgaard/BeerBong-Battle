@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Timers;
+using RaspberryPi.Bluetooth;
 using Sensor;
+using StopWatch;
 
 namespace RaspberryPiStates
 {
@@ -14,26 +16,33 @@ namespace RaspberryPiStates
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
-        StopWatch.StopWatch Timer = new StopWatch.StopWatch();
-        public override bool IsFull()
+        Bluetooth bt = new Bluetooth();
+        //StopWatch1 Timer = new StopWatch1();
+
+        public override bool IsFull(MyStopWatch Timer)
         {
+            bt.Init();
             Console.WriteLine("This is Fullstate");
             if (LaserTop.Detected() == false)
             {
+                bt.SendData("Fullstate - Beerbong is ready");
                 Console.WriteLine("BeerBong is full and you can start drinking!");
                 return true; 
             }
 
-            if (Magnet.Detected() == true)
+            if (LaserTop.Detected() == true && Magnet.Detected() == true)
             {
                 Timer.StartTimer();
+                bt.SendData("Fullstate - You have started drinking");
                 Console.WriteLine("You have started drinking START TIMER");
                 return false;
             }
             else
             {
                 Console.WriteLine("This should not happen");
-                return true; 
+                
+                throw new Exception ("error in fullstate");
+                
             }
         }
 

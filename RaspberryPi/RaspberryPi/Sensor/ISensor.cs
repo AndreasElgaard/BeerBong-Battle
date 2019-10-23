@@ -9,7 +9,7 @@ using Unosquare.WiringPi;
 
 namespace Sensor
 {
-    interface ISensor
+    public interface ISensor
     {
         void Initiate();
         bool Detected();  

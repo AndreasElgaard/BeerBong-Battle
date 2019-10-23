@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StopWatch
 {
-    public class StopWatch
+    public class MyStopWatch
     {
         Stopwatch time = new Stopwatch();
         public void StartTimer()
@@ -23,7 +23,7 @@ namespace StopWatch
             TimeSpan ts = time.Elapsed;
 
             // Formaterer tiden til double
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+            string elapsedTime = String.Format("{0:00}.{1:00}", ts.Seconds, ts.Milliseconds / 10);
             Console.WriteLine(elapsedTime);
 
             return elapsedTime;
