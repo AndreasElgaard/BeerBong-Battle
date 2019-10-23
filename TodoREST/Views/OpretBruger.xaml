@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TodoREST.Views.OpretBruger">
+    <ContentPage.Content>
+        <Grid Margin="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0">
+                <Label Text="Indtast ønsket brugernavn og password" />
+                <Entry Text="{Binding Username}"
+                       Placeholder="Brugernavn" />
+                <Entry Text="{Binding Password}"
+                       Placeholder="Password"
+                       IsPassword="True" />
+                <Entry Text="{Binding Password2}"
+                       Placeholder="Bekræft password"
+                       IsPassword="True" />
+                <Label Text="Passwords matcher ikke"
+                       IsVisible="{Binding LabelCheck}" 
+                       TextColor="Red" />
+            </StackLayout>
+            <Button Grid.Row="2" Text="Opret" Clicked="OnOpretBruger" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
