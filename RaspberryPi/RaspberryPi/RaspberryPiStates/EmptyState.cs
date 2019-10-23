@@ -15,7 +15,12 @@ namespace RaspberryPiStates
         public override bool IsFull()
         {
             Console.WriteLine("This is EmptyState");
-            if (LaserBot.Detected() && LaserTop.Detected() == true)
+            if (LaserTop.Detected() == true)
+            {
+                Console.WriteLine("BeerBong is NOT full please refill your beerbong");
+                return false;
+            }
+            if (LaserBot.Detected() == true)
             {
                 Console.WriteLine("BeerBong is NOT full please refill your beerbong");
                 return false;
@@ -23,7 +28,7 @@ namespace RaspberryPiStates
             else
             {
                 Console.WriteLine("BeerBong is full");
-                return true; 
+                return true;
             }
         }
     }

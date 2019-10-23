@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,55 +18,65 @@ namespace RaspberryPi
 {
     public class Program
     {
+        public void Init()
+        {
+        }
         static void Main(string[] args)
         {
             MagnetSensor Magnet = new MagnetSensor();
             LaserSensorBottom LaserBot = new LaserSensorBottom();
             LaserSensorTop LaserTop = new LaserSensorTop();
             Context context = new Context();
-            RaspberryPiStates.RaspberryPiStates empty = new EmptyState();
+            RaspberryPiStates.RaspberryPiStates emptyState = new EmptyState();
+            RaspberryPiStates.RaspberryPiStates fullState = new FullState();
+            RaspberryPiStates.RaspberryPiStates notDoneState = new NotDoneState();
             Magnet.Initiate();
             LaserTop.Initiate();
             LaserBot.Initiate();
+            context.setState(emptyState);
+
             while (true)
             {
-                while (context.getState() == )
+                while (ReferenceEquals(context.getState(), emptyState))
                 {
                     if (context.IsFull() == false)
                     {
-                        context.setState(new EmptyState());
+                        context.setState(emptyState);
                         Thread.Sleep(5000);
                     }
                     else
                     {
-                        context.setState(new FullState());
+                        context.setState(fullState);
+                        Thread.Sleep(5000);
                     }
                 }
 
-                while (context.getState() == new FullState())
+                while (ReferenceEquals(context.getState(), fullState))
                 {
                     if (context.IsFull() == true)
                     {
-                        context.setState(new FullState());
+                        context.setState(fullState);
                         Thread.Sleep(5000);
                     }
                     else
                     {
-                        context.setState(new NotDoneState());
+                        context.setState(notDoneState);
+                        Thread.Sleep(5000);
                     }
                 }
 
-                while (context.getState() == new NotDoneState())
+                while (ReferenceEquals(context.getState(), notDoneState))
                 {
                     if (context.IsFull() == false)
                     {
-                        context.setState(new NotDoneState());
+                        context.setState(notDoneState);
                         Thread.Sleep(5000);
                     }
 
                     else
                     {
-                        context.setState(new EmptyState());
+                        context.setState(emptyState);
+                        Thread.Sleep(5000);
                     }
                 }
             }

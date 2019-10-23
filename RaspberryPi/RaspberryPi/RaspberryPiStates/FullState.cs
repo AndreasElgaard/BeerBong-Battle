@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Diagnostics;
 using System.Threading;
 using System.Timers;
 using Sensor;
@@ -14,39 +13,28 @@ namespace RaspberryPiStates
     {
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
-        Stopwatch time = new Stopwatch();
+        MagnetSensor Magnet = new MagnetSensor();
+        StopWatch.StopWatch Timer = new StopWatch.StopWatch();
         public override bool IsFull()
         {
             Console.WriteLine("This is Fullstate");
-            if (LaserBot.Detected() && LaserTop.Detected() == false)
+            if (LaserTop.Detected() == false)
             {
                 Console.WriteLine("BeerBong is full and you can start drinking!");
                 return true; 
             }
-            else
+
+            if (Magnet.Detected() == true)
             {
-                Console.WriteLine("BeerBong is NOT full and you can't start drinking!");
+                Timer.StartTimer();
+                Console.WriteLine("You have started drinking START TIMER");
                 return false;
             }
-        }
-
-        public void starTimer()
-        {
-            time.Start();
-        }
-
-        public string stopTimer()
-        {
-            //Stopper stopuret
-            time.Stop();
-            //Henter tid som er taget som en Timespan værdi
-            TimeSpan ts = time.Elapsed;
-
-            // Formaterer tiden til double
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-            Console.WriteLine(elapsedTime);
-
-            return elapsedTime;
+            else
+            {
+                Console.WriteLine("This should not happen");
+                return true; 
+            }
         }
 
     }

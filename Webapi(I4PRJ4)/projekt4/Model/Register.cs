@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projekt4.Model
 {
-    public class Register
+    public class Register : IEntity
     {
         [Key]
         [Column("id")]
@@ -13,7 +13,7 @@ namespace projekt4.Model
         
         public int Brugerid { get; set; }
 
-        public ICollection<Bruger> brugers { get; set; }
+        //public ICollection<Bruger> brugers { get; set; }
 
     }
 }

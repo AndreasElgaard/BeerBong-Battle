@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projekt4.Model
 {
-    public partial class Bruger
+    public partial class Bruger : IEntity
     {
         [Key]
         [Column("id")]
@@ -19,6 +19,6 @@ namespace projekt4.Model
         [Column("date_created", TypeName = "date")]
         public DateTime? DateCreated { get; set; }
 
-        public Register register { get; set; }
+        //public Register register { get; set; }
     }
 }

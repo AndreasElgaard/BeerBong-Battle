@@ -9,7 +9,7 @@ namespace RaspberryPiStates
 
     public class Context
     {
-        private RaspberryPiStates _currentState;
+        public RaspberryPiStates _currentState;
 
         public Context()
         {
@@ -18,6 +18,7 @@ namespace RaspberryPiStates
 
         public void setState(RaspberryPiStates state)
         {
+
             _currentState = state;
         }
 
@@ -28,8 +29,7 @@ namespace RaspberryPiStates
 
         public bool IsFull()
         {
-            _currentState.IsFull();
-            return false;
+            return _currentState.IsFull();
         }
     }
 }

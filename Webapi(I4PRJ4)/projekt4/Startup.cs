@@ -15,6 +15,7 @@ using projekt4.Model;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
 using projekt4.Data;
+using projekt4.Repositories;
 
 
 namespace projekt4
@@ -33,7 +34,8 @@ namespace projekt4
         {
             services.AddControllers();
 
-            services.AddSingleton<IBrugerService, BrugerService>();
+            //services.AddScoped<IBrugerService, BrugerService>();
+            //services.AddScoped<IRegisterService, RegisterService>();
 
             services.AddDbContext<BBMContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("BBMContext")));
@@ -42,6 +44,12 @@ namespace projekt4
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BBMSIMS", Version = "v1" });
             });
+
+            services.AddScoped<EFCoreRegisterRepository>();
+
+            services.AddScoped<EFCoreBrugerRepository>();
+
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +62,12 @@ namespace projekt4
 
             app.UseSwagger();
 
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BBM SIS API v1");
+                c.RoutePrefix = string.Empty; //launch swagger from root
+            });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -65,11 +79,7 @@ namespace projekt4
                 endpoints.MapControllers();
             });
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BBM SIS API v1");
-                c.RoutePrefix = string.Empty; //launch swagger from root
-            });
+           
         }
     }
 }

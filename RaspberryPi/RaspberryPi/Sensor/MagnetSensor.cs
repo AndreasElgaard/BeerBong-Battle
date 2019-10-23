@@ -24,7 +24,6 @@ namespace Sensor
                 Console.WriteLine("Magnet detected");
                 return true;
             }
-
             else
             {
                 Console.WriteLine("No mangnet detected");
