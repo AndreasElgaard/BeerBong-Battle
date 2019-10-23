@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using Sensor;
+using StopWatch;
 
 namespace RaspberryPiStates
 {
@@ -12,7 +13,7 @@ namespace RaspberryPiStates
     {
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
-        public override bool IsFull()
+        public override bool IsFull(StopWatch1 Timer)
         {
             Console.WriteLine("This is EmptyState");
             if (LaserTop.Detected() == true)
