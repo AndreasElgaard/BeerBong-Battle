@@ -19,15 +19,15 @@ namespace Sensor
         {
             var magnet = Pi.Gpio[17];
             magnet.PinMode = GpioPinDriveMode.Input;
-            if (magnet.Read() == true)
+            if (magnet.Read() == false)
             {
-                Console.WriteLine("Magnet detected");
-                return true;
+                Console.WriteLine("No Magnet detected");
+                return false;
             }
             else
             {
-                Console.WriteLine("No mangnet detected");
-                return false;
+                Console.WriteLine("Magnet detected");
+                return true;
             }
         }
     }

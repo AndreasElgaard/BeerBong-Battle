@@ -33,6 +33,7 @@ namespace RaspberryPiStates
             {
                 string result = Timer.StopTimer();
                 bt.SendData(result);
+                result = null;
                 Console.WriteLine("BeerBong is empty - stop timer");
                 return true; 
             }
