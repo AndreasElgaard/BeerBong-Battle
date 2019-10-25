@@ -14,7 +14,7 @@ namespace RaspberryPiStates
     public class NotDoneState : RaspberryPiStates
     {
         LaserSensorBottom LaserBot = new LaserSensorBottom();
-        LaserSensorTop LaserTop = new LaserSensorTop();
+        //LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
         Bluetooth bt = new Bluetooth();
 

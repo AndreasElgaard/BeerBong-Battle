@@ -13,11 +13,10 @@ namespace RaspberryPiStates
 {
     public class FullState : RaspberryPiStates
     {
-        LaserSensorBottom LaserBot = new LaserSensorBottom();
+        //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
         Bluetooth bt = new Bluetooth();
-        //StopWatch1 Timer = new StopWatch1();
 
         public override bool IsFull(MyStopWatch Timer)
         {
