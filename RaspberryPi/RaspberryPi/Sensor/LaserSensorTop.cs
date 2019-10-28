@@ -33,29 +33,3 @@ namespace Sensor
     }
 }
 
-//namespace Sensor
-//{
-//    public class LaserSensorTop : ISensor
-//    {
-//        public void Initiate()
-//        {
-//            Pi.Init<BootstrapWiringPi>();
-//        }
-//        public bool Detected()
-//        { 
-//            var Laser_Top = Pi.Gpio[7];
-//            Laser_Top.PinMode = GpioPinDriveMode.Input;
-//            if (Laser_Top.Read() == true)
-//            {
-//                Console.WriteLine("Top Laser detected"); 
-//                return true;
-//            }
-//            else
-//            {
-//                Console.WriteLine("No Top laser detected");
-//                return false;
-//            }
-//        }
-
-//    }
-//}

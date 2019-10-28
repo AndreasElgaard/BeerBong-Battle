@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StopWatch
 {
-    public interface Timer
+    public interface ITimer
     {
         void StartTimer();
         string StopTimer(); 

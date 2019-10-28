@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StopWatch
 {
-    public class MyStopWatch : Timer
+    public class MyStopWatch : ITimer
     {
         Stopwatch time = new Stopwatch();
         public void StartTimer()

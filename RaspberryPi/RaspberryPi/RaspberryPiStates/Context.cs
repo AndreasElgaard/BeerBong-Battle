@@ -10,20 +10,20 @@ namespace RaspberryPiStates
 
     public class Context
     {
-        public RaspberryPiStates _currentState;
+        public IRaspberryPiStates _currentState;
 
         public Context()
         {
             _currentState = new EmptyState();
         }
 
-        public void setState(RaspberryPiStates state)
+        public void setState(IRaspberryPiStates state)
         {
 
             _currentState = state;
         }
 
-        public RaspberryPiStates getState()
+        public IRaspberryPiStates getState()
         {
             return _currentState;
         }

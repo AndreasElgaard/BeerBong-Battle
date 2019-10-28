@@ -11,28 +11,28 @@ using StopWatch;
 
 namespace RaspberryPiStates
 {
-    public class FullState : RaspberryPiStates
+    public class FullState : IRaspberryPiStates
     {
         //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
         Bluetooth bt = new Bluetooth();
 
-        public override bool IsFull(MyStopWatch Timer)
+        public bool IsFull(MyStopWatch Timer)
         {
-            bt.Init();
+            //bt.Init();
             Console.WriteLine("This is Fullstate");
             if (LaserTop.Detected() == false)
             {
-                bt.SendData("Fullstate - Beerbong is ready");
+                //bt.SendData("Fullstate - Beerbong is ready");
                 Console.WriteLine("BeerBong is full and you can start drinking!");
                 return true; 
             }
 
-            if (LaserTop.Detected() == true && Magnet.Detected() == true)
+            if (LaserTop.Detected() && Magnet.Detected() == true)
             {
                 Timer.StartTimer();
-                bt.SendData("Fullstate - You have started drinking");
+                //bt.SendData("Fullstate - You have started drinking");
                 Console.WriteLine("You have started drinking START TIMER");
                 return false;
             }

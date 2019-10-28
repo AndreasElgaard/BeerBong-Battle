@@ -21,7 +21,7 @@ namespace TestRaspberryPi
 
         private ISensor _Sensor;
         private Program _uut;
-        private RaspberryPiStates.RaspberryPiStates _states;
+        private IRaspberryPiStates _states;
         private MyStopWatch _stopWatch;
         private Bluetooth _bluetooth;
         private Context _context;
@@ -34,7 +34,7 @@ namespace TestRaspberryPi
             //Arrange 
             _Sensor = Substitute.For<ISensor>();
             _uut = new Program();
-            _states = Substitute.For<RaspberryPiStates.RaspberryPiStates>();
+            _states = Substitute.For<RaspberryPiStates.IRaspberryPiStates>();
             _context = Substitute.For<Context>();
             _stopWatch = Substitute.For<MyStopWatch>();
             _bluetooth = Substitute.For<Bluetooth>();
@@ -45,25 +45,25 @@ namespace TestRaspberryPi
         [Test]
         public void Test_GetState_isEqual_to_emptystate()
         {
-            RaspberryPiStates.RaspberryPiStates emptyState = new EmptyState();
+            RaspberryPiStates.IRaspberryPiStates emptyState = new EmptyState();
             _context.setState(emptyState);
-            RaspberryPiStates.RaspberryPiStates result = _context.getState();
+            RaspberryPiStates.IRaspberryPiStates result = _context.getState();
             Assert.That(result, Is.EqualTo(emptyState));
         }
         [Test]
         public void Test_GetState_isEqual_to_fullState()
         {
-            RaspberryPiStates.RaspberryPiStates fullState = new FullState();
+            RaspberryPiStates.IRaspberryPiStates fullState = new FullState();
             _context.setState(fullState);
-            RaspberryPiStates.RaspberryPiStates result = _context.getState();
+            RaspberryPiStates.IRaspberryPiStates result = _context.getState();
             Assert.That(result, Is.EqualTo(fullState));
         }
         [Test]
         public void Test_GetState_isEqual_to_NotDoneState()
         {
-            RaspberryPiStates.RaspberryPiStates notDoneState = new NotDoneState();
+            RaspberryPiStates.IRaspberryPiStates notDoneState = new NotDoneState();
             _context.setState(notDoneState);
-            RaspberryPiStates.RaspberryPiStates result = _context.getState();
+            RaspberryPiStates.IRaspberryPiStates result = _context.getState();
             Assert.That(result, Is.EqualTo(notDoneState));
         }
 
@@ -72,7 +72,7 @@ namespace TestRaspberryPi
         {
             //_laserTop.Initiate();
             //_laserBot.Initiate();
-            RaspberryPiStates.RaspberryPiStates emptyState = new EmptyState();
+            RaspberryPiStates.IRaspberryPiStates emptyState = new EmptyState();
             _context.setState(emptyState);
             _stopWatch.StartTimer();
             _stopWatch.StopTimer();

@@ -11,34 +11,35 @@ using StopWatch;
 
 namespace RaspberryPiStates
 {
-    public class NotDoneState : RaspberryPiStates
+    public class NotDoneState : IRaspberryPiStates
     {
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         //LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
         Bluetooth bt = new Bluetooth();
 
-        public override bool IsFull(MyStopWatch Timer)
+        public bool IsFull(MyStopWatch Timer)
         {
-            bt.Init();
+            //bt.Init();
             Console.WriteLine("This is NotDoneState");
-            if (Magnet.Detected() && LaserBot.Detected() == false)
+            if (LaserBot.Detected() == false)
             {
-                bt.SendData("NotDoneState - You are not finished drinking and timer continues");
+                //bt.SendData("NotDoneState - You are not finished drinking and timer continues");
                 Console.WriteLine("You are not finished drinking - timer continues");
                 return false;
             }
             //Also possible just to use an else loop
             if (Magnet.Detected() == false && LaserBot.Detected() == true)
             {
-                string result = Timer.StopTimer();
-                bt.SendData(result);
-                result = null;
                 Console.WriteLine("BeerBong is empty - stop timer");
+                string result = Timer.StopTimer();
+                //bt.SendData(result);
                 return true; 
             }
-
-            return false; 
+            else
+            {
+                throw new Exception("You are not do");
+            }
         }
     }
 }

@@ -10,24 +10,24 @@ using StopWatch;
 
 namespace RaspberryPiStates
 {
-    public class EmptyState : RaspberryPiStates
+    public class EmptyState : IRaspberryPiStates
     {
         //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         Bluetooth bt = new Bluetooth();
-        public override bool IsFull(MyStopWatch Timer)
+        public bool IsFull(MyStopWatch Timer)
         {
-            bt.Init();
+            //bt.Init();
             Console.WriteLine("This is EmptyState");
             if (LaserTop.Detected() == true)
             {
-                bt.SendData("EmptyState - Beerbong is not full");
+                //bt.SendData("EmptyState - Beerbong is not full");
                 Console.WriteLine("BeerBong is NOT full please refill your beerbong");
                 return false;
             }
             else
             {
-                bt.SendData("Empty state - Beerbong is full");
+                //bt.SendData("Empty state - Beerbong is full");
                 Console.WriteLine("BeerBong is full");
                 return true;
             }
