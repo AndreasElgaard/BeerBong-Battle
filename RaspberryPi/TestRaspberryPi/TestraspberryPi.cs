@@ -67,19 +67,19 @@ namespace TestRaspberryPi
             Assert.That(result, Is.EqualTo(notDoneState));
         }
 
-        [Test]
-        public void Test_EmptySate_returnsTrue_when_topAndBot_sensor_isFalse()
-        {
-            //_laserTop.Initiate();
-            //_laserBot.Initiate();
-            RaspberryPiStates.IRaspberryPiStates emptyState = new EmptyState();
-            _context.setState(emptyState);
-            _stopWatch.StartTimer();
-            _stopWatch.StopTimer();
-            _laserBot.Detected().Returns(false);
-            _laserTop.Detected().Returns(false);
-            Assert.IsTrue(_context.IsFull(_stopWatch));
-        }
+        //[Test]
+        //public void Test_EmptySate_returnsTrue_when_topAndBot_sensor_isFalse()
+        //{
+        //    //_laserTop.Initiate();
+        //    //_laserBot.Initiate();
+        //    RaspberryPiStates.IRaspberryPiStates emptyState = new EmptyState();
+        //    _context.setState(emptyState);
+        //    _stopWatch.StartTimer();
+        //    _stopWatch.StopTimer();
+        //    _laserBot.Detected().Returns(false);
+        //    _laserTop.Detected().Returns(false);
+        //    Assert.IsTrue(_context.IsFull(_stopWatch));
+        //}
 
         [TestCase("02.23")]
         public void Test_timer_returns_right_value(string a)

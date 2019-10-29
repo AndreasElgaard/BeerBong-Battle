@@ -150,7 +150,7 @@
     <Compile Include="Sensor\LaserSensorTop.cs" />
     <Compile Include="Sensor\LaserSensorBottom.cs" />
     <Compile Include="Sensor\MagnetSensor.cs" />
-    <Compile Include="Timer\Timer.cs" />
+    <Compile Include="Timer\ITimer.cs" />
     <Compile Include="Timer\MyStopWatch.cs" />
   </ItemGroup>
   <ItemGroup>

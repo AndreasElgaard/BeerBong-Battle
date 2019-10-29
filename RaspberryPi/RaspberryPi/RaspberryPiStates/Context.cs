@@ -28,9 +28,10 @@ namespace RaspberryPiStates
             return _currentState;
         }
 
-        public bool IsFull(MyStopWatch timer)
+        public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            return _currentState.IsFull(timer);
+            _currentState.IsFull(timer, context, emptyState, fullState, notDoneState);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace RaspberryPiStates
 {
     public interface IRaspberryPiStates
     {
-        bool IsFull(MyStopWatch timer);
+        void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState, 
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState);
     }
 }
