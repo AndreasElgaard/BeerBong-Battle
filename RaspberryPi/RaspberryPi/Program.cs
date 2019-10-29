@@ -20,15 +20,10 @@ namespace RaspberryPi
     {
         static void Main(string[] args)
         {
-            MagnetSensor Magnet = new MagnetSensor();
-            LaserSensorBottom LaserBot = new LaserSensorBottom();
-            LaserSensorTop LaserTop = new LaserSensorTop();
-            Magnet.Initiate();
-            LaserTop.Initiate();
-            LaserBot.Initiate();
+            Init();
             MyStopWatch timer = new MyStopWatch();
             Context context = new Context();
-            EmptyState emptyState = new EmptyState();
+            IRaspberryPiStates emptyState = new EmptyState();
             IRaspberryPiStates fullState = new FullState();
             IRaspberryPiStates notDoneState = new NotDoneState();
             context.setState(emptyState);
@@ -44,6 +39,16 @@ namespace RaspberryPi
                 {
                     context.setState(emptyState);
                 }
+            }
+
+            void Init()
+            {
+                MagnetSensor Magnet = new MagnetSensor();
+                LaserSensorBottom LaserBot = new LaserSensorBottom();
+                LaserSensorTop LaserTop = new LaserSensorTop();
+                Magnet.Initiate();
+                LaserTop.Initiate();
+                LaserBot.Initiate();
             }
 
             //while (true)
