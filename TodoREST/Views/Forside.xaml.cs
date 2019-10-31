@@ -26,10 +26,18 @@ namespace TodoREST.Views
             await Navigation.PushAsync(new TodoListPage());
 
         }
+    
+
         async void OpretBruger(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new OpretBruger());
+            await Navigation.PushAsync(new OpretBruger(true)
+            {
+                BindingContext = new BrugerTest
+                {
 
+
+                }
+            });
         }
     }
 }

@@ -13,19 +13,19 @@ namespace TodoREST
 			restService = service;
 		}
 
-		public Task<List<TodoItem>> GetTasksAsync ()
+		public Task<List<BrugerTest>> GetTasksAsync ()
 		{
 			return restService.RefreshDataAsync ();	
 		}
 
-		public Task SaveTaskAsync (TodoItem item, bool isNewItem = false)
+		public Task SaveTaskAsync (BrugerTest item, bool isNewItem = false)
 		{
 			return restService.SaveTodoItemAsync (item, isNewItem);
 		}
 
-		public Task DeleteTaskAsync (TodoItem item)
+		public Task DeleteTaskAsync (BrugerTest item)
 		{
-			return restService.DeleteTodoItemAsync (item.title.ToString());
+			return restService.DeleteTodoItemAsync (item.brugerid.ToString());
 		}
 	}
 }

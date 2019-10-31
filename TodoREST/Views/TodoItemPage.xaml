@@ -8,10 +8,10 @@
 		<Entry Text="{Binding Path=id}" 
                Placeholder="Enter item" />
 		<Label Text="Notes" />
-		<Entry Text="{Binding Path=body}"
+		<Entry Text="{Binding Path=brugerid}"
                Placeholder="Enter notes" />
 		<Label Text="Done" />
-		<Switch IsToggled="{Binding Path=title}" />
+		
 		<Button Text="Save" 
                 Clicked="OnSaveButtonClicked" />
 		<Button Text="Delete"

@@ -24,7 +24,7 @@
                         <Label Text="{Binding id}"
                                VerticalTextAlignment="Center" />
                         <Image Source="check.png"
-                               IsVisible="{Binding userId}" />
+                               IsVisible="{Binding brugerid}" />
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

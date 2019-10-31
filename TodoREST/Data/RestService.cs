@@ -12,7 +12,7 @@ namespace TodoREST
     {
         HttpClient _client;
 
-        public List<TodoItem> Items { get; private set; }
+        public List<BrugerTest> Items { get; private set; }
 
         public RestService()
         {
@@ -22,9 +22,9 @@ namespace TodoREST
             _client = new HttpClient(clientHandler);
         }
 
-        public async Task<List<TodoItem>> RefreshDataAsync()
+        public async Task<List<BrugerTest>> RefreshDataAsync()
         {
-            Items = new List<TodoItem>();
+            Items = new List<BrugerTest>();
             
             var uri = new Uri(string.Format(Constants.TodoItemsUrl, string.Empty));
             try
@@ -33,7 +33,7 @@ namespace TodoREST
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    Items = JsonConvert.DeserializeObject<List<TodoItem>>(content);
+                    Items = JsonConvert.DeserializeObject<List<BrugerTest>>(content);
                 }
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace TodoREST
         }
         
 
-        public async Task SaveTodoItemAsync(TodoItem item, bool isNewItem = false)
+        public async Task SaveTodoItemAsync(BrugerTest item, bool isNewItem = false)
         {
             var uri = new Uri(string.Format(Constants.TodoItemsUrl, string.Empty));
 

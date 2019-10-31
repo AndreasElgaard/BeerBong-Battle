@@ -15,14 +15,14 @@ namespace TodoREST
 
 		async void OnSaveButtonClicked (object sender, EventArgs e)
 		{
-			var todoItem = (TodoItem)BindingContext;
+			var todoItem = (BrugerTest)BindingContext;
 			await App.TodoManager.SaveTaskAsync (todoItem, isNewItem);
 			await Navigation.PopAsync ();
 		}
 
 		async void OnDeleteButtonClicked (object sender, EventArgs e)
 		{
-			var todoItem = (TodoItem)BindingContext;
+			var todoItem = (BrugerTest)BindingContext;
 			await App.TodoManager.DeleteTaskAsync (todoItem);
 			await Navigation.PopAsync ();
 		}

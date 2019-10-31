@@ -23,9 +23,10 @@ namespace TodoREST
 		{
             await Navigation.PushAsync(new TodoItemPage(true)
             {
-                BindingContext = new TodoItem
+                BindingContext = new BrugerTest
                 {
-                    title = Guid.NewGuid().ToString()
+                    
+
                 }
             });
 		}
@@ -34,7 +35,7 @@ namespace TodoREST
 		{
             await Navigation.PushAsync(new TodoItemPage
             {
-                BindingContext = e.SelectedItem as TodoItem
+                BindingContext = e.SelectedItem as BrugerTest
             });
 		}
 	}

@@ -5,9 +5,9 @@ namespace TodoREST
 {
 	public interface IRestService
 	{
-		Task<List<TodoItem>> RefreshDataAsync ();
+		Task<List<BrugerTest>> RefreshDataAsync ();
 
-		Task SaveTodoItemAsync (TodoItem item, bool isNewItem);
+		Task SaveTodoItemAsync (BrugerTest item, bool isNewItem);
 
 		Task DeleteTodoItemAsync (string id);
 	}
