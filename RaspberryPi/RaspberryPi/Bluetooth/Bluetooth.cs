@@ -12,7 +12,7 @@ using Unosquare.RaspberryIO.Abstractions;
 
 namespace RaspberryPi.Bluetooth
 {
-    public class Bluetooth
+    public class Bluetooth : IBluetooth
     {
         private SerialPort Bt;
 

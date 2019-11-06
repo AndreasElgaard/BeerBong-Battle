@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bluetooth\Bluetooth.cs" />
+    <Compile Include="Bluetooth\IBluetooth.cs" />
     <Compile Include="RaspberryPiStates\Context.cs" />
     <Compile Include="RaspberryPiStates\EmptyState.cs" />
     <Compile Include="RaspberryPiStates\FullState.cs" />

@@ -72,10 +72,10 @@ namespace TestRaspberryPi
         {
             //_laserTop.Initiate();
             //_laserBot.Initiate();
-            RaspberryPiStates.RaspberryPiStates emptyState = new EmptyState();
-            _context.setState(emptyState);
-            _stopWatch.StartTimer();
-            _stopWatch.StopTimer();
+            //RaspberryPiStates.RaspberryPiStates emptyState = new EmptyState();
+            _states.IsFull(_stopWatch).Returns(true);
+            _context.setState(_states);
+            
             _laserBot.Detected().Returns(false);
             _laserTop.Detected().Returns(false);
             Assert.IsTrue(_context.IsFull(_stopWatch));
