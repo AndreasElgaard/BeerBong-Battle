@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using NUnit.Framework;
 using NSubstitute;
-using Sensor;
-using RaspberryPiStates;
-using RaspberryPi.Bluetooth;
-using StopWatch;
 using NUnit.Framework;
 using RaspberryPi;
+using RaspberryPi.Bluetooth;
+using RaspberryPiStates;
+using Sensor;
+using StopWatch;
 
-namespace TestRaspberryPi
+namespace RaspberryPiUnitTest
 {
-    public class TestRaspberryPi
+    [TestFixture]
+    public class UnitTest1
     {
         
         private ISensor _Sensor;
@@ -26,6 +24,7 @@ namespace TestRaspberryPi
         private LaserSensorBottom _laserBot;
         private LaserSensorTop _laserTop;
         private MagnetSensor _magnet;
+
         [SetUp]
         public void setup()
         {
@@ -94,5 +93,6 @@ namespace TestRaspberryPi
         public void bluetoothReceived
 
         #endregion
-    }
+        }
+}
 }
