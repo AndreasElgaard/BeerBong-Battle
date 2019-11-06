@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RaspberryPi.Bluetooth;
 using StopWatch;
 
 namespace RaspberryPiStates
@@ -29,7 +30,7 @@ namespace RaspberryPiStates
         }
 
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
-            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, IBluetooth bt)
         {
             _currentState.IsFull(timer, context, emptyState, fullState, notDoneState);
         }

@@ -18,12 +18,14 @@ namespace RaspberryPiUnitTest
         private ISensor _Sensor;
         private Program _uut;
         private IRaspberryPiStates _states;
+        
         private MyStopWatch _stopWatch;
-        private Bluetooth _bluetooth;
+        private IBluetooth _bluetooth;
         private Context _context;
         private LaserSensorBottom _laserBot;
         private LaserSensorTop _laserTop;
         private MagnetSensor _magnet;
+        private ITimer _timer;
 
         [SetUp]
         public void setup()
@@ -34,11 +36,15 @@ namespace RaspberryPiUnitTest
             _states = Substitute.For<RaspberryPiStates.IRaspberryPiStates>();
             _context = Substitute.For<Context>();
             _stopWatch = Substitute.For<MyStopWatch>();
-            _bluetooth = Substitute.For<Bluetooth>();
+            _bluetooth = Substitute.For<IBluetooth>();
             _laserBot = Substitute.For<LaserSensorBottom>();
             _laserTop = Substitute.For<LaserSensorTop>();
             _magnet = Substitute.For<MagnetSensor>();
+            _timer = Substitute.For<MyStopWatch>();
         }
+
+        #region States
+
         [Test]
         public void Test_GetState_isEqual_to_emptystate()
         {
@@ -87,12 +93,23 @@ namespace RaspberryPiUnitTest
             Assert.That(a, Is.EqualTo(result));
         }
 
+        #endregion
+
         #region bluetooth
 
         [Test]
         public void bluetoothReceived()
         {
+            IRaspberryPiStates _full = Substitute.For<IRaspberryPiStates>();
+            IRaspberryPiStates _notdone = Substitute.For<IRaspberryPiStates>();
 
+            _states.getBT().Returns(_bluetooth);
+
+            _states.IsFull(_stopWatch, _context, _states, _full,_notdone);
+
+            _bluetooth = _states.getBT();
+
+            _bluetooth.Received().SendData(Arg.Any<string>());
         }
 
         #endregion
