@@ -10,8 +10,9 @@ using StopWatch;
 
 namespace RaspberryPiStates
 {
-    public abstract class RaspberryPiStates
+    public interface IRaspberryPiStates
     {
-        public abstract bool IsFull(MyStopWatch Timer);
+        void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState, 
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState);
     }
 }

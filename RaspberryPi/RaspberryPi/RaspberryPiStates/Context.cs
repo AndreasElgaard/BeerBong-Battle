@@ -10,27 +10,28 @@ namespace RaspberryPiStates
 
     public class Context
     {
-        public RaspberryPiStates _currentState;
+        public IRaspberryPiStates _currentState;
 
         public Context()
         {
             _currentState = new EmptyState();
         }
 
-        public void setState(RaspberryPiStates state)
+        public void setState(IRaspberryPiStates state)
         {
 
             _currentState = state;
         }
 
-        public RaspberryPiStates getState()
+        public IRaspberryPiStates getState()
         {
             return _currentState;
         }
 
-        public bool IsFull(MyStopWatch timer)
+        public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            return _currentState.IsFull(timer);
+            _currentState.IsFull(timer, context, emptyState, fullState, notDoneState);
         }
     }
 }

@@ -11,38 +11,40 @@ using StopWatch;
 
 namespace RaspberryPiStates
 {
-    public class FullState : RaspberryPiStates
+    public class FullState : IRaspberryPiStates
     {
-        LaserSensorBottom LaserBot = new LaserSensorBottom();
+        //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
         Bluetooth bt = new Bluetooth();
-        //StopWatch1 Timer = new StopWatch1();
 
-        public override bool IsFull(MyStopWatch Timer)
+        public void IsFull(MyStopWatch Timer, Context context, IRaspberryPiStates emptyState,
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            bt.Init();
+            //bt.Init();
             Console.WriteLine("This is Fullstate");
             if (LaserTop.Detected() == false)
             {
-                bt.SendData("Fullstate - Beerbong is ready");
+                //bt.SendData("Fullstate - Beerbong is ready");
+                context.setState(fullState);
                 Console.WriteLine("BeerBong is full and you can start drinking!");
-                return true; 
+                Thread.Sleep(1000);
+                return; 
             }
 
-            if (LaserTop.Detected() == true && Magnet.Detected() == true)
+            if (LaserTop.Detected() && Magnet.Detected() == true)
             {
                 Timer.StartTimer();
-                bt.SendData("Fullstate - You have started drinking");
+                //bt.SendData("Fullstate - You have started drinking");
+                context.setState(notDoneState);
                 Console.WriteLine("You have started drinking START TIMER");
-                return false;
+                Thread.Sleep(1000);
+                //return false;
             }
             else
             {
                 Console.WriteLine("This should not happen");
-                
                 throw new Exception ("error in fullstate");
-                
             }
         }
 

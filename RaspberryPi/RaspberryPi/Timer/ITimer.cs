@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RaspberryPiStates
+namespace StopWatch
 {
-    class EmptyState
+    public interface ITimer
     {
+        void StartTimer();
+        string StopTimer(); 
     }
 }
