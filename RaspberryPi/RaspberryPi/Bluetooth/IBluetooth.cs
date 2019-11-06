@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace RaspberryPi.Bluetooth
 {
-    interface IBluetooth
+    public interface IBluetooth
     {
-        void Init();
+        int Init();
         void SendData(string data);
+        string ReceviceByte();
         void closeBT();
     }
 }

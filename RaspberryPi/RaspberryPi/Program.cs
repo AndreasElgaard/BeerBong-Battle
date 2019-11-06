@@ -10,6 +10,7 @@ using Unosquare.RaspberryIO;
 using Unosquare.RaspberryIO.Abstractions;
 using Unosquare.WiringPi;
 using System.Timers;
+using RaspberryPi.Bluetooth;
 using RaspberryPiStates;
 using Sensor;
 using StopWatch;
@@ -26,6 +27,7 @@ namespace RaspberryPi
             IRaspberryPiStates emptyState = new EmptyState();
             IRaspberryPiStates fullState = new FullState();
             IRaspberryPiStates notDoneState = new NotDoneState();
+            IBluetooth bt = new Bluetooth.Bluetooth();
             context.setState(emptyState);
             while (ReferenceEquals(context.getState(),emptyState)
                    || ReferenceEquals(context.getState(), fullState)
@@ -33,7 +35,7 @@ namespace RaspberryPi
             {
                 try
                 {
-                    context.IsFull(timer, context, emptyState, fullState, notDoneState);
+                    context.IsFull(timer, context, emptyState, fullState, notDoneState, bt);
                 }
                 catch (Exception)
                 {

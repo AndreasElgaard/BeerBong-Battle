@@ -17,10 +17,11 @@ namespace RaspberryPi.Bluetooth
         private SerialPort Bt;
 
 
-        public void Init()
+        public int Init()
         {
             Bt = new SerialPort("/dev/rfcomm0",9600);
             Bt.Open();
+            return 1;
         }
 
         public void SendData(string data)
