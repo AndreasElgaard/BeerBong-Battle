@@ -4,27 +4,33 @@
              x:Class="TodoREST.TodoListPage"
              Title="Global Leaderboard">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+" Clicked="OnAddItemClicked">
-            <ToolbarItem.IconImageSource>
-                <OnPlatform x:TypeArguments="ImageSource">
-                    <On Platform="Android, UWP" Value="plus.png" />
-                </OnPlatform>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
     </ContentPage.ToolbarItems>
+
     <ListView x:Name="listView"
-              Margin="20"
-              ItemSelected="OnItemSelected">
+              Margin="30"
+              >
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
+
                     <StackLayout Padding="20,0,0,0"
                                  HorizontalOptions="StartAndExpand"
                                  Orientation="Horizontal">
-                        <Label Text="{Binding id}"
-                               VerticalTextAlignment="Center" />
-                        <Image Source="check.png"
-                               IsVisible="{Binding brugerid}" />
+                        
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding brugerid}"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="30"
+                                   
+                                   FontAttributes="Bold"/>
+                            <Label Text="{Binding id}"
+                                   Margin="0,0,0,0"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="30"
+                                   FontAttributes="Bold"/>
+                            
+                        </StackLayout>
+                        
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
