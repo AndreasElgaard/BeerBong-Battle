@@ -35,7 +35,7 @@ namespace RaspberryPi
             {
                 try
                 {
-                    context.IsFull(timer, context, emptyState, fullState, notDoneState, bt);
+                    context.IsFull(timer, context, emptyState, fullState, notDoneState);
                 }
                 catch (Exception)
                 {

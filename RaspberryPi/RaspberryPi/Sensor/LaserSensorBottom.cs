@@ -16,6 +16,7 @@ namespace Sensor
         {
             Pi.Init<BootstrapWiringPi>();
         }
+
         public bool Detected()
         {
             var Laser_Bot = Pi.Gpio[6];

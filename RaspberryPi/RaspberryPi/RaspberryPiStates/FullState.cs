@@ -18,7 +18,7 @@ namespace RaspberryPiStates
         MagnetSensor Magnet = new MagnetSensor();
         Bluetooth bt = new Bluetooth();
 
-        public void IsFull(MyStopWatch Timer, Context context, IRaspberryPiStates emptyState,
+        public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
             bt.Init();
@@ -34,7 +34,7 @@ namespace RaspberryPiStates
 
             if (LaserTop.Detected() && Magnet.Detected() == true)
             {
-                Timer.StartTimer();
+                timer.StartTimer();
                 bt.SendData("Fullstate - You have started drinking");
                 context.setState(notDoneState);
                 Console.WriteLine("You have started drinking START TIMER");
