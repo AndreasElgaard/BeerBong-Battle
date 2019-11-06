@@ -2,35 +2,50 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
+using RaspberryPi.Bluetooth;
 using Sensor;
 using StopWatch;
 
 namespace RaspberryPiStates
 {
-    public class EmptyState : RaspberryPiStates
+    public class EmptyState : IRaspberryPiStates
     {
-        LaserSensorBottom LaserBot = new LaserSensorBottom();
+        //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
-        public override bool IsFull(MyStopWatch Timer)
+        Bluetooth bt = new Bluetooth();
+        public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
+            //bt.Init();
             Console.WriteLine("This is EmptyState");
             if (LaserTop.Detected() == true)
             {
+                //bt.SendData("EmptyState - Beerbong is not full");
+                context.setState(emptyState);
                 Console.WriteLine("BeerBong is NOT full please refill your beerbong");
-                return false;
-            }
-            if (LaserBot.Detected() == true)
-            {
-                Console.WriteLine("BeerBong is NOT full please refill your beerbong");
-                return false;
+                Thread.Sleep(5000);
+                
             }
             else
             {
+                //bt.SendData("Empty state - Beerbong is full");
+                context.setState(fullState);
                 Console.WriteLine("BeerBong is full");
-                return true;
+                Thread.Sleep(5000);
+                
             }
+        }
+
+        public Bluetooth getBT()
+        {
+            return bt;
+        }
+
+        public void setBT(Bluetooth bt_)
+        {
+            bt = bt_;
         }
     }
 }

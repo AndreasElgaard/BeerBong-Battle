@@ -7,24 +7,26 @@ using System.Threading.Tasks;
 
 namespace StopWatch
 {
-    public class MyStopWatch
+    public class MyStopWatch : ITimer
     {
         Stopwatch time = new Stopwatch();
         public void StartTimer()
         {
+            time.Reset();
             time.Start();
         }
 
         public string StopTimer()
         {
+            string elapsedTime = null;
+            TimeSpan ts = TimeSpan.Zero;
             //Stopper stopuret
             time.Stop();
             //Henter tid som er taget som en Timespan værdi
-            TimeSpan ts = time.Elapsed;
-
+            ts = time.Elapsed;
             // Formaterer tiden til double
-            string elapsedTime = String.Format("{0:00}.{1:00}", ts.Seconds, ts.Milliseconds / 10);
-            Console.WriteLine(elapsedTime);
+            elapsedTime = String.Format("{0:00}.{1:00}", ts.Seconds, ts.Milliseconds / 10);
+            Console.WriteLine(elapsedTime); //For testing
 
             return elapsedTime;
         }

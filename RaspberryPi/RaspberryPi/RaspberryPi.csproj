@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bluetooth\Bluetooth.cs" />
+    <Compile Include="Bluetooth\IBluetooth.cs" />
     <Compile Include="RaspberryPiStates\Context.cs" />
     <Compile Include="RaspberryPiStates\EmptyState.cs" />
     <Compile Include="RaspberryPiStates\FullState.cs" />
@@ -146,11 +147,12 @@
     <Compile Include="Sensor\ISensor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RaspberryPiStates\RaspberryPiStates.cs" />
+    <Compile Include="RaspberryPiStates\IRaspberryPiStates.cs" />
     <Compile Include="Sensor\LaserSensorTop.cs" />
     <Compile Include="Sensor\LaserSensorBottom.cs" />
     <Compile Include="Sensor\MagnetSensor.cs" />
-    <Compile Include="Timer\Timer.cs" />
+    <Compile Include="Timer\ITimer.cs" />
+    <Compile Include="Timer\MyStopWatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
