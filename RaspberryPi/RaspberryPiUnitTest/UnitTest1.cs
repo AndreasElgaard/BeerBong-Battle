@@ -90,9 +90,12 @@ namespace RaspberryPiUnitTest
         #region bluetooth
 
         [Test]
-        public void bluetoothReceived
+        public void bluetoothReceived()
+        {
+
+        }
 
         #endregion
         }
 }
-}
+
