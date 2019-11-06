@@ -34,10 +34,14 @@ namespace TodoREST.Views
             {
                 BindingContext = new BrugerTest
                 {
-
-
                 }
             });
+        }
+
+        async void GoToLogin(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginPage());
+
         }
     }
 }

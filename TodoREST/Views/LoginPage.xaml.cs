@@ -11,30 +11,35 @@ using Xamarin.Forms.Xaml;
 namespace TodoREST.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OpretBruger : ContentPage
-    { 
+    public partial class LoginPage : ContentPage
+    {
         bool isNewItem;
 
-        private string _username;
-        private string _password;
-        private string _password2;
-        private bool _areCredentialsInvalid;
-        public OpretBruger(bool isNew=false)
+        public LoginPage(bool isNew = false)
         {
             InitializeComponent();
             isNewItem = isNew;
-
-            
         }
 
-       
 
-        async void OnOpretBruger(object sender, EventArgs e)
+
+        async void OnLogin(object sender, EventArgs e)
         {
+
             
-            var todoItem = (BrugerTest)BindingContext;
-            await App.TodoManager.SaveTaskAsync(todoItem, isNewItem);
             await Navigation.PopAsync();
+        }
+
+        async void OnOpretBrugerFromLogin(object sender, EventArgs e)
+        {
+
+            await Navigation.PushAsync(new OpretBruger(true)
+            {
+                BindingContext = new BrugerTest
+                {
+                    
+                }
+            });
         }
 
 

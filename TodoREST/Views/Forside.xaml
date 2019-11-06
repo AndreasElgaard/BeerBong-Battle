@@ -25,7 +25,7 @@
                 <Button Text="start lokalt spil" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#BAB0B0" HorizontalOptions="Center" VerticalOptions="Center" />
                 <Button Text="vis leaderboard" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#BAB0B0" HorizontalOptions="Center" VerticalOptions="Center" Clicked="GoToLeaderboard" />
                 <Button Text="start online spil" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" BackgroundColor="#BAB0B0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0" />
-                <Button Text="Login" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#BAB0B0" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Button Text="Login" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#BAB0B0" HorizontalOptions="Center" VerticalOptions="Center" Clicked="GoToLogin" />
                 <Button Text="Opret Bruger" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#BAB0B0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,0" Clicked="OpretBruger" />
             </Grid>
        
