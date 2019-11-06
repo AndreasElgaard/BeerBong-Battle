@@ -27,9 +27,9 @@ namespace projekt4.Model
         {
             modelBuilder.Entity<Bruger>(entity =>
             {
-                entity.Property(e => e.FirstName).IsUnicode(false);
+                entity.Property(e => e.UserName).IsUnicode(false);
 
-                entity.Property(e => e.LastName).IsUnicode(false);
+                entity.Property(e => e.PassWord).IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

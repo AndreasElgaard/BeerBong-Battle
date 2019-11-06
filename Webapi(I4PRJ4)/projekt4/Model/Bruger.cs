@@ -10,14 +10,16 @@ namespace projekt4.Model
         [Key]
         [Column("id")]
         public int Id { get; set; }
-        [Column("first_name")]
+        [Column("User_Name")]
         [StringLength(50)]
-        public string FirstName { get; set; }
+        public string UserName { get; set; }
         [Column("last_name")]
         [StringLength(50)]
-        public string LastName { get; set; }
-        [Column("date_created", TypeName = "date")]
+        public string PassWord { get; set; }
+        [Column("Password", TypeName = "date")]
         public DateTime? DateCreated { get; set; }
+        [Column("Best Time")]
+        public double BestTime { get; set; }
 
         //public Register register { get; set; }
     }
