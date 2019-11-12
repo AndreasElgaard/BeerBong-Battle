@@ -1,4 +1,8 @@
 {
+  "JwtSetting": {
+    "Secret" : "projekti42017webapi123"
+  },
+
   "iisSettings": {
     "windowsAuthentication": true,
     "anonymousAuthentication": false,
@@ -25,4 +29,5 @@
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }
   }
+
 }

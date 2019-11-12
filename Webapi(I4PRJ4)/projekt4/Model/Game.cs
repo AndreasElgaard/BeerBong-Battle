@@ -7,11 +7,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projekt4.Model
 {
-    public class Game : IEntity
+    public class Game 
     {
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public int GameId { get; set; }
 
 
         public ICollection<Participant> Participants { get; set; }

@@ -7,11 +7,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projekt4.Model
 {
-    public class Participant : IEntity
+    public class Participant 
     {
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public int ParticipantId { get; set; }
         [Column("Participant_name")]
         [StringLength(50)]
         public string ParticipantName { get; set; }
@@ -22,6 +22,5 @@ namespace projekt4.Model
 
         //Navigation propertie
         public Queue Queue { get; set; }
-
     }
 }

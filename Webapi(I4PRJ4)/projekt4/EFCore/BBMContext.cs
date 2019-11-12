@@ -39,5 +39,6 @@ namespace projekt4.Model
 
         public DbSet<Register> Register { get; set; }
         public DbSet<Bruger> Brguers { get; set; }
+        public DbSet<LeaderBoard> LeaderBoards { get; set; }
     }
 }

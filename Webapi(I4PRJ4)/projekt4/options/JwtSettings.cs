@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace projekt4.Model
+namespace projekt4.options
 {
-    public interface IEntity
+    public class JwtSettings
     {
-        int Id { get; set; }
+        public string Secret { get; set; }
     }
 }
