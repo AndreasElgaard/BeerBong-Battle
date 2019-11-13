@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projekt4.Model
 {
-    public class Register : IEntity
+    public class Register 
     {
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public int RegisterId { get; set; }
         
         public int Brugerid { get; set; }
 

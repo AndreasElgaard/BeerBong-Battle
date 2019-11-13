@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace projekt4.Data
+namespace projekt4.options
 {
-    public interface IBrugerService
+    public class JwtSettings
     {
-        public void DoSomething();
-
+        public string Secret { get; set; }
     }
 }

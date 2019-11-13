@@ -7,11 +7,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projekt4.Model
 {
-    public class Queue : IEntity
+    public class Queue 
     {
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public int QueueId { get; set; }
         [Column("date_created", TypeName = "Timestamp")]
         public DateTime TimeStamp { get; set; }
 
