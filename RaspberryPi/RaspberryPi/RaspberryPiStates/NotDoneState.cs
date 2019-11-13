@@ -28,9 +28,8 @@ namespace RaspberryPiStates
             {
                 bt.SendData("NotDoneState - You are not finished drinking and timer continues");
                 context.setState(notDoneState);
-                Console.WriteLine("You are not finished drinking - timer continues");
-                Thread.Sleep(1000);
-                //return false;
+                //Console.WriteLine("You are not finished drinking - timer continues");
+                //Thread.Sleep(1000);
             }
             //Also possible just to use an else loop
             if (Magnet.Detected() == false && LaserBot.Detected() == true)
@@ -40,14 +39,12 @@ namespace RaspberryPiStates
                 Console.WriteLine(result);
                 bt.SendData(result);
                 context.setState(emptyState);
-                Console.WriteLine("BeerBong is empty - stop timer");
+                //Console.WriteLine("BeerBong is empty - stop timer");
                 Thread.Sleep(5000);
-                //return true; 
             }
             else
             {
                 context.setState(notDoneState);
-                //return false; 
             }
         }
         public Bluetooth getBT()

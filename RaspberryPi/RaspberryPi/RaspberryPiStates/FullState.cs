@@ -22,12 +22,12 @@ namespace RaspberryPiStates
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
             bt.Init();
-            Console.WriteLine("This is Fullstate");
+            //Console.WriteLine("This is Fullstate");
             if (LaserTop.Detected() == false)
             {
                 bt.SendData("Fullstate - Beerbong is ready");
                 context.setState(fullState);
-                Console.WriteLine("BeerBong is full and you can start drinking!");
+                //Console.WriteLine("BeerBong is full and you can start drinking!");
                 //Thread.Sleep(1000);
                 return; 
             }
@@ -37,13 +37,12 @@ namespace RaspberryPiStates
                 timer.StartTimer();
                 bt.SendData("Fullstate - You have started drinking");
                 context.setState(notDoneState);
-                Console.WriteLine("You have started drinking START TIMER");
+                //Console.WriteLine("You have started drinking START TIMER");
                 //Thread.Sleep(1000);
-                //return false;
             }
             else
             {
-                Console.WriteLine("This should not happen");
+                //Console.WriteLine("This should not happen");
                 throw new Exception ("error in fullstate");
             }
         }

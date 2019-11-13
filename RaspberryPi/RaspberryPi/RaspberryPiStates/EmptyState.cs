@@ -17,23 +17,23 @@ namespace RaspberryPiStates
         Bluetooth bt = new Bluetooth();
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
-        {
-            //bt.Init();
-            Console.WriteLine("This is EmptyState");
+        { 
+            bt.Init();
+            //Console.WriteLine("This is EmptyState");
             if (LaserTop.Detected() == true)
             {
-                //bt.SendData("EmptyState - Beerbong is not full");
+                //Console.WriteLine("BeerBong is NOT full please refill your beerbong");
+                bt.SendData("This is EmptyState");
                 context.setState(emptyState);
-                Console.WriteLine("BeerBong is NOT full please refill your beerbong");
-                Thread.Sleep(5000);
-                
+                //Thread.Sleep(5000);
+
             }
             else
             {
-                //bt.SendData("Empty state - Beerbong is full");
+                bt.SendData("Empty state - Beerbong is full");
                 context.setState(fullState);
-                Console.WriteLine("BeerBong is full");
-                Thread.Sleep(5000);
+                //Console.WriteLine("BeerBong is full");
+                //Thread.Sleep(5000);
                 
             }
         }
