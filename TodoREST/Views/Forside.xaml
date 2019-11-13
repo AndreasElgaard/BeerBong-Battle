@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              BackgroundImageSource="olbong.png"
+             
              x:Class="TodoREST.Views.Forside">
     <ContentPage.Content>
         
@@ -27,6 +28,7 @@
                 <Button Text="start online spil" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" BackgroundColor="#BAB0B0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0" />
                 <Button Text="Login" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#BAB0B0" HorizontalOptions="Center" VerticalOptions="Center" Clicked="GoToLogin" />
                 <Button Text="Opret Bruger" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="#BAB0B0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,100,0,0" Clicked="OpretBruger" />
+                <Button Text="Forbind til ølbong" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Scale="1" ScaleX="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="0" Grid.RowSpan="2" TextColor="#000000" BackgroundColor="#5757F3" Clicked="ForbindBT"  />
             </Grid>
        
 

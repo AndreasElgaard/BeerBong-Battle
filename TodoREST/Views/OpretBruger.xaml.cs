@@ -14,29 +14,47 @@ namespace TodoREST.Views
     public partial class OpretBruger : ContentPage
     { 
         bool isNewItem;
+        private string password1_;
+        private string password2_;
 
-        private string _username;
-        private string _password;
-        private string _password2;
-        private bool _areCredentialsInvalid;
         public OpretBruger(bool isNew=false)
         {
             InitializeComponent();
             isNewItem = isNew;
-
-            
         }
-
-       
 
         async void OnOpretBruger(object sender, EventArgs e)
         {
             
-            var todoItem = (BrugerTest)BindingContext;
-            await App.TodoManager.SaveTaskAsync(todoItem, isNewItem);
-            await Navigation.PopAsync();
+
+            password1_ = Password.Text;
+            password2_ = Password2.Text;
+
+            if (password1_ != password2_)
+            {
+                ErrorLabel.Text = "Passwords matcher ikke";
+                
+            }
+            else
+            {
+                OpretBrugerSucces();
+            }
+
+           // var todoItem = (OpretBrugerModel)BindingContext;
+            
         }
 
+        public void OpretBrugerSucces()
+        {
+            var bruger = new OpretBrugerModel
+            {
+                brugernavn_ = Brugernavn.Text,
+                password_ = Password.Text
+            };
 
+            App.TodoManager.SaveOpretBruger(bruger, isNewItem); 
+            Navigation.PopAsync();
+        }
+        
     }
 }

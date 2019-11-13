@@ -5,9 +5,13 @@ namespace TodoREST
 {
 	public interface IRestService
 	{
-		Task<List<BrugerTest>> RefreshDataAsync ();
+		Task<List<TodoItem>> RefreshDataAsync ();
 
-		Task SaveTodoItemAsync (BrugerTest item, bool isNewItem);
+        Task<List<OpretBrugerModel>> GetLoginDataAsync();
+
+        Task SaveTodoItemAsync (BrugerTest item, bool isNewItem);
+
+        Task SaveOpretBrugerAsync(OpretBrugerModel bruger, bool isNewItem);
 
 		Task DeleteTodoItemAsync (string id);
 	}

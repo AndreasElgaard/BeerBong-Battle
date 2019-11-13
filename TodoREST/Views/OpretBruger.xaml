@@ -12,15 +12,18 @@
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0">
                 <Label Text="Indtast ønsket brugernavn og password" />
-                <Entry Text="{Binding brugerid}"
+                <Entry 
+                       x:Name="Brugernavn"
                        Placeholder="Brugernavn" />
-                <Entry Text="{Binding id}"
+                <Entry 
+                       x:Name="Password"
                        Placeholder="Password"
                         />
-                <Entry Text="{}"
+                <Entry x:Name="Password2"
                        Placeholder="Bekræft password"
                        IsPassword="True" />
-                <Label Text="Passwords matcher ikke"
+                <Label Text=""
+                       x:Name="ErrorLabel"
                         
                        TextColor="Red" />
             </StackLayout>

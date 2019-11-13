@@ -43,5 +43,10 @@ namespace TodoREST.Views
             await Navigation.PushAsync(new LoginPage());
 
         }
+
+        async void ForbindBT(object sender, EventArgs e)
+        {
+
+        }
     }
 }

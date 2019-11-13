@@ -12,7 +12,10 @@ namespace TodoREST
     {
         HttpClient _client;
 
-        public List<BrugerTest> Items { get; private set; }
+        public List<BrugerTest> Items { get;  set; }
+        public List<TodoItem> TestItems { get; set; }
+
+        public List<OpretBrugerModel> Logins { get; set; }
 
         public RestService()
         {
@@ -22,29 +25,55 @@ namespace TodoREST
             _client = new HttpClient(clientHandler);
         }
 
-        public async Task<List<BrugerTest>> RefreshDataAsync()
+        public async Task<List<TodoItem>> RefreshDataAsync()
         {
-            Items = new List<BrugerTest>();
+            TestItems = new List<TodoItem>();
             
-            var uri = new Uri(string.Format(Constants.TodoItemsUrl, string.Empty));
+            
+            var uri = new Uri(string.Format(Constants.ToDoItemsJosep, string.Empty));
             try
             {
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    Items = JsonConvert.DeserializeObject<List<BrugerTest>>(content);
+                    TestItems = JsonConvert.DeserializeObject<List<TodoItem>>(content);
                 }
+                
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
-            return Items;
+            return TestItems;
             
         }
-        
+
+        public async Task<List<OpretBrugerModel>> GetLoginDataAsync()
+        {
+            Logins = new List<OpretBrugerModel>();
+
+
+            var uri = new Uri(string.Format(Constants.ToDoItemsJosep, string.Empty));
+            try
+            {
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Logins = JsonConvert.DeserializeObject<List<OpretBrugerModel>>(content);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return Logins;
+        }
+
 
         public async Task SaveTodoItemAsync(BrugerTest item, bool isNewItem = false)
         {
@@ -76,6 +105,38 @@ namespace TodoREST
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
         }
+
+        public async Task SaveOpretBrugerAsync(OpretBrugerModel bruger, bool isNewItem)
+        {
+            var uri = new Uri(string.Format(Constants.TodoItemsUrl, string.Empty));
+
+            try
+            {
+                var json = JsonConvert.SerializeObject(bruger);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                if (isNewItem)
+                {
+                    response = await _client.PostAsync(uri, content);
+                }
+                else
+                {
+                    response = await _client.PutAsync(uri, content);
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\tBruger er oprettet");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
 
         public async Task DeleteTodoItemAsync(string id)
         {

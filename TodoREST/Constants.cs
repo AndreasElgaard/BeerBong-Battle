@@ -7,5 +7,11 @@ namespace TodoREST
         // The iOS simulator can connect to localhost. However, Android emulators must use the 10.0.2.2 special alias to your host loopback interface.
         public static string BaseAddress = Device.RuntimePlatform == Device.Android ? "https://projekti4demo.azurewebsites.net" : "https://projekti4demo.azurewebsites.net";
         public static string TodoItemsUrl = BaseAddress + "/api/registers";
+
+        public static string TestBaseAddress = Device.RuntimePlatform == Device.Android
+            ? "https://jsonplaceholder.typicode.com"
+            : "https://jsonplaceholder.typicode.com";
+
+        public static string ToDoItemsJosep = TestBaseAddress + "/posts/1";
     }
 }

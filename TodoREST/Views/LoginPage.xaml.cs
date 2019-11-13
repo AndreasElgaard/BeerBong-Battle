@@ -14,6 +14,8 @@ namespace TodoREST.Views
     public partial class LoginPage : ContentPage
     {
         bool isNewItem;
+        private OpretBrugerModel LoginBruger;
+        
 
         public LoginPage(bool isNew = false)
         {
@@ -26,7 +28,13 @@ namespace TodoREST.Views
         async void OnLogin(object sender, EventArgs e)
         {
 
-            
+            var LoginBruger = await App.TodoManager.GetLoginDataAsync();
+
+            foreach (var login in LoginBruger)
+            {
+                this.LoginBruger = login;
+            }
+
             await Navigation.PopAsync();
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
@@ -13,10 +14,12 @@ namespace TodoREST
 		}
 
 		protected async override void OnAppearing ()
-		{
+        {
+            
 			base.OnAppearing ();
+            
 
-			listView.ItemsSource = await App.TodoManager.GetTasksAsync ();
+            listView.ItemsSource = await App.TodoManager.GetTasksAsync ();
 		}
 
 		//async void OnAddItemClicked (object sender, EventArgs e)
