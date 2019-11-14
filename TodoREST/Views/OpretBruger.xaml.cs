@@ -21,6 +21,19 @@ namespace TodoREST.Views
         {
             InitializeComponent();
             isNewItem = isNew;
+            if (App.isLoggedIn==true)
+            {
+                ToolbarItem brugerToolbarItem = new ToolbarItem
+                {
+                    Text = App.BrugernavnOnLogIn,
+
+                    Order = ToolbarItemOrder.Primary,
+                    Priority = 0
+                };
+
+                this.ToolbarItems.Add(brugerToolbarItem);
+            }
+            
         }
 
         async void OnOpretBruger(object sender, EventArgs e)
@@ -48,11 +61,14 @@ namespace TodoREST.Views
         {
             var bruger = new OpretBrugerModel
             {
-                brugernavn_ = Brugernavn.Text,
-                password_ = Password.Text
+                navn = Brugernavn.Text,
+                password = Password.Text
             };
 
-            App.TodoManager.SaveOpretBruger(bruger, isNewItem); 
+            string brugernavnonopret;
+            brugernavnonopret = Brugernavn.Text;
+            //  App.TodoManager.SaveOpretBruger(bruger, isNewItem);
+            DisplayAlert("Bruger succesfuldt oprettet!", "Du er oprettet som: " + brugernavnonopret, "OK");
             Navigation.PopAsync();
         }
         

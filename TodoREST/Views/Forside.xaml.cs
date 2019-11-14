@@ -19,6 +19,19 @@ namespace TodoREST.Views
 
             InitializeComponent();
             isNewItem = false;
+            if (App.isLoggedIn==true)
+            {
+                ToolbarItem brugerToolbarItem = new ToolbarItem
+                {
+                    Text = App.BrugernavnOnLogIn,
+
+                    Order = ToolbarItemOrder.Primary,
+                    Priority = 0
+                };
+
+                this.ToolbarItems.Add(brugerToolbarItem);
+                
+            }
         }
 
         async void GoToLeaderboard(object sender, EventArgs e)
@@ -46,6 +59,12 @@ namespace TodoREST.Views
 
         async void ForbindBT(object sender, EventArgs e)
         {
+
+        }
+
+        async void GoToMultiplayer(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Multiplayer());
 
         }
     }

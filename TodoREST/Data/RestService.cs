@@ -30,7 +30,7 @@ namespace TodoREST
             TestItems = new List<TodoItem>();
             
             
-            var uri = new Uri(string.Format(Constants.ToDoItemsJosep, string.Empty));
+            var uri = new Uri(string.Format(Constants.TestBaseAddress, string.Empty));
             try
             {
                 var response = await _client.GetAsync(uri);
@@ -55,16 +55,15 @@ namespace TodoREST
             Logins = new List<OpretBrugerModel>();
 
 
-            var uri = new Uri(string.Format(Constants.ToDoItemsJosep, string.Empty));
+            var uri = new Uri(string.Format(Constants.TestBaseAddress, string.Empty));
+
             try
             {
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    Logins = JsonConvert.DeserializeObject<List<OpretBrugerModel>>(content);
-                }
-
+                var response = await _client.GetAsync("https://my-json-server.typicode.com/MathiasTP/apitest1/logins")
+                    .ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+                Logins = JsonConvert.DeserializeObject<List<OpretBrugerModel>>(content);
             }
             catch (Exception ex)
             {

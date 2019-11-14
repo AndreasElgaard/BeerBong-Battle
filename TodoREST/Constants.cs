@@ -9,9 +9,12 @@ namespace TodoREST
         public static string TodoItemsUrl = BaseAddress + "/api/registers";
 
         public static string TestBaseAddress = Device.RuntimePlatform == Device.Android
-            ? "https://jsonplaceholder.typicode.com"
-            : "https://jsonplaceholder.typicode.com";
+            ? "https://my-json-server.typicode.com/MathiasTP/apitest1/logins"
+            : "https://my-json-server.typicode.com/MathiasTP/apitest1/logins";
 
-        public static string ToDoItemsJosep = TestBaseAddress + "/posts/1";
+        // public static string ToDoItemsJosep = TestBaseAddress + "/logins";
+
+
+        
     }
 }

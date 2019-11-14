@@ -9,12 +9,22 @@ namespace TodoREST
 	{
 		public static TodoItemManager TodoManager { get; private set; }
 
-		public App ()
+
+        public static bool isLoggedIn = false;
+
+        public static string BrugernavnOnLogIn;
+       
+
+        
+
+        public App ()
 		{
 			TodoManager = new TodoItemManager (new RestService ());
             
 			MainPage = new NavigationPage (new Forside ());
 		}
+
+        
 
 		protected override void OnStart ()
         {

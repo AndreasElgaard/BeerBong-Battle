@@ -15,7 +15,8 @@ namespace TodoREST.Views
     {
         bool isNewItem;
         private OpretBrugerModel LoginBruger;
-        
+        private string _password;
+        private string _brugernavn;
 
         public LoginPage(bool isNew = false)
         {
@@ -25,18 +26,57 @@ namespace TodoREST.Views
 
 
 
+
         async void OnLogin(object sender, EventArgs e)
         {
 
             var LoginBruger = await App.TodoManager.GetLoginDataAsync();
 
-            foreach (var login in LoginBruger)
-            {
-                this.LoginBruger = login;
-            }
+            int AntalBrugere = LoginBruger.Count;
 
-            await Navigation.PopAsync();
+            _password = Password.Text;
+            _brugernavn = Brugernavn.Text;
+
+            for (int i = 0; i < AntalBrugere; i++)
+            {
+                if (_brugernavn == LoginBruger[i].navn && _password == LoginBruger[i].password)
+                {
+                    _brugernavn = LoginBruger[i].navn;
+                    
+
+                    await DisplayAlert("Login succesfuldt!", "Du er logget ind som: " + _brugernavn, "OK");
+
+                    ToolbarItem brugerToolbarItem = new ToolbarItem
+                    {
+                        Text = "brugernavn:" + _brugernavn,
+
+                        Order = ToolbarItemOrder.Primary,
+                        Priority = 0
+                    };
+
+                        this.ToolbarItems.Add(brugerToolbarItem);
+                        App.isLoggedIn = true;
+                        App.BrugernavnOnLogIn = _brugernavn;
+                        break;
+
+
+                }
+                
+                
+                
+            }
+            //Hvis brugernavn og password ikke stemmeroverens
+            if (App.isLoggedIn==false)
+            {
+                await DisplayAlert("Brugernavn eller password forkert", "Prøv igen!", "OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new Forside(true));
+            }
         }
+        
+    
 
         async void OnOpretBrugerFromLogin(object sender, EventArgs e)
         {

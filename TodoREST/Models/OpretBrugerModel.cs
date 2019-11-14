@@ -2,8 +2,8 @@
 {
     public class OpretBrugerModel
     {
-        public string brugernavn_ { get; set; }
-        public string password_ { get; set; }
+        public string navn { get; set; }
+        public string password { get; set; }
     }
 }
 
