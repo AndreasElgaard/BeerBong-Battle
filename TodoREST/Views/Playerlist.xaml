@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TodoREST.Views.Playerlist">
+    <ContentPage.Content>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0"
+                     Orientation="Horizontal">
+                <Entry Placeholder="Number of Items"
+                   Keyboard="Numeric"
+                   Text="{Binding Count}"/>
+                <Button Text="Refresh"
+                    Command="{Binding RefreshItemsCommand}"/>
+            </StackLayout>
+
+            <ListView Grid.Row="1"
+                  ItemsSource="{Binding People}"
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None">
+
+                <ListView.Header>
+                    <Frame>
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="Navn"
+                           HorizontalOptions="Center"
+                           FontSize="Large"/>
+                            <Label Grid.Column="1"
+                       Text="Tid"
+                           HorizontalOptions="Center"
+                           FontSize="Large"/>
+
+                            <BoxView Grid.Row="1"
+                             Grid.ColumnSpan="2"
+                             HeightRequest="1"
+                             BackgroundColor="LightGray"/>
+                        </Grid>
+                    </Frame>
+                </ListView.Header>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="20,10">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Navn}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                                <Label Grid.Column="1"
+                               Text="{Binding Tid}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+
+                                <BoxView Grid.Row="1"
+                             Grid.ColumnSpan="2"
+                             HeightRequest="1"
+                             BackgroundColor="LightGray"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
