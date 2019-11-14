@@ -21,11 +21,10 @@ namespace RaspberryPiStates
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            bt.Init();
             //Console.WriteLine("This is Fullstate");
             if (LaserTop.Detected() == false)
             {
-                bt.SendData("Fullstate - Beerbong is ready");
+                //bt.SendData("Fullstate");
                 context.setState(fullState);
                 //Console.WriteLine("BeerBong is full and you can start drinking!");
                 //Thread.Sleep(1000);
@@ -34,8 +33,9 @@ namespace RaspberryPiStates
 
             if (LaserTop.Detected() && Magnet.Detected() == true)
             {
+                bt.Init();
                 timer.StartTimer();
-                bt.SendData("Fullstate - You have started drinking");
+                bt.SendData("NotDoneState");
                 context.setState(notDoneState);
                 //Console.WriteLine("You have started drinking START TIMER");
                 //Thread.Sleep(1000);
@@ -43,7 +43,7 @@ namespace RaspberryPiStates
             else
             {
                 //Console.WriteLine("This should not happen");
-                throw new Exception ("error in fullstate");
+                throw new Exception ("Error In FullState");
             }
         }
         public Bluetooth getBT()

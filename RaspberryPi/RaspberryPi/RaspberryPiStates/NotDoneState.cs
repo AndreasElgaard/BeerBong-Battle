@@ -22,11 +22,10 @@ namespace RaspberryPiStates
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            bt.Init();
-            Console.WriteLine("This is NotDoneState");
+            //Console.WriteLine("This is NotDoneState");
             if (LaserBot.Detected() == false)
             {
-                bt.SendData("NotDoneState - You are not finished drinking and timer continues");
+                //bt.SendData("NotDoneState");
                 context.setState(notDoneState);
                 //Console.WriteLine("You are not finished drinking - timer continues");
                 //Thread.Sleep(1000);
@@ -34,17 +33,21 @@ namespace RaspberryPiStates
             //Also possible just to use an else loop
             if (Magnet.Detected() == false && LaserBot.Detected() == true)
             {
+                bt.Init();
                 string result = null;
                 result = timer.StopTimer();
                 Console.WriteLine(result);
                 bt.SendData(result);
+                bt.SendData("EmptyState");
                 context.setState(emptyState);
-                //Console.WriteLine("BeerBong is empty - stop timer");
-                Thread.Sleep(5000);
+                //Console.WriteLine("EmptyState");
+                //Thread.Sleep(5000);
             }
-            else
+
+            if (timer.GetTime() > 20.00)
             {
-                context.setState(notDoneState);
+                //context.setState(emptyState);
+                throw new Exception("Error In fullstate - time went out");
             }
         }
         public Bluetooth getBT()
