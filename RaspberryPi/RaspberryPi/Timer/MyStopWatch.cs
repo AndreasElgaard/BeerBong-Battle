@@ -30,5 +30,16 @@ namespace StopWatch
 
             return elapsedTime;
         }
+
+        public double GetTime()
+        {
+            TimeSpan ts = TimeSpan.Zero;
+            ts = time.Elapsed;
+            string elapsedTime = String.Format("{0:00}.{1:00}", ts.Seconds, ts.Milliseconds / 10);
+            double result = double.Parse(elapsedTime);
+            Console.WriteLine(result); //for testing
+            return result;
+        }
+
     }
 }
