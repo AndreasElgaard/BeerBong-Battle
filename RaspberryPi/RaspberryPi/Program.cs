@@ -41,9 +41,19 @@ namespace RaspberryPii
                 {
                     context.IsFull(timer, context, emptyState, fullState, notDoneState);
                 }
+                catch (ArgumentException)
+                {
+                    bt.SendData("ErrorFullStateGoEmptyState");
+                    context.setState(emptyState);
+                }
+                catch (InvalidOperationException)
+                {
+                    bt.SendData("TimeoutGoEmptyState");
+                    context.setState(emptyState);
+                }
                 catch (Exception)
                 {
-                    bt.SendData("Error - EmptyState");
+                    bt.SendData("ErrorGoEmptyState");
                     context.setState(emptyState);
                 }
             }
