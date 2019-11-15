@@ -14,10 +14,12 @@ namespace TodoREST
 			restService = service;
 		}
 
-		public Task<List<TodoItem>> GetTasksAsync ()
-		{
-			return restService.RefreshDataAsync();	
-		}
+		
+
+        public Task<List<OnlineLeaderboard>> GetOnlineLeaderboardAsync()
+        {
+            return restService.RefreshDataAsync();
+        }
 
         public Task<List<OpretBrugerModel>> GetLoginDataAsync()
         {

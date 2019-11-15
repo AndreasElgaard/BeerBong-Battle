@@ -19,7 +19,12 @@ namespace TodoREST.Views
 
             InitializeComponent();
             isNewItem = false;
-            if (App.isLoggedIn==true)
+            
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (App.isLoggedIn == true)
             {
                 ToolbarItem brugerToolbarItem = new ToolbarItem
                 {
@@ -29,9 +34,13 @@ namespace TodoREST.Views
                     Priority = 0
                 };
 
+                this.ToolbarItems.Clear();
                 this.ToolbarItems.Add(brugerToolbarItem);
-                
+                this.LoginButton.IsVisible = false;
+                this.OpretBrugerButton.IsVisible = false;
             }
+            
+
         }
 
         async void GoToLeaderboard(object sender, EventArgs e)

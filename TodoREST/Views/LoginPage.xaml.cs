@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static Xamarin.Forms.NavigationPage;
 
 namespace TodoREST.Views
 {
@@ -29,7 +30,7 @@ namespace TodoREST.Views
 
         async void OnLogin(object sender, EventArgs e)
         {
-
+            tænker.IsRunning = true;
             var LoginBruger = await App.TodoManager.GetLoginDataAsync();
 
             int AntalBrugere = LoginBruger.Count;
@@ -41,6 +42,7 @@ namespace TodoREST.Views
             {
                 if (_brugernavn == LoginBruger[i].navn && _password == LoginBruger[i].password)
                 {
+                    tænker.IsRunning = false;
                     _brugernavn = LoginBruger[i].navn;
                     
 
@@ -72,7 +74,11 @@ namespace TodoREST.Views
             }
             else
             {
-                await Navigation.PushAsync(new Forside(true));
+                //var forside = new Forside(true);
+                
+                //await Navigation.PushAsync(forside);
+
+                await Navigation.PopAsync();
             }
         }
         

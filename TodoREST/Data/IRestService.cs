@@ -5,7 +5,7 @@ namespace TodoREST
 {
 	public interface IRestService
 	{
-		Task<List<TodoItem>> RefreshDataAsync ();
+		Task<List<OnlineLeaderboard>> RefreshDataAsync ();
 
         Task<List<OpretBrugerModel>> GetLoginDataAsync();
 

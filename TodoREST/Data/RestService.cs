@@ -13,7 +13,7 @@ namespace TodoREST
         HttpClient _client;
 
         public List<BrugerTest> Items { get;  set; }
-        public List<TodoItem> TestItems { get; set; }
+        public List<OnlineLeaderboard> LeaderboardTider { get; set; }
 
         public List<OpretBrugerModel> Logins { get; set; }
 
@@ -25,19 +25,19 @@ namespace TodoREST
             _client = new HttpClient(clientHandler);
         }
 
-        public async Task<List<TodoItem>> RefreshDataAsync()
+        public async Task<List<OnlineLeaderboard>> RefreshDataAsync()
         {
-            TestItems = new List<TodoItem>();
+            LeaderboardTider = new List<OnlineLeaderboard>();
             
             
             var uri = new Uri(string.Format(Constants.TestBaseAddress, string.Empty));
             try
             {
-                var response = await _client.GetAsync(uri);
+                var response = await _client.GetAsync("https://my-json-server.typicode.com/MathiasTP/apileaderboard/tider");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    TestItems = JsonConvert.DeserializeObject<List<TodoItem>>(content);
+                    LeaderboardTider = JsonConvert.DeserializeObject<List<OnlineLeaderboard>>(content);
                 }
                 
             }
@@ -46,7 +46,7 @@ namespace TodoREST
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
-            return TestItems;
+            return LeaderboardTider;
             
         }
 

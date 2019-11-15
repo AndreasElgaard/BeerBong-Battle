@@ -7,7 +7,7 @@
     </ContentPage.ToolbarItems>
 
     <ListView x:Name="listView"
-              Margin="30"
+              Margin="10"
               >
         <ListView.ItemTemplate>
             <DataTemplate>
@@ -18,16 +18,20 @@
                                  Orientation="Horizontal">
                         
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding brugerid}"
-                                   VerticalTextAlignment="Center"
-                                   FontSize="30"
-                                   
+                            <Label Text="1"  />
+                            <Label Text="{Binding navn}"
+                                   VerticalTextAlignment="Start"
+                                   FontSize="25"
+                                   x:Name="NavnLabel"
+                                   FontAttributes="Bold" VerticalOptions="Start"/>
+
+                            <Label Text="{Binding tid}"
+                                   Margin="50,0,0,0"
+                                   VerticalTextAlignment="End"
+                                   FontSize="25"
+                                   x:Name="TidLabel"
                                    FontAttributes="Bold"/>
-                            <Label Text="{Binding id}"
-                                   Margin="0,0,0,0"
-                                   VerticalTextAlignment="Center"
-                                   FontSize="30"
-                                   FontAttributes="Bold"/>
+                                    
                             
                         </StackLayout>
                         

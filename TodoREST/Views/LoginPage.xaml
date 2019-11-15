@@ -22,8 +22,8 @@
                     
                 <Entry Text="" TextColor="White" PlaceholderColor="White" Placeholder="Brugernavn" Margin="0,100,0,0" x:Name="Brugernavn"  />
                 <Entry Text="" Placeholder="Password" PlaceholderColor="White" TextColor="White" x:Name="Password" IsPassword="true" />
-            
-                
+                <ActivityIndicator IsRunning="False" x:Name="tænker" />
+
                 <Button Grid.Row="2" Text="LOGIN" Clicked="OnLogin" FontSize="20" BackgroundColor="Green" TextColor="White" Margin="0,20,0,0" BorderColor="#EA2C2C" BorderWidth="0" />
             </StackLayout>
             <Button Grid.Row="2" Text="Opret bruger" Clicked="OnOpretBrugerFromLogin" BackgroundColor="Orange" TextColor="White"/>
