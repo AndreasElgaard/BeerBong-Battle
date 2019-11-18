@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoREST.TodoListPage"
+             Title="Global Leaderboard">
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+
+    <ListView x:Name="LeaderboardData"
+              Margin="10"
+              RowHeight="70">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding rank}" VerticalOptions="Center" FontSize="30" VerticalTextAlignment="Center" Grid.Column="0" FontAttributes="Bold"  />
+                            <Label Text="{Binding navn}"
+                                   Grid.Column="1"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="25"
+                                   x:Name="NavnLabel"
+                                   VerticalOptions="Center"
+                                   />
+
+                            <!--<StackLayout Spacing="0" VerticalOptions="Center">-->
+                                <Label Text="{Binding tid}"
+                                       Grid.Column="2"
+                                       VerticalTextAlignment="Center"
+                                       VerticalOptions="Center"
+                                       FontSize="25"
+                                       x:Name="TidLabel"
+                                       />
+                            <!--</StackLayout>
+
+
+
+                        </StackLayout>-->
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
