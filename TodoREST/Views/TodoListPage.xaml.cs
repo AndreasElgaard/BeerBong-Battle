@@ -11,11 +11,9 @@ namespace TodoREST
 {
 	public partial class TodoListPage : ContentPage, INotifyPropertyChanged
     {
-        private string _navn;
-        private string _tid;
-        private int _count;
-        private int ranks;
+ 
         List<OnlineLeaderboard> leaderboard = new List<OnlineLeaderboard>();
+
 
         public TodoListPage ()
 		{
