@@ -10,7 +10,7 @@ namespace projekt4.Repositories
 {
     public class ParticipantRepository : Repository<Participant>, IParticipantRepository
     {
-        public ParticipantRepository(DbContext context) : base(context)
+        public ParticipantRepository(BBMContext context) : base(context)
         {
         }
 

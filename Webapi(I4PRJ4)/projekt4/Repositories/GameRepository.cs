@@ -10,7 +10,7 @@ namespace projekt4.Repositories
 {
     public class GameRepository : Repository<Game>, IGameRepository
     {
-        public GameRepository(DbContext context) : base(context)
+        public GameRepository(BBMContext context) : base(context)
         {
         }
 

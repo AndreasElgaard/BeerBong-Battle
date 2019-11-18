@@ -5,12 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20191014100325_initialMigration.cs" />
-    <Compile Remove="Migrations\20191014100325_initialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20191113203945_initialmigration.cs" />
+    <Compile Remove="Migrations\20191113203945_initialmigration.Designer.cs" />
+    <Compile Remove="Migrations\20191113204502_initialmigration.cs" />
+    <Compile Remove="Migrations\20191113204502_initialmigration.Designer.cs" />
+    <Compile Remove="Migrations\20191113204631_initialmigration.cs" />
+    <Compile Remove="Migrations\20191113204631_initialmigration.Designer.cs" />
+    <Compile Remove="Migrations\20191113205102_initialmigration.cs" />
+    <Compile Remove="Migrations\20191113205102_initialmigration.Designer.cs" />
+    <Compile Remove="Migrations\20191113205658_initialmigration.cs" />
+    <Compile Remove="Migrations\20191113205658_initialmigration.Designer.cs" />
+    <Compile Remove="Migrations\20191113210129_initialmigration.cs" />
+    <Compile Remove="Migrations\20191113210129_initialmigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
@@ -28,7 +37,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="Swashbuckle.ASPnetCore" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc4" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
   </ItemGroup>
 

@@ -9,18 +9,34 @@ namespace projekt4.Model
     {
         [Key]
         [Column("id")]
+        
         public int BrugerId { get; set; }
         [Column("User_Name")]
         [StringLength(50)]
+        [Required(ErrorMessage = "User Name is required")]
         public string UserName { get; set; }
-        [Column("last_name")]
+        [Column("Password")]
         [StringLength(50)]
+        [Required(ErrorMessage = "Password is required")]
         public string PassWord { get; set; }
-        //[Column("Password", TypeName = "date")]
-        //public DateTime? DateCreated { get; set; }
-        //[Column("Best Time")]
-        //public double BestTime { get; set; }
+        [Column("Date", TypeName = "date")]
+        public DateTime DateCreated { get; set; }
+        [Column("Token")]
+        public string? Token { get; set; }
 
-        //public Register register { get; set; }
+
+        public int? GameId { get; set; }
+        [ForeignKey("Game id")]
+        public Game Game { get; set; }
+
+        [ForeignKey("Queue id")]
+        public int? QueueId { get; set; }
+        public Queue Queue { get; set; }
+
+        [ForeignKey("Leaderboard id")]
+        public int? LeaderBoardId { get; set; }
+        public LeaderBoard LeaderBoard { get; set; }
+
+        public ICollection<Participant> Participants { get; set; }
     }
 }

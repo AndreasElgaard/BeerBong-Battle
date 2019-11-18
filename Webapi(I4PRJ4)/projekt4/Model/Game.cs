@@ -12,8 +12,9 @@ namespace projekt4.Model
         [Key]
         [Column("id")]
         public int GameId { get; set; }
+        [Column("Result from drinking bear")]
+        public string Time { get; set; }
 
-
-        public ICollection<Participant> Participants { get; set; }
+        public ICollection<Bruger> Brugers { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace projekt4.Repositories
 {
     public class QueueRepository : Repository<Queue>, IQueueRepository
     {
-        public QueueRepository(DbContext context) : base(context)
+        public QueueRepository(BBMContext context) : base(context)
         {
         }
 

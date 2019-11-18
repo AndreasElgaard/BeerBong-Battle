@@ -12,33 +12,31 @@ namespace projekt4.Model
         {
         }
 
-        //public virtual DbSet<Bruger> Bruger { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=tcp:bbm.database.windows.net,1433;Initial Catalog=Projekti4;Persist Security Info=False;User ID=au592631;Password=Xantos2012;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Bruger>(entity =>
-            {
-                entity.Property(e => e.FirstName).IsUnicode(false);
+            modelBuilder.Entity<Bruger>()
+                .Property(b => b.DateCreated)
+                .HasDefaultValueSql("GETDATE()");
 
-                entity.Property(e => e.LastName).IsUnicode(false);
-            });
+            modelBuilder.Entity<Bruger>()
+                .HasIndex(b => b.UserName)
+                .IsUnique();
 
-            OnModelCreatingPartial(modelBuilder);
+            modelBuilder.Entity<Bruger>()
+                .HasIndex(b => b.PassWord)
+                .IsUnique();
+
+            //modelBuilder.Entity<Queue>()
+            //    .Property(q => q.TimeStamp)
+            //    .HasDefaultValueSql("GETDATE()");
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+       
 
-        public DbSet<Register> Register { get; set; }
         public DbSet<Bruger> Brguers { get; set; }
         public DbSet<LeaderBoard> LeaderBoards { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<Participant> Participants { get; set; }
+        public DbSet<Queue> Queues { get; set; }
     }
 }

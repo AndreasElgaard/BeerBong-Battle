@@ -18,8 +18,10 @@ using projekt4.options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Swashbuckle.AspNetCore;
 using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.OpenApi.Models;
+
 
 namespace projekt4
 {
@@ -35,11 +37,20 @@ namespace projekt4
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
 
-            var jwtSettings = new JwtSettings();
-            Configuration.Bind(nameof(jwtSettings), jwtSettings);
-            services.AddSingleton<JwtSettings>();
+            var appsettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appsettingsSection);
+
+            var appSettings = appsettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            services.AddSingleton<AppSettings>();
+
+            //var jwtSettings = new AppSettings();
+            //Configuration.Bind(nameof(jwtSettings), jwtSettings);
+            //services.AddSingleton<AppSettings>();
+
+           
 
             services.AddAuthentication(x =>
             {
@@ -49,42 +60,61 @@ namespace projekt4
             })
             .AddJwtBearer(x =>
             {
+                x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     RequireExpirationTime = false,
-                    ValidateLifetime = true,
+                    ValidateLifetime = true
                 };
             });
 
 
             services.AddDbContext<BBMContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("BBMContext")));
+            options.UseSqlServer(Configuration.GetConnectionString("Defaultconnection")));
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "BBMSIMS", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BBMSIMS", Version = "v1" });
 
                 var security = new Dictionary<string, IEnumerable<string>>
                 {
-                    {"Bearer", new string[0]}
+                     {"Bearer", new string[0]}
                 };
 
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header usinger the bearer scheme",
                     Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
-
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT"
                 });
 
-                c.AddSecurityRequirement(security);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement 
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                             Reference = new OpenApiReference
+                             {
+                                 Type = ReferenceType.SecurityScheme,
+                                 Id = "Bearer"
+                             }
+                        },
+                        new string[]{}
+                    }
+                    
+                });
             });
+
+
+
+
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -92,7 +122,10 @@ namespace projekt4
             services.AddScoped<ILeaderBoardRepository, LeaderBoardRepository>();
             services.AddScoped<IParticipantRepository, ParticipantRepository>();
             services.AddScoped<IQueueRepository, QueueRepository>();
-            //services.AddScoped<IBrugerService, BrugerService>();
+            services.AddScoped<IBrugerRepository, BrugerRepository>();
+
+            
+            services.AddControllers();
 
         }
 
@@ -104,9 +137,16 @@ namespace projekt4
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
+            
+          
 
             app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseSwagger();
 
@@ -116,18 +156,11 @@ namespace projekt4
                 c.RoutePrefix = string.Empty; //launch swagger from root
             });
 
-            
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-           
         }
     }
 }

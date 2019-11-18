@@ -15,12 +15,11 @@ namespace projekt4.Model
         [Column("Participant_name")]
         [StringLength(50)]
         public string ParticipantName { get; set; }
-        [Column("date_created", TypeName = "TimeStamp")]
-        public DateTime TimeStamp { get; set; }
         [Column("Result_from_drinking")]
         public double RestultTime { get; set; }
 
-        //Navigation propertie
-        public Queue Queue { get; set; }
+        [ForeignKey("Bruger id")]
+        public int BrugerId { get; set; }
+        public Bruger Bruger { get; set; }
     }
 }

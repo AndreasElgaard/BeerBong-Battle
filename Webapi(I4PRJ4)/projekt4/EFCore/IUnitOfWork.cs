@@ -12,6 +12,7 @@ namespace projekt4.EFCore
         IQueueRepository Queue { get; }
         IParticipantRepository Participant { get; }
         IGameRepository Game { get; }
+        IBrugerRepository Bruger { get; }
 
         int Complete();
     }

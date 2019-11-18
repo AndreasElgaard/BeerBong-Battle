@@ -12,10 +12,9 @@ namespace projekt4.Model
         [Key]
         [Column("id")]
         public int LeaderBoardId { get; set; }
+        [Column("Best Time")]
+        public string Time { get; set; }
 
-        //
-        [ForeignKey("Bruger")]
-        public int BrugerId { get; set; }
-        public Bruger Bruger { get; set; }
+        public ICollection<Bruger> Brugers { get; set; }
     }
 }

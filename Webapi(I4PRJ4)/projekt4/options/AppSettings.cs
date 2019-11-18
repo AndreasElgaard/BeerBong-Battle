@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace projekt4.options
 {
-    public class JwtSettings
+    public class AppSettings
     {
         public string Secret { get; set; }
     }

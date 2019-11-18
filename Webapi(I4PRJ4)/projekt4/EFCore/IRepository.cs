@@ -23,5 +23,9 @@ namespace projekt4.Repositories
         //Removing Objects
         void Remove(TEntity entity); //Remove one
         void RemoveRange(IEnumerable<TEntity> entities); //Remove a list
+
+        //Update object
+        void Update(TEntity entity);
+
     }
 }
