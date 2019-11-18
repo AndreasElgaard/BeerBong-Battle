@@ -23,12 +23,12 @@ namespace Sensor
             Laser_Bot.PinMode = GpioPinDriveMode.Input;
             if (Laser_Bot.Read() == true)
             {
-                Console.WriteLine("Bottom Laser detected");
+                //Console.WriteLine("Bottom Laser detected");
                 return true;
             }
             else
             {
-                Console.WriteLine("No Bottom laser detected");
+                //Console.WriteLine("No Bottom laser detected");
                 return false;
             }
         }

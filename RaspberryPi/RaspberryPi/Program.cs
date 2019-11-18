@@ -11,11 +11,12 @@ using Unosquare.RaspberryIO.Abstractions;
 using Unosquare.WiringPi;
 using System.Timers;
 using RaspberryPi.Bluetooth;
+using RaspberryPi.Bluetooth;
 using RaspberryPiStates;
 using Sensor;
 using StopWatch;
 
-namespace RaspberryPi
+namespace RaspberryPii
 {
     public class Program
     {
@@ -27,18 +28,32 @@ namespace RaspberryPi
             IRaspberryPiStates emptyState = new EmptyState();
             IRaspberryPiStates fullState = new FullState();
             IRaspberryPiStates notDoneState = new NotDoneState();
-            IBluetooth bt = new Bluetooth.Bluetooth();
+            Bluetooth bt = new Bluetooth();
+            bt.Init();
             context.setState(emptyState);
+            bt.SendData("EmptyState");
             while (ReferenceEquals(context.getState(),emptyState)
                    || ReferenceEquals(context.getState(), fullState)
                    || ReferenceEquals(context.getState(), notDoneState))
             {
+                //context.IsFull(timer, context, emptyState, fullState, notDoneState);
                 try
                 {
                     context.IsFull(timer, context, emptyState, fullState, notDoneState);
                 }
+                catch (ArgumentException)
+                {
+                    bt.SendData("ErrorFullStateGoEmptyState");
+                    context.setState(emptyState);
+                }
+                catch (InvalidOperationException)
+                {
+                    bt.SendData("TimeoutGoEmptyState");
+                    context.setState(emptyState);
+                }
                 catch (Exception)
                 {
+                    bt.SendData("ErrorGoEmptyState");
                     context.setState(emptyState);
                 }
             }
@@ -52,65 +67,6 @@ namespace RaspberryPi
                 LaserTop.Initiate();
                 LaserBot.Initiate();
             }
-
-            //while (true)
-            //{
-            //    while (ReferenceEquals(context.getState(), emptyState))
-            //    {
-            //        if (context.IsFull(timer) == false)
-            //        {
-            //            context.setState(emptyState);
-            //            Thread.Sleep(5000);
-            //        }
-            //        else
-            //        {
-            //            context.setState(fullState);
-            //            Thread.Sleep(5000);
-            //        }
-            //    }
-
-            //    while (ReferenceEquals(context.getState(), fullState))
-            //    {
-            //        try
-            //        {
-            //            if (context.IsFull(timer) == true)
-            //            {
-            //                context.setState(fullState);
-            //                Thread.Sleep(1000);
-            //            }
-            //            else
-            //            {
-            //                context.setState(notDoneState);
-            //                Thread.Sleep(2000);
-            //            }
-            //        }
-            //        catch (Exception)
-            //        {
-            //            context.setState(emptyState);
-            //        }
-            //    }
-
-            //    while (ReferenceEquals(context.getState(), notDoneState))
-            //    {
-            //        try
-            //        {
-            //            if (context.IsFull(timer) == false)
-            //            {
-            //                context.setState(notDoneState);
-            //                Thread.Sleep(1000);
-            //            }
-            //            else
-            //            {
-            //                context.setState(emptyState);
-            //                Thread.Sleep(5000);
-            //            }
-            //        }
-            //        catch (Exception)
-            //        {
-            //            context.setState(notDoneState);
-            //        }
-            //    }
-            //}
         }
     }
 }

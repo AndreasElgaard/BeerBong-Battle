@@ -119,6 +119,17 @@ namespace RaspberryPiUnitTest
             Assert.That(a, Is.EqualTo(result));
         }
 
+        [TestCase("01.00")]
+        public void Test_get_time(string time)
+        {
+            _stopWatch.StartTimer();
+            Thread.Sleep(1000);
+            double result = _stopWatch.GetTime();
+            _stopWatch.StopTimer();
+
+            Assert.That(result, Is.EqualTo(01.00));
+        }
+
         #endregion
 
         #region bluetooth

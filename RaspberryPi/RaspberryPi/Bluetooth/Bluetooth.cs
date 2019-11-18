@@ -26,7 +26,12 @@ namespace RaspberryPi.Bluetooth
 
         public void SendData(string data)
         {
-            Bt.WriteLine(data);
+            int times = 0;
+            while (times < 5)
+            {
+                Bt.WriteLine(data);
+                times++; 
+            }
         }
 
         public string ReceviceByte()

@@ -21,12 +21,12 @@ namespace Sensor
             magnet.PinMode = GpioPinDriveMode.Input;
             if (magnet.Read() == false)
             {
-                Console.WriteLine("No Magnet detected");
+                //Console.WriteLine("No Magnet detected");
                 return false;
             }
             else
             {
-                Console.WriteLine("Magnet detected");
+                //Console.WriteLine("Magnet detected");
                 return true;
             }
         }
