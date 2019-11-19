@@ -18,6 +18,7 @@ namespace RaspberryPiStates
         //LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
         Bluetooth bt = new Bluetooth();
+        private double MAX_TIME = 20.00; 
 
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
@@ -44,10 +45,11 @@ namespace RaspberryPiStates
                 //Thread.Sleep(5000);
             }
 
-            if (timer.GetTime() > 20.00)
+            if (timer.GetTime() > MAX_TIME)
             {
+                throw new InvalidOperationException("TimeOut");
+                //bt.SendData("TimeoutGOEmptyState");
                 //context.setState(emptyState);
-                throw new Exception("Error In fullstate - time went out");
             }
         }
         public Bluetooth getBT()

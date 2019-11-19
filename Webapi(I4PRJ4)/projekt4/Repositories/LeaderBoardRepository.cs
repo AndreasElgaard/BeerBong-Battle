@@ -16,7 +16,7 @@ namespace projekt4.Repositories
 
         public IEnumerable<LeaderBoard> GetLeaderboardWithUsers(int leaderboardId, int NumberofUsers)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();  
         }
 
         public IEnumerable<LeaderBoard> GetTopOnLeaderboard(int count)

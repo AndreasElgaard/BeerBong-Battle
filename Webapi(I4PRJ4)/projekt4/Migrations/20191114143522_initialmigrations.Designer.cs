@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using projekt4.Model;
 
 namespace projekt4.Migrations
 {
     [DbContext(typeof(BBMContext))]
-    partial class BBMContextModelSnapshot : ModelSnapshot
+    [Migration("20191114143522_initialmigrations")]
+    partial class initialmigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,6 @@ namespace projekt4.Migrations
                         .HasColumnType("date")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<int?>("Game id")
-                        .HasColumnType("int");
-
                     b.Property<int?>("GameId")
                         .HasColumnType("int");
 
@@ -43,7 +42,6 @@ namespace projekt4.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PassWord")
-                        .IsRequired()
                         .HasColumnName("Password")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -51,29 +49,18 @@ namespace projekt4.Migrations
                     b.Property<int?>("QueueId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Token")
-                        .HasColumnName("Token")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnName("User_Name")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
                     b.HasKey("BrugerId");
 
-                    b.HasIndex("Game id");
+                    b.HasIndex("GameId");
 
                     b.HasIndex("LeaderBoardId");
 
-                    b.HasIndex("PassWord")
-                        .IsUnique();
-
                     b.HasIndex("QueueId");
-
-                    b.HasIndex("UserName")
-                        .IsUnique();
 
                     b.ToTable("Brguers");
                 });
@@ -166,7 +153,7 @@ namespace projekt4.Migrations
                 {
                     b.HasOne("projekt4.Model.Game", "Game")
                         .WithMany("Brugers")
-                        .HasForeignKey("Game id");
+                        .HasForeignKey("GameId");
 
                     b.HasOne("projekt4.Model.LeaderBoard", "LeaderBoard")
                         .WithMany("Brugers")

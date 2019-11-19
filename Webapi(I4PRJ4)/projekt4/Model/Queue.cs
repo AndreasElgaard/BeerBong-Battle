@@ -15,7 +15,6 @@ namespace projekt4.Model
         [Column("date_created", TypeName = "Timestamp")]
         public DateTime TimeStamp { get; set; }
 
-        //navigation propertie
         public ICollection<Participant> Participants { get; set; }
     }
 }

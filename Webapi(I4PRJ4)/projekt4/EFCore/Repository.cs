@@ -20,6 +20,7 @@ namespace projekt4.EFCore
             _context = context;
         }
 
+
         public void Add(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);
@@ -53,6 +54,12 @@ namespace projekt4.EFCore
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             _context.Set<TEntity>().RemoveRange(entities);
+        }
+
+        public void Update(TEntity entity)
+        {
+            _context.Set<TEntity>().Attach(entity);
+            _context.Entry<TEntity>(entity).State = EntityState.Modified;
         }
     }
 }

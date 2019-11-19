@@ -26,7 +26,7 @@ namespace StopWatch
             ts = time.Elapsed;
             // Formaterer tiden til double
             elapsedTime = String.Format("{0:00}.{1:00}", ts.Seconds, ts.Milliseconds / 10);
-            Console.WriteLine(elapsedTime); //For testing
+            //Console.WriteLine(elapsedTime); //For testing
 
             return elapsedTime;
         }
@@ -37,7 +37,7 @@ namespace StopWatch
             ts = time.Elapsed;
             string elapsedTime = String.Format("{0:00}.{1:00}", ts.Seconds, ts.Milliseconds / 10);
             double result = double.Parse(elapsedTime);
-            Console.WriteLine(result); //for testing
+            //Console.WriteLine(result); //for testing
             return result;
         }
 

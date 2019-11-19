@@ -42,8 +42,9 @@ namespace RaspberryPiStates
             }
             else
             {
-                //Console.WriteLine("This should not happen");
-                throw new Exception ("Error In FullState");
+                //bt.SendData("NotFullGOEmptyState");
+                //context.setState(emptyState);
+                throw new ArgumentException("Error In FullState");
             }
         }
         public Bluetooth getBT()

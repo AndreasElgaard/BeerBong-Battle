@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using projekt4.Model;
 
 namespace projekt4.Migrations
 {
     [DbContext(typeof(BBMContext))]
-    partial class BBMContextModelSnapshot : ModelSnapshot
+    [Migration("20191117150734_authentication")]
+    partial class authentication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +45,6 @@ namespace projekt4.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PassWord")
-                        .IsRequired()
                         .HasColumnName("Password")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -56,7 +57,6 @@ namespace projekt4.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnName("User_Name")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -67,13 +67,7 @@ namespace projekt4.Migrations
 
                     b.HasIndex("LeaderBoardId");
 
-                    b.HasIndex("PassWord")
-                        .IsUnique();
-
                     b.HasIndex("QueueId");
-
-                    b.HasIndex("UserName")
-                        .IsUnique();
 
                     b.ToTable("Brguers");
                 });
