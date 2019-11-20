@@ -1,12 +1,15 @@
-﻿using System;
+﻿using System.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using projekt4.Model;
 
-namespace projekt4.Model
+namespace projekt4.EFCore
 {
-    public partial class BBMContext : DbContext
+    public partial class BBMContext : IdentityDbContext<IdentityUser>
     {
+
         public BBMContext(DbContextOptions<BBMContext> options)
             : base(options)
         {

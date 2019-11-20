@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projekt4.Model
 {
-    public partial class Bruger
+    public partial class Bruger : IdentityUser<int>
     {
         [Key]
         [Column("id")]
-        
         public int BrugerId { get; set; }
         [Column("User_Name")]
         [StringLength(50)]

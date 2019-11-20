@@ -16,12 +16,13 @@ using projekt4.EFCore;
 using projekt4.Repositories;
 using projekt4.options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Swashbuckle.AspNetCore;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace projekt4
 {
@@ -46,11 +47,21 @@ namespace projekt4
 
             services.AddSingleton<AppSettings>();
 
-            //var jwtSettings = new AppSettings();
-            //Configuration.Bind(nameof(jwtSettings), jwtSettings);
-            //services.AddSingleton<AppSettings>();
+            services.AddDbContext<BBMContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("Defaultconnection")));
 
-           
+            services.AddIdentityCore<ApplicationUser>()
+                .AddEntityFrameworkStores<BBMContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            });
 
             services.AddAuthentication(x =>
             {
@@ -74,8 +85,7 @@ namespace projekt4
             });
 
 
-            services.AddDbContext<BBMContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("Defaultconnection")));
+
 
             services.AddSwaggerGen(c =>
             {
@@ -137,8 +147,14 @@ namespace projekt4
                 app.UseDeveloperExceptionPage();
             }
 
-            
-          
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:5000")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                );
+                
+
 
             app.UseHttpsRedirection();
 
