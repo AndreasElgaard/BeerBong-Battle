@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TodoREST.Models;
 
 namespace TodoREST
 {
@@ -31,9 +32,9 @@ namespace TodoREST
 			return restService.SaveTodoItemAsync (item, isNewItem);
 		}
 
-        public Task SaveOpretBruger(OpretBrugerModel item, bool isNewItem = false)
+        public Task SaveOpretBruger(RegisterUser item)
         {
-            return restService.SaveOpretBrugerAsync(item, isNewItem);
+            return restService.SaveOpretBrugerAsync(item);
         }
 
         public Task DeleteTaskAsync (BrugerTest item)

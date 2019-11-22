@@ -69,6 +69,7 @@ namespace TodoREST.Views
             brugernavnonopret = Brugernavn.Text;
             //  App.TodoManager.SaveOpretBruger(bruger, isNewItem);
             DisplayAlert("Bruger succesfuldt oprettet!", "Du er oprettet som: " + brugernavnonopret, "OK");
+            
             Navigation.PopAsync();
         }
         

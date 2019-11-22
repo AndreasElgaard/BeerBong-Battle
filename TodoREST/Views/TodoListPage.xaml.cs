@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using TodoREST.Models;
 using Xamarin.Forms;
 
+
 namespace TodoREST
 {
 	public partial class TodoListPage : ContentPage, INotifyPropertyChanged

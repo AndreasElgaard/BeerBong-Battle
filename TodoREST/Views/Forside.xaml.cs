@@ -68,7 +68,7 @@ namespace TodoREST.Views
 
         async void ForbindBT(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new BlueTooth());
         }
 
         async void GoToMultiplayer(object sender, EventArgs e)

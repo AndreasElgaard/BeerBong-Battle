@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using TodoREST.Models;
 
 namespace TodoREST
 {
@@ -106,7 +107,7 @@ namespace TodoREST
             }
         }
 
-        public async Task SaveOpretBrugerAsync(OpretBrugerModel bruger, bool isNewItem)
+        public async Task SaveOpretBrugerAsync(RegisterUser bruger)
         {
             var uri = new Uri(string.Format(Constants.TodoItemsUrl, string.Empty));
 
@@ -116,14 +117,9 @@ namespace TodoREST
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = null;
-                if (isNewItem)
-                {
-                    response = await _client.PostAsync(uri, content);
-                }
-                else
-                {
-                    response = await _client.PutAsync(uri, content);
-                }
+                
+                response = await _client.PostAsync("https://webapiprojekt420191120040352.azurewebsites.net//api/Identity/Register", content);
+
 
                 if (response.IsSuccessStatusCode)
                 {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using TodoREST.Models;
 
 namespace TodoREST
 {
@@ -11,7 +12,7 @@ namespace TodoREST
 
         Task SaveTodoItemAsync (BrugerTest item, bool isNewItem);
 
-        Task SaveOpretBrugerAsync(OpretBrugerModel bruger, bool isNewItem);
+        Task SaveOpretBrugerAsync(RegisterUser bruger);
 
 		Task DeleteTodoItemAsync (string id);
 	}
