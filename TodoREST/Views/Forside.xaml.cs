@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TodoREST.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -54,7 +54,7 @@ namespace TodoREST.Views
         {
             await Navigation.PushAsync(new OpretBruger(true)
             {
-                BindingContext = new BrugerTest
+                BindingContext = new RegisterUser
                 {
                 }
             });

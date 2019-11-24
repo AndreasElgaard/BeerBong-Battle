@@ -13,6 +13,8 @@ namespace TodoREST
         public static bool isLoggedIn = false;
 
         public static string BrugernavnOnLogIn;
+
+        public static string Token;
        
 
         

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TodoREST.Models;
+using Xamarin.Forms.Internals;
 
 namespace TodoREST
 {
@@ -8,9 +9,7 @@ namespace TodoREST
 	{
 		Task<List<OnlineLeaderboard>> RefreshDataAsync ();
 
-        Task<List<OpretBrugerModel>> GetLoginDataAsync();
-
-        Task SaveTodoItemAsync (BrugerTest item, bool isNewItem);
+        Task<bool> GetLoginDataAsync(LoginUser login);
 
         Task SaveOpretBrugerAsync(RegisterUser bruger);
 

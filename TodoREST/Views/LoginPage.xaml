@@ -26,7 +26,7 @@
 
                 <Button Grid.Row="2" Text="LOGIN" Clicked="OnLogin" FontSize="20" BackgroundColor="Green" TextColor="White" Margin="0,20,0,0" BorderColor="#EA2C2C" BorderWidth="0" />
             </StackLayout>
-            <Button Grid.Row="2" Text="Opret bruger" Clicked="OnOpretBrugerFromLogin" BackgroundColor="Orange" TextColor="White"/>
+            <Button Grid.Row="2" Text="Opret bruger"  BackgroundColor="Orange" TextColor="White"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

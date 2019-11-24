@@ -8,7 +8,7 @@ namespace TodoREST
 	public class TodoItemManager
 	{
 		IRestService restService;
-        public List<BrugerTest> LoginList { get; private set; }
+       
 
         public TodoItemManager (IRestService service)
 		{
@@ -22,25 +22,19 @@ namespace TodoREST
             return restService.RefreshDataAsync();
         }
 
-        public Task<List<OpretBrugerModel>> GetLoginDataAsync()
+        public Task<bool> GetLoginDataAsync(LoginUser login)
         {
-            return restService.GetLoginDataAsync();
+            return restService.GetLoginDataAsync(login);
         }
 
-		public Task SaveTaskAsync (BrugerTest item, bool isNewItem = false)
-		{
-			return restService.SaveTodoItemAsync (item, isNewItem);
-		}
+		
 
         public Task SaveOpretBruger(RegisterUser item)
         {
             return restService.SaveOpretBrugerAsync(item);
         }
 
-        public Task DeleteTaskAsync (BrugerTest item)
-		{
-			return restService.DeleteTodoItemAsync (item.brugerid.ToString());
-		}
+       
 
       
     }

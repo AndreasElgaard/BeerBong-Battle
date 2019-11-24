@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TodoREST.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -59,15 +60,15 @@ namespace TodoREST.Views
 
         public void OpretBrugerSucces()
         {
-            var bruger = new OpretBrugerModel
+            var bruger = new RegisterUser()
             {
-                navn = Brugernavn.Text,
-                password = Password.Text
+                userName = Brugernavn.Text,
+                passWord = Password.Text
             };
 
             string brugernavnonopret;
             brugernavnonopret = Brugernavn.Text;
-            //  App.TodoManager.SaveOpretBruger(bruger, isNewItem);
+            App.TodoManager.SaveOpretBruger(bruger);
             DisplayAlert("Bruger succesfuldt oprettet!", "Du er oprettet som: " + brugernavnonopret, "OK");
             
             Navigation.PopAsync();

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TodoREST.Models;
+using Xamarin.Forms.Internals;
 
 namespace TodoREST
 {
@@ -13,10 +14,10 @@ namespace TodoREST
     {
         HttpClient _client;
 
-        public List<BrugerTest> Items { get;  set; }
+        
         public List<OnlineLeaderboard> LeaderboardTider { get; set; }
 
-        public List<OpretBrugerModel> Logins { get; set; }
+        
 
         public RestService()
         {
@@ -51,66 +52,41 @@ namespace TodoREST
             
         }
 
-        public async Task<List<OpretBrugerModel>> GetLoginDataAsync()
+        public async Task<bool> GetLoginDataAsync(LoginUser login)
         {
-            Logins = new List<OpretBrugerModel>();
-
-
-            //var uri = new Uri(string.Format(Constants.TestBaseAddress, string.Empty));
-
+            bool status = false;
             try
             {
-                var response = await _client.GetAsync("https://my-json-server.typicode.com/MathiasTP/apitest1/logins")
-                    .ConfigureAwait(false);
-                
-                response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync();
-                Logins = JsonConvert.DeserializeObject<List<OpretBrugerModel>>(content);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-
-            return Logins;
-        }
-
-
-        public async Task SaveTodoItemAsync(BrugerTest item, bool isNewItem = false)
-        {
-            var uri = new Uri(string.Format(Constants.TodoItemsUrl, string.Empty));
-
-            try
-            {
-                var json = JsonConvert.SerializeObject(item);
+                var json = JsonConvert.SerializeObject(login);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+
                 HttpResponseMessage response = null;
-                if (isNewItem)
+                response = await _client.PostAsync(
+                    "https://webapiprojekt420191120040352.azurewebsites.net/api/Identity/Login", content);
+                if (response.IsSuccessStatusCode)
                 {
-                    response = await _client.PostAsync(uri, content);
+                    var jsonlogin = await response.Content.ReadAsAsync<LoginResponse>();
+                    App.Token = jsonlogin.token;
+                     status = true;
                 }
                 else
                 {
-                    response = await _client.PutAsync(uri, content);
+                    status = false;
                 }
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine(@"\tTodoItem successfully saved.");
-                }
-
+               
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
+
+            return status;
         }
+
 
         public async Task SaveOpretBrugerAsync(RegisterUser bruger)
         {
-            var uri = new Uri(string.Format(Constants.TodoItemsUrl, string.Empty));
-
             try
             {
                 var json = JsonConvert.SerializeObject(bruger);

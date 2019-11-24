@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TodoREST.Models
 {
-    class LoginUser
+   public class LoginUser
     {
         public string userName { get; set; }
         public string passWord { get; set; }
