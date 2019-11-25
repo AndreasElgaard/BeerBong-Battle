@@ -1,4 +1,5 @@
-﻿using TodoREST.Views;
+﻿using TodoREST.Models;
+using TodoREST.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +16,11 @@ namespace TodoREST
         public static string BrugernavnOnLogIn;
 
         public static string Token;
+
+        public static Player player;
+
+        public static QueueModstander modstander;
+        public static Game game;
        
 
         

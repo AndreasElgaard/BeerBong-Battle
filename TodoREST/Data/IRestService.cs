@@ -11,8 +11,18 @@ namespace TodoREST
 
         Task<bool> GetLoginDataAsync(LoginUser login);
 
+        Task AddPlayer(Player player);
+
+        Task QueueGetPlayer(QueueModstander modstander);
+
         Task SaveOpretBrugerAsync(RegisterUser bruger);
 
 		Task DeleteTodoItemAsync (string id);
-	}
+
+        Task CreateGame(Game game);
+
+        Task RemovePlayerQueue();
+
+        Task AddPlayerToGame(Game game);
+    }
 }

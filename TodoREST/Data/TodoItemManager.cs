@@ -27,6 +27,10 @@ namespace TodoREST
             return restService.GetLoginDataAsync(login);
         }
 
+        public Task GetFirstPlayerInQueue(QueueModstander modstander)
+        {
+            return restService.QueueGetPlayer(modstander);
+        }
 		
 
         public Task SaveOpretBruger(RegisterUser item)
