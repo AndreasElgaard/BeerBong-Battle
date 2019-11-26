@@ -63,7 +63,7 @@ namespace we.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "Player already exsist" });
+                return BadRequest(new { message = "LeaderBoard Allready exsist" });
             }
 
 
@@ -118,6 +118,23 @@ namespace we.Controllers
             {
                 return BadRequest(new { message = "Players already exsist" });
             }
+
+
+            return Ok();
+        }
+
+        [Route("GetTopTimes")]
+        [HttpGet]
+        public IActionResult GetTopTimes()
+        {
+
+            return Ok();
+        }
+
+        [Route("InsertTopTimes")]
+        [HttpPatch]
+        public IActionResult InsertTopTimes(int Time)
+        {
 
 
             return Ok();
