@@ -96,7 +96,7 @@ namespace RaspberryPiUnitTest
         #endregion
 
         #region bluetooth
-
+        /*
         [Test]
         public void bluetoothReceived()
         {
@@ -110,7 +110,7 @@ namespace RaspberryPiUnitTest
             _bluetooth = _states.getBT();
 
             _bluetooth.Received().SendData(Arg.Any<string>());
-        }
+        }*/
 
         #endregion
         }

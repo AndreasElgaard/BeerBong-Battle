@@ -14,6 +14,7 @@ using RaspberryPi.Bluetooth;
 using RaspberryPiStates;
 using Sensor;
 using StopWatch;
+using RaspberryPi.Json_Writer;
 
 namespace RaspberryPi
 {
@@ -28,7 +29,9 @@ namespace RaspberryPi
             IRaspberryPiStates fullState = new FullState();
             IRaspberryPiStates notDoneState = new NotDoneState();
             IBluetooth bt = new Bluetooth.Bluetooth();
+            JsonWriter writer = new JsonWriter();
             context.setState(emptyState);
+            writer.JsonWriterFunc("Emptystate", 0);
             while (ReferenceEquals(context.getState(),emptyState)
                    || ReferenceEquals(context.getState(), fullState)
                    || ReferenceEquals(context.getState(), notDoneState))

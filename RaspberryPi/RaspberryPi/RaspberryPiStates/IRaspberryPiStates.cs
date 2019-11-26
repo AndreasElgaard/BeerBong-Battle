@@ -16,7 +16,7 @@ namespace RaspberryPiStates
         void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState);
 
-        Bluetooth getBT();
-        void setBT(Bluetooth bt_);
+
+       
     }
-    }
+}
