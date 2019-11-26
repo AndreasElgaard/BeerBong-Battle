@@ -10,6 +10,7 @@ using WebApiProjekt4.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using WebApiProjekt4.Controllers.Responses;
+using WebApiProjekt4.Data.Dto;
 
 namespace we.Controllers
 {
@@ -97,6 +98,7 @@ namespace we.Controllers
                 return BadRequest(new { message = "Player Id doesn't exsist" });
             }
 
+            
             unitOfWork_.Queue.Update(updatedqueue);
             await unitOfWork_.CompleteAsync();
 
@@ -104,7 +106,7 @@ namespace we.Controllers
         }
 
         [HttpGet("GetFirstPlayer")]
-        public async Task<ActionResult<Queue>> GetPlayers()
+        public async Task<ActionResult<GetFirstPlayerResult>> GetPlayers()
         {
             var Players = await unitOfWork_.Queue.GetUser();
 
