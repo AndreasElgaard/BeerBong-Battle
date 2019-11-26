@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using RaspberryPi.Bluetooth;
-using RaspberryPi.Json_Writer;
 using Sensor;
 using StopWatch;
 
@@ -15,31 +14,38 @@ namespace RaspberryPiStates
     {
         //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
-        //Bluetooth bt = new Bluetooth();
-        JsonWriter writer = new JsonWriter();
-        public void IsFull(MyStopWatch Timer, Context context, IRaspberryPiStates emptyState,
+        Bluetooth bt = new Bluetooth();
+        public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            //bt.Init();
-            Console.WriteLine("This is EmptyState");
+            //Console.WriteLine("This is EmptyState");
             if (LaserTop.Detected() == true)
             {
-                //bt.SendData("EmptyState - Beerbong is not full");
+                //Console.WriteLine("BeerBong is NOT full please refill your beerbong");
+                //bt.SendData("EmptyState");
                 context.setState(emptyState);
-                Console.WriteLine("BeerBong is NOT full please refill your beerbong");
-                Thread.Sleep(5000);
-                
+                //Thread.Sleep(5000);
+
             }
             else
             {
-                //bt.SendData("Empty state - Beerbong is full");
-                writer.JsonWriterFunc("Fullstate", 0);
+                bt.Init();
+                bt.SendData("FullState");
                 context.setState(fullState);
-                Console.WriteLine("BeerBong is full");
-                Thread.Sleep(5000);
+                //Console.WriteLine("BeerBong is full");
+                //Thread.Sleep(5000);
                 
             }
         }
-        
+
+        public Bluetooth getBT()
+        {
+            return bt;
+        }
+
+        public void setBT(Bluetooth bt_)
+        {
+            bt = bt_;
+        }
     }
 }

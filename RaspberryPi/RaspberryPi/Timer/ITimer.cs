@@ -9,6 +9,7 @@ namespace StopWatch
     public interface ITimer
     {
         void StartTimer();
-        string StopTimer(); 
+        string StopTimer();
+        double GetTime(); 
     }
 }

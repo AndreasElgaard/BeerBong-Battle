@@ -30,7 +30,7 @@ namespace RaspberryPiStates
         }
 
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
-            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, IBluetooth bt)
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
             _currentState.IsFull(timer, context, emptyState, fullState, notDoneState);
         }

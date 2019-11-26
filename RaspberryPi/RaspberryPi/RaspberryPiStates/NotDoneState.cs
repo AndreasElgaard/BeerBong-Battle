@@ -17,39 +17,48 @@ namespace RaspberryPiStates
         LaserSensorBottom LaserBot = new LaserSensorBottom();
         //LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
-        //Bluetooth bt = new Bluetooth();
+        Bluetooth bt = new Bluetooth();
+        private double MAX_TIME = 20.00; 
 
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            //bt.Init();
-            Console.WriteLine("This is NotDoneState");
+            //Console.WriteLine("This is NotDoneState");
             if (LaserBot.Detected() == false)
             {
-               // bt.SendData("NotDoneState - You are not finished drinking and timer continues");
+                //bt.SendData("NotDoneState");
                 context.setState(notDoneState);
-                Console.WriteLine("You are not finished drinking - timer continues");
-                Thread.Sleep(1000);
-                //return false;
+                //Console.WriteLine("You are not finished drinking - timer continues");
+                //Thread.Sleep(1000);
             }
             //Also possible just to use an else loop
             if (Magnet.Detected() == false && LaserBot.Detected() == true)
             {
+                bt.Init();
                 string result = null;
                 result = timer.StopTimer();
                 Console.WriteLine(result);
-                //bt.SendData(result);
+                bt.SendData(result);
+                bt.SendData("EmptyState");
                 context.setState(emptyState);
-                Console.WriteLine("BeerBong is empty - stop timer");
-                Thread.Sleep(5000);
-                //return true; 
+                //Console.WriteLine("EmptyState");
+                //Thread.Sleep(5000);
             }
-            else
+
+            if (timer.GetTime() > MAX_TIME)
             {
-                context.setState(notDoneState);
-                //return false; 
+                throw new InvalidOperationException("TimeOut");
+                //bt.SendData("TimeoutGOEmptyState");
+                //context.setState(emptyState);
             }
         }
-        
+        public Bluetooth getBT()
+        {
+            return bt;
+        }
+        public void setBT(Bluetooth bt_)
+        {
+            bt = bt_;
+        }
     }
 }

@@ -5,11 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Timers;
-using Newtonsoft.Json;
 using RaspberryPi.Bluetooth;
 using Sensor;
 using StopWatch;
-using JsonWriter = RaspberryPi.Json_Writer.JsonWriter;
 
 namespace RaspberryPiStates
 {
@@ -18,17 +16,15 @@ namespace RaspberryPiStates
         //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
-        JsonWriter writer = new JsonWriter();
-        //Bluetooth bt = new Bluetooth();
+        Bluetooth bt = new Bluetooth();
 
-        public void IsFull(MyStopWatch Timer, Context context, IRaspberryPiStates emptyState,
+        public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            //bt.Init();
-            Console.WriteLine("This is Fullstate");
+            //Console.WriteLine("This is Fullstate");
             if (LaserTop.Detected() == false)
             {
-                //bt.SendData("Fullstate - Beerbong is ready");
+                //bt.SendData("Fullstate");
                 context.setState(fullState);
                 //Console.WriteLine("BeerBong is full and you can start drinking!");
                 //Thread.Sleep(1000);
@@ -37,19 +33,28 @@ namespace RaspberryPiStates
 
             if (LaserTop.Detected() && Magnet.Detected() == true)
             {
-                Timer.StartTimer();
-                //bt.SendData("Fullstate - You have started drinking");
-                writer.JsonWriterFunc("NotDonestate", 0);
+                bt.Init();
+                timer.StartTimer();
+                bt.SendData("NotDoneState");
                 context.setState(notDoneState);
-                Console.WriteLine("You have started drinking START TIMER");
+                //Console.WriteLine("You have started drinking START TIMER");
                 //Thread.Sleep(1000);
-                //return false;
             }
             else
             {
-                Console.WriteLine("This should not happen");
-                throw new Exception ("error in fullstate");
+                //bt.SendData("NotFullGOEmptyState");
+                //context.setState(emptyState);
+                throw new ArgumentException("Error In FullState");
             }
+        }
+        public Bluetooth getBT()
+        {
+            return bt;
+        }
+
+        public void setBT(Bluetooth bt_)
+        {
+            bt = bt_;
         }
 
     }
