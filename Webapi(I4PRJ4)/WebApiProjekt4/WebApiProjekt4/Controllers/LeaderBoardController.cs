@@ -63,7 +63,7 @@ namespace we.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "LeaderBoard Allready exsist" });
+                return BadRequest(new { message = "LeaderBoard already exists" });
             }
 
 
@@ -81,7 +81,7 @@ namespace we.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "Players already exsist" });
+                return BadRequest(new { message = "Players already exists" });
             }
 
 
@@ -98,7 +98,7 @@ namespace we.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "Players already exsist" });
+                return BadRequest(new { message = "Players already exists" });
             }
 
 
@@ -116,7 +116,7 @@ namespace we.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "Players already exsist" });
+                return BadRequest(new { message = "Players already exists" });
             }
 
 
@@ -125,19 +125,29 @@ namespace we.Controllers
 
         [Route("GetTopTimes")]
         [HttpGet]
-        public IActionResult GetTopTimes()
+        public async Task<IActionResult> GetTopTimes()
         {
+            var result = await unitOfWork_.LeaderBoard.GetTopTimes();
 
-            return Ok();
+
+            return Ok(result);
         }
 
         [Route("InsertTopTimes")]
         [HttpPatch]
-        public IActionResult InsertTopTimes(int Time)
+        public async Task<IActionResult> InsertIntoLeaderBoard(int playerId)
         {
+            var result = await unitOfWork_.LeaderBoard.InsertPlayer(playerId);
 
+            if (result == null)
+            {
+                return BadRequest(new { message = "Players Does not exists" });
+            }
 
-            return Ok();
+            unitOfWork_.LeaderBoard.Update(result);
+            await unitOfWork_.CompleteAsync();
+
+            return Ok(result);
         }
     }
 }
