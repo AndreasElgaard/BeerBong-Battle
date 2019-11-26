@@ -147,7 +147,7 @@ namespace we.Controllers
             unitOfWork_.LeaderBoard.Update(result);
             await unitOfWork_.CompleteAsync();
 
-            return Ok(result);
+            return Ok(_mapper.Map<LeaderBoardResponse>(result));
         }
     }
 }

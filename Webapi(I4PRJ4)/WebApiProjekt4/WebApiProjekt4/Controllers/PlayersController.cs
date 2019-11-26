@@ -49,7 +49,7 @@ namespace WebApiProjekt4.Controllers
 
             if(Player == null)
             {
-                return BadRequest(new { message = "Id does not exist" });
+                return BadRequest(new { message = "Id does not exists" });
             }
 
             return Ok(_mapper.Map<PlayerResponse>(Player));
@@ -59,6 +59,13 @@ namespace WebApiProjekt4.Controllers
         [HttpPost("Add")]
         public async Task<IActionResult> Post()
         {
+
+            var exists = await unitOfWork_.Player.DoesPlayerExists(HttpContext.GetUserId());
+
+            if (!exists)
+            {
+                return BadRequest(new { message = "Player, with this login already exists, can't create new player" });
+            }
 
             var newPlayer = new Player
             {
@@ -72,7 +79,7 @@ namespace WebApiProjekt4.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "Player already exsist" });
+                return BadRequest(new { message = "Player already exists" });
             }
 
 

@@ -13,5 +13,6 @@ namespace WebApiProjekt4.Repositories
         Task<Player> AddStats(int id, int statid);
         Task<IEnumerable<PlayerStatsResult>> GetStats(int playerid);
         Task<bool> PlayerOwnsStats(int playerid, string userid);
+        Task<bool> DoesPlayerExists(string userid);
     }
 }
