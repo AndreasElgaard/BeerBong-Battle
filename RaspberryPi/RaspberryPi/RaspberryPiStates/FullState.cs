@@ -38,9 +38,9 @@ namespace RaspberryPiStates
                 //bt.Init();
                 timer.StartTimer();
                 //bt.SendData("NotDoneState");
-                writer.JsonWriterFunc("NotDonestate", "0");
+                writer.JsonWriterFunc("NotDonestate", "0", "");
                 context.setState(notDoneState);
-                //Console.WriteLine("You have started drinking START TIMER");
+                Console.WriteLine("You have started drinking START TIMER");
                 //Thread.Sleep(1000);
             }
             else

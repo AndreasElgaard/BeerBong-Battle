@@ -32,7 +32,7 @@ namespace RaspberryPii
             //bt.Init();
             JsonWriter writer = new JsonWriter();
             context.setState(emptyState);
-            writer.JsonWriterFunc("Emptystate", "0");
+            writer.JsonWriterFunc("Emptystate", "0", "Start");
             //bt.SendData("EmptyState");
             while (ReferenceEquals(context.getState(),emptyState)
                    || ReferenceEquals(context.getState(), fullState)
@@ -46,19 +46,19 @@ namespace RaspberryPii
                 catch (ArgumentException)
                 {
                     //bt.SendData("ErrorFullStateGoEmptyState");
-                    writer.JsonWriterFunc("Emptystate","0");
+                    writer.JsonWriterFunc("Emptystate", "0", "Fullstate error");
                     context.setState(emptyState);
                 }
                 catch (InvalidOperationException)
                 {
                     //bt.SendData("TimeoutGoEmptyState");
-                    writer.JsonWriterFunc("Emptystate", "0");
+                    writer.JsonWriterFunc("Emptystate", "0", "Timeout");
                     context.setState(emptyState);
                 }
                 catch (Exception)
                 {
                     //bt.SendData("ErrorGoEmptyState");
-                    writer.JsonWriterFunc("Emptystate", "0");
+                    writer.JsonWriterFunc("Emptystate", "0", "ProgramCrash");
                     context.setState(emptyState);
                 }
             }

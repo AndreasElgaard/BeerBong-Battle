@@ -43,15 +43,16 @@ namespace RaspberryPiStates
                 Console.WriteLine(result);
                 //bt.SendData(result);
                 //bt.SendData("EmptyState");
-                writer.JsonWriterFunc("Emptystate", result);
+                writer.JsonWriterFunc("Emptystate", result, "");
                 context.setState(emptyState);
-                //Console.WriteLine("EmptyState");
+                Console.WriteLine("EmptyState");
                 //Thread.Sleep(5000);
             }
 
             if (timer.GetTime() > MAX_TIME)
             {
                 throw new InvalidOperationException("TimeOut");
+
                 //bt.SendData("TimeoutGOEmptyState");
                 //context.setState(emptyState);
             }

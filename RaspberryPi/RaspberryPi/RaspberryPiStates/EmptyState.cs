@@ -33,9 +33,9 @@ namespace RaspberryPiStates
             {
                 //bt.Init();
                 //bt.SendData("FullState");
-                writer.JsonWriterFunc("Fullstate", "0");
+                writer.JsonWriterFunc("Fullstate", "0", "");
                 context.setState(fullState);
-                //Console.WriteLine("BeerBong is full");
+                Console.WriteLine("BeerBong is full");
                 //Thread.Sleep(5000);
                 
             }

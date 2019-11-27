@@ -1,0 +1,12 @@
+[Unit]
+Description=Program respwn after bluetooth connection 
+After=bluetooth.target
+Requries=bluetooth.taget
+
+[Service]
+ExecStart=sudo mono /home/pi/prj4/RaspberryPi/RaspberryPi.exe
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
