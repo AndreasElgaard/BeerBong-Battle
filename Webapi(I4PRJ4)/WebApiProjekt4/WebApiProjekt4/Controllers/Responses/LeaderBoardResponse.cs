@@ -12,8 +12,6 @@ namespace WebApiProjekt4.Controllers.Responses
         [DataMember]
         public int LeaderBoardId { get; set; }
         [DataMember]
-        public string Time { get; set; }
-        [DataMember]
         public IEnumerable<PlayerResponse> Players { get; set; }
     }
 }
