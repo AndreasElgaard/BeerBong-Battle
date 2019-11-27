@@ -10,6 +10,6 @@ namespace RaspberryPi.Json_Writer
     {
         public string name;
         public string state;
-        public double time;
+        public string time = "";
     }
 }

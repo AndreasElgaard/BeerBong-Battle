@@ -10,10 +10,12 @@ namespace RaspberryPi.Json_Writer
 {
     public class JsonWriter
     {
-        public void JsonWriterFunc(string context, double time)
+        public void JsonWriterFunc(string context, string time)
         {
             //var filename = @"home\pi\test.json";
             //var file = await StorageFile.GetFileFromPathAsync(filename);
+            //if(File.Exists("/home/pi/prj4/webapi/package.json"))
+              //  File.Delete("/home/pi/prj4/webapi/package.json");
             switch (context)
             {
                 case ("Emptystate"):
@@ -28,7 +30,7 @@ namespace RaspberryPi.Json_Writer
                     string json = JsonConvert.SerializeObject(_data.ToArray());
 
                     //write string to file
-                    File.WriteAllText(@"test.json", json);
+                    File.WriteAllText("/home/pi/prj4/webapi/package.json", json);
                     break;
 
                 case ("Fullstate"):
@@ -43,7 +45,7 @@ namespace RaspberryPi.Json_Writer
                     string jsonF = JsonConvert.SerializeObject(_dataF.ToArray());
 
                     //write string to file
-                    System.IO.File.WriteAllText(@"test.json", jsonF);
+                    System.IO.File.WriteAllText("/home/pi/prj4/webapi/package.json", jsonF);
                     break;
 
                 case ("NotDonestate"):
@@ -58,7 +60,7 @@ namespace RaspberryPi.Json_Writer
                     string jsonN = JsonConvert.SerializeObject(_dataN.ToArray());
 
                     //write string to file
-                    System.IO.File.WriteAllText(@"test.json", jsonN);
+                    System.IO.File.WriteAllText("/home/pi/prj4/webapi/package.json", jsonN);
                     break;
                 default:
                     break;

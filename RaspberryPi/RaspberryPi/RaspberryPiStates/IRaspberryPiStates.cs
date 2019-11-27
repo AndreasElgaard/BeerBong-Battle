@@ -8,7 +8,6 @@ using System.Timers;
 using RaspberryPi.Bluetooth;
 using Sensor;
 using StopWatch;
-using RaspberryPi.Bluetooth;
 
 namespace RaspberryPiStates
 {

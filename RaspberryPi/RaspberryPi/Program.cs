@@ -11,7 +11,7 @@ using Unosquare.RaspberryIO.Abstractions;
 using Unosquare.WiringPi;
 using System.Timers;
 using RaspberryPi.Bluetooth;
-using RaspberryPi.Bluetooth;
+using RaspberryPi.Json_Writer;
 using RaspberryPiStates;
 using Sensor;
 using StopWatch;
@@ -28,10 +28,12 @@ namespace RaspberryPii
             IRaspberryPiStates emptyState = new EmptyState();
             IRaspberryPiStates fullState = new FullState();
             IRaspberryPiStates notDoneState = new NotDoneState();
-            Bluetooth bt = new Bluetooth();
-            bt.Init();
+            //Bluetooth bt = new Bluetooth();
+            //bt.Init();
+            JsonWriter writer = new JsonWriter();
             context.setState(emptyState);
-            bt.SendData("EmptyState");
+            writer.JsonWriterFunc("Emptystate", "0");
+            //bt.SendData("EmptyState");
             while (ReferenceEquals(context.getState(),emptyState)
                    || ReferenceEquals(context.getState(), fullState)
                    || ReferenceEquals(context.getState(), notDoneState))
@@ -43,17 +45,20 @@ namespace RaspberryPii
                 }
                 catch (ArgumentException)
                 {
-                    bt.SendData("ErrorFullStateGoEmptyState");
+                    //bt.SendData("ErrorFullStateGoEmptyState");
+                    writer.JsonWriterFunc("Emptystate","0");
                     context.setState(emptyState);
                 }
                 catch (InvalidOperationException)
                 {
-                    bt.SendData("TimeoutGoEmptyState");
+                    //bt.SendData("TimeoutGoEmptyState");
+                    writer.JsonWriterFunc("Emptystate", "0");
                     context.setState(emptyState);
                 }
                 catch (Exception)
                 {
-                    bt.SendData("ErrorGoEmptyState");
+                    //bt.SendData("ErrorGoEmptyState");
+                    writer.JsonWriterFunc("Emptystate", "0");
                     context.setState(emptyState);
                 }
             }

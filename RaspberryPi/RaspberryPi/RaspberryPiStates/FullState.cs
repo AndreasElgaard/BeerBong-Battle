@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Timers;
 using RaspberryPi.Bluetooth;
+using RaspberryPi.Json_Writer;
 using Sensor;
 using StopWatch;
 
@@ -16,7 +17,8 @@ namespace RaspberryPiStates
         //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
-        Bluetooth bt = new Bluetooth();
+        //Bluetooth bt = new Bluetooth();
+        JsonWriter writer = new JsonWriter();
 
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
@@ -33,9 +35,10 @@ namespace RaspberryPiStates
 
             if (LaserTop.Detected() && Magnet.Detected() == true)
             {
-                bt.Init();
+                //bt.Init();
                 timer.StartTimer();
-                bt.SendData("NotDoneState");
+                //bt.SendData("NotDoneState");
+                writer.JsonWriterFunc("NotDonestate", "0");
                 context.setState(notDoneState);
                 //Console.WriteLine("You have started drinking START TIMER");
                 //Thread.Sleep(1000);
@@ -47,15 +50,15 @@ namespace RaspberryPiStates
                 throw new ArgumentException("Error In FullState");
             }
         }
-        public Bluetooth getBT()
-        {
-            return bt;
-        }
+        //public Bluetooth getBT()
+        //{
+        //    return bt;
+        //}
 
-        public void setBT(Bluetooth bt_)
-        {
-            bt = bt_;
-        }
+        //public void setBT(Bluetooth bt_)
+        //{
+        //    bt = bt_;
+        //}
 
     }
 }

@@ -5,7 +5,6 @@ using NSubstitute;
 using Unosquare.RaspberryIO;
 using Unosquare.RaspberryIO.Abstractions;
 using Unosquare.WiringPi;
-using NUnit.Framework;
 using RaspberryPi;
 using RaspberryPi.Bluetooth;
 using RaspberryPiStates;
