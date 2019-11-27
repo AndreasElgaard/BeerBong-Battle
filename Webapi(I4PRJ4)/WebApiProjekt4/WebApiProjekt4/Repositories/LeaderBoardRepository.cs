@@ -25,9 +25,9 @@ namespace WebApiProjekt4.Repositories
         {
             var Items = await DataContext.LeaderBoards
                 .Include(p => p.Players)
-                .ThenInclude(p => p.identityUser)
+                    .ThenInclude(p => p.identityUser)
                 .Include(p => p.Players)
-                .ThenInclude(s => s.Stats)
+                    .ThenInclude(s => s.Stats)
                 .FirstAsync();
 
             var Top = new List<TopTimes>();
@@ -37,7 +37,7 @@ namespace WebApiProjekt4.Repositories
                 Top.Add(player.Stats.Select(s =>
                 new TopTimes
                 {
-                    UserName = player.identityUser.UserName,
+                    //UserName = player.identityUser.UserName,
                     Time = s.Time,
                     DateTime = s.DateTime
 

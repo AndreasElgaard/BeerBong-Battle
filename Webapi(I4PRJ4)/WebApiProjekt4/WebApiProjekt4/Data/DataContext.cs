@@ -34,8 +34,6 @@ namespace WebApiProjekt4.Data
                 .WithOne(p => p.Queue)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-
-
             modelBuilder.Entity<Game>()
                 .HasMany(c => c.Players)
                 .WithOne(c => c.Game)
