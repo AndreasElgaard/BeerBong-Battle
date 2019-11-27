@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebApiProjekt4.Data.EFCore;
 using WebApiProjekt4.Data;
+using WebApiProjekt4.Data.Dto;
 
 namespace WebApiProjekt4.Repositories
 {
@@ -32,10 +33,11 @@ namespace WebApiProjekt4.Repositories
             return Updatequeue;
         }
 
-        public async Task<object> GetUser()
+        public async Task<GetFirstPlayerResult> GetUser()
         {
             var queue = await DataContext.Queues
                 .Include(q => q.Players)
+                    .ThenInclude(p => p.identityUser)
                 .SingleAsync();
 
             if(queue.Players == null)
@@ -43,11 +45,13 @@ namespace WebApiProjekt4.Repositories
                 return null;
             }
 
-            var player = queue.Players.Select(p => new
-            {
-                PlayerId = p.PlayerId
+            var player = queue.Players.Select(p => 
+                new GetFirstPlayerResult
+                {
+                    PlayerId = p.PlayerId,
+                    BrugerNavn = p.identityUser.UserName
 
-            }).First();
+                }).First();
 
             return player;
         }

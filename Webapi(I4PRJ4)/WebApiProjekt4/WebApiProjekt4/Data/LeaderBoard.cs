@@ -12,8 +12,6 @@ namespace WebApiProjekt4.Data
         [Key]
         [Column("id")]
         public int LeaderBoardId { get; set; }
-        [Column("Best Time")]
-        public string Time { get; set; }
 
         public ICollection<Player> Players { get; set; }
     }

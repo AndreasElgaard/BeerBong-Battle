@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApiProjekt4.Data;
 using WebApiProjekt4.Data.EFCore;
+using WebApiProjekt4.Repositories;
+using WebApiProjekt4.Services;
 
 
 namespace WebApiProjekt4.Installers
@@ -22,7 +24,16 @@ namespace WebApiProjekt4.Installers
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<DataContext>();
-                
+
+            services.AddScoped<IGameRepository, GameRepository>();
+            services.AddScoped<ILeaderBoardRepository, LeaderBoardRepository>();
+            services.AddScoped<IStatsRepository, StatsRepository>();
+            services.AddScoped<IQueueRepository, QueueRepository>();
+            services.AddScoped<IPlayerRepository, PlayerRepository>();
+
+            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
         }
     }
 }

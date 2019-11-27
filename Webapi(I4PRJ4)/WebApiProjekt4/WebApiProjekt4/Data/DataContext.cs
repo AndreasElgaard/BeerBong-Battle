@@ -32,13 +32,12 @@ namespace WebApiProjekt4.Data
             modelBuilder.Entity<Queue>()
                 .HasMany(b => b.Players)
                 .WithOne(p => p.Queue)
-                .OnDelete(DeleteBehavior.Cascade);
-                
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             modelBuilder.Entity<Game>()
                 .HasMany(c => c.Players)
                 .WithOne(c => c.Game)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Player>()
                 .HasMany(c => c.Stats)
@@ -48,7 +47,7 @@ namespace WebApiProjekt4.Data
             modelBuilder.Entity<LeaderBoard>()
                 .HasMany(l => l.Players)
                 .WithOne(c => c.LeaderBoard)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
     }
 }

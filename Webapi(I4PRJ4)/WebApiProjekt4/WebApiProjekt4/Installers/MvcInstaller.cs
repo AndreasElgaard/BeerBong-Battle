@@ -28,17 +28,7 @@ namespace WebApiProjekt4.Installers
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddScoped<IGameRepository, GameRepository>();
-            services.AddScoped<ILeaderBoardRepository, LeaderBoardRepository>();
-            services.AddScoped<IStatsRepository, StatsRepository>();
-            services.AddScoped<IQueueRepository, QueueRepository>();
-            services.AddScoped<IPlayerRepository, PlayerRepository>();
-
-            services.AddScoped<IIdentityService, IdentityService>();
-
-            
+            services.AddAuthorization();
 
             var AppSettings = new AppSettings();
             Configuration.Bind(nameof(AppSettings), AppSettings);

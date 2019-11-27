@@ -85,8 +85,22 @@ namespace WebApiProjekt4.Repositories
             }
 
             return true;
-
         }
+
+        public async Task<bool> DoesPlayerExists(string userid)
+        {
+            var player = await DataContext.Players
+                .AsNoTracking()
+                .SingleOrDefaultAsync(p => p.UserId == userid);
+
+            if (player == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
         public DataContext DataContext
         {

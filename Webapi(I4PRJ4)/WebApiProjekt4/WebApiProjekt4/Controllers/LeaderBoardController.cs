@@ -63,7 +63,7 @@ namespace we.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "Player already exsist" });
+                return BadRequest(new { message = "LeaderBoard already exists" });
             }
 
 
@@ -81,7 +81,7 @@ namespace we.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "Players already exsist" });
+                return BadRequest(new { message = "Players already exists" });
             }
 
 
@@ -98,7 +98,7 @@ namespace we.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "Players already exsist" });
+                return BadRequest(new { message = "Players already exists" });
             }
 
 
@@ -116,11 +116,38 @@ namespace we.Controllers
             }
             catch
             {
-                return BadRequest(new { message = "Players already exsist" });
+                return BadRequest(new { message = "Players already exists" });
             }
 
 
             return Ok();
+        }
+
+        [Route("GetTopTimes")]
+        [HttpGet]
+        public async Task<IActionResult> GetTopTimes()
+        {
+            var result = await unitOfWork_.LeaderBoard.GetTopTimes();
+
+
+            return Ok(result);
+        }
+
+        [Route("InsertTopTimes")]
+        [HttpPatch]
+        public async Task<IActionResult> InsertIntoLeaderBoard(int playerId)
+        {
+            var result = await unitOfWork_.LeaderBoard.InsertPlayer(playerId);
+
+            if (result == null)
+            {
+                return BadRequest(new { message = "Players Does not exists" });
+            }
+
+            unitOfWork_.LeaderBoard.Update(result);
+            await unitOfWork_.CompleteAsync();
+
+            return Ok(_mapper.Map<LeaderBoardResponse>(result));
         }
     }
 }
