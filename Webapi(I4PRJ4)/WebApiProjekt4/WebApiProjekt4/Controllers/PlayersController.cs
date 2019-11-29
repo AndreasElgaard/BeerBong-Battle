@@ -191,5 +191,22 @@ namespace WebApiProjekt4.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("GetPlayerId")]
+        public async Task<IActionResult> GetplayerId()
+        {
+            var result = await unitOfWork_.Player.GetplayerId(HttpContext.GetUserId());
+
+            if (result == null)
+            {
+                return BadRequest(new {message = "You must be loggedin"});
+            }
+
+
+            return Ok(_mapper.Map<PlayerResponse>(result));
+        }
+
     }
+
+   
 }

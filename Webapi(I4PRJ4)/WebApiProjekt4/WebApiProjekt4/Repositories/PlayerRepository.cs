@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using WebApiProjekt4.options;
 using Microsoft.Extensions.Options;
+using WebApiProjekt4.Controllers.Responses;
 using WebApiProjekt4.Data.Dto;
 
 namespace WebApiProjekt4.Repositories
@@ -99,6 +100,21 @@ namespace WebApiProjekt4.Repositories
             }
 
             return false;
+        }
+
+        public async Task<Player> GetplayerId(string userId)
+        {
+            var player = await DataContext.Players
+                .AsNoTracking()
+                .SingleOrDefaultAsync(p => p.UserId == userId);
+
+            if (player == null)
+            {
+                return null;
+            }
+
+
+            return player;
         }
 
 
