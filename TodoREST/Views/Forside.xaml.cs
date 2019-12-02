@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TodoREST.Data;
 using TodoREST.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -75,6 +76,11 @@ namespace TodoREST.Views
         {
             await Navigation.PushAsync(new Multiplayer());
 
+        }
+        async void forbindWebsocket(object sender, EventArgs e)
+        {
+            WebsocketData data = new WebsocketData();
+           await App.TodoManager.GetWebsocketData();
         }
     }
 }

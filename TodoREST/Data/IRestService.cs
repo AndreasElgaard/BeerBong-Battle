@@ -13,16 +13,25 @@ namespace TodoREST
 
         Task AddPlayer(Player player);
 
-        Task QueueGetPlayer(QueueModstander modstander);
+        Task<bool> QueueGetPlayer(QueueModstander modstander);
 
         Task SaveOpretBrugerAsync(RegisterUser bruger);
 
-		Task DeleteTodoItemAsync (string id);
+        Task PushTimes(int id);
 
-        Task CreateGame(Game game);
+        Task<List<GameResult>> GetGameResult(int id);
+
+        Task<Game> CreateGame(Game game);
 
         Task RemovePlayerQueue();
 
         Task AddPlayerToGame(Game game);
+
+        Task AddStats(Stats stat);
+
+        Task<List<WebsocketData>> GetWebsocketData();
+
+        Task<int> GetPlayerId(Player player);
+
     }
 }

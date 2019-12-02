@@ -1,4 +1,5 @@
-﻿using TodoREST.Models;
+﻿using System.Collections.Generic;
+using TodoREST.Models;
 using TodoREST.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,8 +22,10 @@ namespace TodoREST
 
         public static QueueModstander modstander;
         public static Game game;
-       
 
+        public static List<WebsocketData> BeerBongData;
+
+        public static string gameresultat;
         
 
         public App ()

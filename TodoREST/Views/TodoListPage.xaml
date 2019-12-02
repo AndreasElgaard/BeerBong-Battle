@@ -20,8 +20,8 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Text="{Binding rank}" VerticalOptions="Center" FontSize="30" VerticalTextAlignment="Center" Grid.Column="0" FontAttributes="Bold"  />
-                            <Label Text="{Binding navn}"
+                           
+                            <Label Text="{Binding userName}"
                                    Grid.Column="1"
                                    VerticalTextAlignment="Center"
                                    FontSize="25"
@@ -30,7 +30,7 @@
                                    />
 
                             <!--<StackLayout Spacing="0" VerticalOptions="Center">-->
-                                <Label Text="{Binding tid}"
+                                <Label Text="{Binding time}"
                                        Grid.Column="2"
                                        VerticalTextAlignment="Center"
                                        VerticalOptions="Center"

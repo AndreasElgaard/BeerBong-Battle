@@ -17,11 +17,12 @@
             <Label Text="Du har 30 sekunder til at fylde din ølbong:" TextColor="#FFFFFF" x:Name="fyldop" />
             <Entry Placeholder="30" PlaceholderColor="#FFFFFF" TextColor="#FFFFFF" x:Name="TTimer" FontSize="50" HorizontalOptions="Center"/>
             <Label Text="Tryk på klar når din ølbong er fyldt med 33cl øl. Du vil så have 3 minutter til at drikke bongen hurtigere end din modstander" TextColor="#FFFFFF" FontSize="18"/>
-            <Button Text="Klar" BackgroundColor="#28D211" />
-            <Entry Placeholder="counter" x:Name="counter" FontSize="35" TextColor="#FFFFFF" PlaceholderColor="#FFFFFF" VerticalOptions="Center" HorizontalOptions="Center" />
-            <Entry Text="Din tid:" x:Name="userTid" TextColor="#FFFFFF"/>
-            <Entry Text="Modstanders tid:" x:Name="modstanderTid" TextColor="#FFFFFF"/>
+            <Button Text="Klar" BackgroundColor="#28D211" x:Name="KlarButton" />
+            <Entry Placeholder="180" PlaceholderColor="#FFFFFF" TextColor="#FFFFFF" x:Name="DrikTimer" FontSize="50" HorizontalOptions="Center"/>
 
+            <Entry Text="Din tid:" x:Name="userTid" TextColor="#FFFFFF"  />
+            <Entry Text="Modstanders tid:" x:Name="modstanderTid" TextColor="#FFFFFF"/>
+            <Entry Text="Vinderen er:" x:Name="VinderEntry" TextColor="#FFFFFF"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

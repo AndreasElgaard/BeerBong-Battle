@@ -15,8 +15,8 @@ namespace TodoREST.Views
     public partial class OpretBruger : ContentPage
     { 
         bool isNewItem;
-        private string password1_;
-        private string password2_;
+        public string password1_;
+        public string password2_;
 
         public OpretBruger(bool isNew=false)
         {
@@ -37,25 +37,33 @@ namespace TodoREST.Views
             
         }
 
-        async void OnOpretBruger(object sender, EventArgs e)
+        
+        void OnOpretBruger(object sender, EventArgs e)
         {
-            
-
             password1_ = Password.Text;
             password2_ = Password2.Text;
 
+           bool status = PasswordCheck();
+           if (status!=true)
+           {
+               ErrorLabel.Text = "Passwords matcher ikke";
+           }
+           else
+           { 
+               OpretBrugerSucces();
+           }
+        }
+
+        public bool PasswordCheck()
+        {
             if (password1_ != password2_)
             {
-                ErrorLabel.Text = "Passwords matcher ikke";
-                
+                return false;
             }
             else
             {
-                OpretBrugerSucces();
+                return true;
             }
-
-           // var todoItem = (OpretBrugerModel)BindingContext;
-            
         }
 
         public void OpretBrugerSucces()

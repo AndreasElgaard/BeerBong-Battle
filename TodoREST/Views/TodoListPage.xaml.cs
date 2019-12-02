@@ -19,8 +19,19 @@ namespace TodoREST
         public TodoListPage ()
 		{
             InitializeComponent ();
+            if (App.isLoggedIn == true)
+            {
+                ToolbarItem brugerToolbarItem = new ToolbarItem
+                {
+                    Text = App.BrugernavnOnLogIn,
 
-        
+                    Order = ToolbarItemOrder.Primary,
+                    Priority = 0
+                };
+                this.ToolbarItems.Clear();
+                this.ToolbarItems.Add(brugerToolbarItem);
+            }
+
 
         }
 
@@ -31,12 +42,6 @@ namespace TodoREST
             
             leaderboard = await App.TodoManager.GetOnlineLeaderboardAsync();
             LeaderboardData.ItemsSource = leaderboard;
-
-            
-
-
-
-
         }
     }
 }

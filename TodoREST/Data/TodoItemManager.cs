@@ -27,7 +27,7 @@ namespace TodoREST
             return restService.GetLoginDataAsync(login);
         }
 
-        public Task GetFirstPlayerInQueue(QueueModstander modstander)
+        public Task<bool> GetFirstPlayerInQueue(QueueModstander modstander)
         {
             return restService.QueueGetPlayer(modstander);
         }
@@ -38,8 +38,26 @@ namespace TodoREST
             return restService.SaveOpretBrugerAsync(item);
         }
 
-       
 
+        public Task<List<WebsocketData>> GetWebsocketData()
+        {
+            return restService.GetWebsocketData();
+        }
+
+        public Task PushStats(Stats stats)
+        {
+            return restService.AddStats(stats);
+        }
+
+        public Task PushtoLeaderboard(int id)
+        {
+            return restService.PushTimes(id);
+        }
+
+        public Task<List<GameResult>> GetGameResult(int id)
+        {
+            return restService.GetGameResult(id);
+        }
       
     }
 }

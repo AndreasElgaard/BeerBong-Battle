@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TodoREST.Views.Multiplayer"
              Title="Online Multiplayer" BackgroundColor="#252525">
-
+        
 
     <ContentPage.Content>
 

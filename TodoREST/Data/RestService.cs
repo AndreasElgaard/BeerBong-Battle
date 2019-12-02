@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -38,7 +39,7 @@ namespace TodoREST
             var uri = new Uri(string.Format(Constants.TestBaseAddress, string.Empty));
             try
             {
-                var response = await _client.GetAsync("https://my-json-server.typicode.com/MathiasTP/apileaderboard/tider");
+                var response = await _client.GetAsync("https://webapiprojekt420191125022155.azurewebsites.net/api/LeaderBoard/GetTopTimes");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -73,8 +74,10 @@ namespace TodoREST
                     App.Token = jsonlogin.token;
                      status = true;
                      _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Token);
-                    var player = new Player();
+                     var player = new Player();
                      await AddPlayer(player);
+                     await GetPlayerId(player);
+
                 }
                 else
                 {
@@ -113,7 +116,7 @@ namespace TodoREST
 
         }
 
-        public async Task QueueGetPlayer(QueueModstander modstander)
+        public async Task<bool> QueueGetPlayer(QueueModstander modstander)
         {
             var json = JsonConvert.SerializeObject(modstander);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -130,11 +133,12 @@ namespace TodoREST
                     
                     await AddPlayerToGame(App.game);
                     await RemovePlayerQueue();
+                    return true;
                 }
                 else
                 {
                    response = await _client.PostAsync("https://webapiprojekt420191125022155.azurewebsites.net/api/Queue/AddPlayer?PlayerId=" + App.player.PlayerId, content);
-                   var jsonlogin = await response.Content.ReadAsAsync<QueueModstander>();
+                   return false;
                 }
                 
 
@@ -162,6 +166,13 @@ namespace TodoREST
 
                 if (response.IsSuccessStatusCode)
                 {
+                    var jsonlogin = await response.Content.ReadAsAsync<LoginResponse>();
+                    App.Token = jsonlogin.token;
+                    
+
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", App.Token);
+
+                    
                     Debug.WriteLine(@"\tBruger er oprettet");
                 }
 
@@ -172,18 +183,18 @@ namespace TodoREST
             }
         }
 
-
-        public async Task DeleteTodoItemAsync(string id)
+        public async Task PushTimes(int id)
         {
-            var uri = new Uri(string.Format(Constants.TodoItemsUrl, id));
-
             try
             {
-                var response = await _client.DeleteAsync(uri);
+                HttpResponseMessage response = null;
+
+                response = await _client.PutAsync($"https://webapiprojekt420191125022155.azurewebsites.net/api/LeaderBoard/InsertTopTimes?playerId={id}", null);
+
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine(@"\tTodoItem successfully deleted.");
+                    Debug.WriteLine(@"\tStats er pushet");
                 }
 
             }
@@ -193,8 +204,36 @@ namespace TodoREST
             }
         }
 
-        public async Task CreateGame(Game game)
+        public async Task<List<GameResult>> GetGameResult(int id)
         {
+            var result = new List<GameResult>();
+            
+
+            var uri = new Uri(string.Format(Constants.TestBaseAddress, string.Empty));
+            try
+            {
+                var response = await _client.GetAsync($"https://webapiprojekt420191125022155.azurewebsites.net/api/Game/GetResult?gameid={id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    result = JsonConvert.DeserializeObject<List<GameResult>>(content);
+                    App.gameresultat = content;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return result;
+        }
+
+
+        public async Task<Game> CreateGame(Game game)
+        {
+            var jsongame = new Game();
             try
             {
                 var json = JsonConvert.SerializeObject(game);
@@ -207,16 +246,18 @@ namespace TodoREST
                 if (response.IsSuccessStatusCode)
                 {
                     Debug.WriteLine(@"\t Game er oprettet");
+                    jsongame = await response.Content.ReadAsAsync<Game>();
+                    App.game = jsongame;
                 }
-
-                var jsonlogin = await response.Content.ReadAsAsync<Game>();
-                App.game = jsonlogin;
 
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                
             }
+
+            return jsongame;
         }
 
         public async Task RemovePlayerQueue()
@@ -246,6 +287,10 @@ namespace TodoREST
 
         public async Task AddPlayerToGame(Game game)
         {
+           int gameid = App.game.gameId;
+           int player1id = App.player.PlayerId;
+           int modstanderid = App.modstander.Playerid;
+
             var uri = new Uri($"https://webapiprojekt420191125022155.azurewebsites.net/api/Game/AddPlayerToGame?gameid={App.game.gameId}&player1id={App.player.PlayerId}&player2id={App.modstander.Playerid}");
             try
             {
@@ -267,6 +312,80 @@ namespace TodoREST
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
 
+        }
+
+        public async Task AddStats(Stats stat)
+        {
+            var uri = new Uri("https://webapiprojekt420191125022155.azurewebsites.net/api/Stats/Add");
+            try
+            {
+                var json = JsonConvert.SerializeObject(stat);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+
+                response = await _client.PostAsync(uri, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\t Stats er tilføjet");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        public async Task<List<WebsocketData>> GetWebsocketData()
+        {
+            var Data = new List<WebsocketData>();
+
+            try
+            {
+                var response = await _client.GetAsync("http://192.168.43.171:3000");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    Data = JsonConvert.DeserializeObject<List<WebsocketData>>(content);
+                    Data = App.BeerBongData;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return Data;
+
+        }
+
+        public async Task<int> GetPlayerId(Player player)
+        {
+            player = new Player();
+
+
+            var uri = new Uri(string.Format(Constants.TestBaseAddress, string.Empty));
+            try
+            {
+                var response = await _client.GetAsync("https://webapiprojekt420191125022155.azurewebsites.net/api/Players/GetPlayerId");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    player = JsonConvert.DeserializeObject<Player>(content);
+                    App.player.PlayerId = player.PlayerId;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+            return player.PlayerId;
+            
         }
     }
 }

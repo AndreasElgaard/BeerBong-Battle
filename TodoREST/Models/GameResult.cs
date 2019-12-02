@@ -4,11 +4,10 @@ using System.Text;
 
 namespace TodoREST.Models
 {
-   public class Stats
+   public class GameResult
     {
-        
+        public int playerid { get; set; }
         public double time { get; set; }
-        
-        public int playerId { get; set; }
+        public DateTime dateTime { get; set; }
     }
 }

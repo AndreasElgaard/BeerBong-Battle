@@ -18,7 +18,7 @@ namespace TodoREST.Droid
             base.OnCreate(bundle);
             Instance = this;
             global::Xamarin.Forms.Forms.Init(this, bundle);
-
+            
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             LoadApplication(new App());
         }
