@@ -38,7 +38,6 @@ namespace RaspberryPii
                    || ReferenceEquals(context.getState(), fullState)
                    || ReferenceEquals(context.getState(), notDoneState))
             {
-                //context.IsFull(timer, context, emptyState, fullState, notDoneState);
                 try
                 {
                     context.IsFull(timer, context, emptyState, fullState, notDoneState);

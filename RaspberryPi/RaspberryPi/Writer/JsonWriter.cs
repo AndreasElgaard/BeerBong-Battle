@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using RaspberryPi.Websocket;
 
 namespace RaspberryPi.Json_Writer
 {
@@ -12,10 +14,12 @@ namespace RaspberryPi.Json_Writer
     {
         public void JsonWriterFunc(string context, string time, string comment)
         {
+            //MyWebsocket socket;
+            //socket.Init();
             //var filename = @"home\pi\test.json";
             //var file = await StorageFile.GetFileFromPathAsync(filename);
             //if(File.Exists("/home/pi/prj4/webapi/package.json"))
-              //  File.Delete("/home/pi/prj4/webapi/package.json");
+            //  File.Delete("/home/pi/prj4/webapi/package.json");
             switch (context)
             {
                 case ("Emptystate"):
@@ -30,6 +34,8 @@ namespace RaspberryPi.Json_Writer
 
                     string json = JsonConvert.SerializeObject(_data.ToArray());
 
+                    //socket.SendToWebsocket(json);
+
                     File.WriteAllText("/home/pi/prj4/webapi/package.json", json);
                     break;
 
@@ -43,6 +49,8 @@ namespace RaspberryPi.Json_Writer
                     });
 
                     string jsonF = JsonConvert.SerializeObject(_dataF.ToArray());
+
+                    //socket.SendToWebsocket(jsonF);
 
                     File.WriteAllText("/home/pi/prj4/webapi/package.json", jsonF);
                     break;

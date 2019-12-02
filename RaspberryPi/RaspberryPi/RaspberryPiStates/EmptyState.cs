@@ -13,21 +13,17 @@ namespace RaspberryPiStates
 {
     public class EmptyState : IRaspberryPiStates
     {
-        //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         //Bluetooth bt = new Bluetooth();
         JsonWriter writer = new JsonWriter();
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            //Console.WriteLine("This is EmptyState");
+            //Console.WriteLine("EmptyState");
             if (LaserTop.Detected() == true)
             {
-                //Console.WriteLine("BeerBong is NOT full please refill your beerbong");
                 //bt.SendData("EmptyState");
                 context.setState(emptyState);
-                //Thread.Sleep(5000);
-
             }
             else
             {
@@ -35,9 +31,6 @@ namespace RaspberryPiStates
                 //bt.SendData("FullState");
                 writer.JsonWriterFunc("Fullstate", "0", "");
                 context.setState(fullState);
-                Console.WriteLine("BeerBong is full");
-                //Thread.Sleep(5000);
-                
             }
         }
 

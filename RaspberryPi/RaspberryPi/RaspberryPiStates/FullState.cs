@@ -14,7 +14,6 @@ namespace RaspberryPiStates
 {
     public class FullState : IRaspberryPiStates
     {
-        //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
         MagnetSensor Magnet = new MagnetSensor();
         //Bluetooth bt = new Bluetooth();
@@ -23,30 +22,25 @@ namespace RaspberryPiStates
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            //Console.WriteLine("This is Fullstate");
+            //Console.WriteLine("Fullstate");
             if (LaserTop.Detected() == false)
             {
                 //bt.SendData("Fullstate");
                 context.setState(fullState);
-                //Console.WriteLine("BeerBong is full and you can start drinking!");
-                //Thread.Sleep(1000);
                 return; 
             }
 
             if (LaserTop.Detected() && Magnet.Detected() == true)
             {
-                //bt.Init();
                 timer.StartTimer();
+                //Bluetooth
+                //bt.Init();
                 //bt.SendData("NotDoneState");
                 writer.JsonWriterFunc("NotDonestate", "0", "");
                 context.setState(notDoneState);
-                Console.WriteLine("You have started drinking START TIMER");
-                //Thread.Sleep(1000);
             }
             else
             {
-                //bt.SendData("NotFullGOEmptyState");
-                //context.setState(emptyState);
                 throw new ArgumentException("Error In FullState");
             }
         }

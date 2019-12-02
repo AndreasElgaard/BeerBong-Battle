@@ -15,26 +15,22 @@ namespace RaspberryPiStates
 {
     public class NotDoneState : IRaspberryPiStates
     {
-        LaserSensorBottom LaserBot = new LaserSensorBottom();
-        //LaserSensorTop LaserTop = new LaserSensorTop();
-        MagnetSensor Magnet = new MagnetSensor();
-       // Bluetooth bt = new Bluetooth();
-       JsonWriter writer = new JsonWriter();
-        private double MAX_TIME = 20.00; 
+        LaserSensorBottom LaserBot = new LaserSensorBottom(); 
+        MagnetSensor Magnet = new MagnetSensor(); 
+        // Bluetooth bt = new Bluetooth();
+        JsonWriter writer = new JsonWriter();
+       private double MAX_TIME = 20.00; 
 
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
-            //Console.WriteLine("This is NotDoneState");
+            //Console.WriteLine("NotDoneState");
             if (LaserBot.Detected() == false)
             {
                 //bt.SendData("NotDoneState");
                 context.setState(notDoneState);
-                //writer.JsonWriterFunc("Notdonestate", "pistid");
-                //Console.WriteLine("You are not finished drinking - timer continues");
-                //Thread.Sleep(1000);
             }
-            //Also possible just to use an else loop
+
             if (Magnet.Detected() == false && LaserBot.Detected() == true)
             {
                 //bt.Init();
@@ -45,16 +41,11 @@ namespace RaspberryPiStates
                 //bt.SendData("EmptyState");
                 writer.JsonWriterFunc("Emptystate", result, "");
                 context.setState(emptyState);
-                Console.WriteLine("EmptyState");
-                //Thread.Sleep(5000);
             }
 
             if (timer.GetTime() > MAX_TIME)
             {
                 throw new InvalidOperationException("TimeOut");
-
-                //bt.SendData("TimeoutGOEmptyState");
-                //context.setState(emptyState);
             }
         }
         //public Bluetooth getBT()
