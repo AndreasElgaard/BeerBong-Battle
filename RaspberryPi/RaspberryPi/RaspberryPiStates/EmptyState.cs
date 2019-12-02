@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using RaspberryPi.Bluetooth;
+using RaspberryPi.Json_Writer;
 using Sensor;
 using StopWatch;
 
@@ -14,7 +15,8 @@ namespace RaspberryPiStates
     {
         //LaserSensorBottom LaserBot = new LaserSensorBottom();
         LaserSensorTop LaserTop = new LaserSensorTop();
-        Bluetooth bt = new Bluetooth();
+        //Bluetooth bt = new Bluetooth();
+        JsonWriter writer = new JsonWriter();
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
             IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
         {
@@ -29,23 +31,24 @@ namespace RaspberryPiStates
             }
             else
             {
-                bt.Init();
-                bt.SendData("FullState");
+                //bt.Init();
+                //bt.SendData("FullState");
+                writer.JsonWriterFunc("Fullstate", "0", "");
                 context.setState(fullState);
-                //Console.WriteLine("BeerBong is full");
+                Console.WriteLine("BeerBong is full");
                 //Thread.Sleep(5000);
                 
             }
         }
 
-        public Bluetooth getBT()
-        {
-            return bt;
-        }
+    //    public Bluetooth getBT()
+    //    {
+    //        return bt;
+    //    }
 
-        public void setBT(Bluetooth bt_)
-        {
-            bt = bt_;
-        }
+    //    public void setBT(Bluetooth bt_)
+    //    {
+    //        bt = bt_;
+    //    }
     }
 }

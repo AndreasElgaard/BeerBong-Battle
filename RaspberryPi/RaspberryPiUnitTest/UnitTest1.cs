@@ -5,7 +5,6 @@ using NSubstitute;
 using Unosquare.RaspberryIO;
 using Unosquare.RaspberryIO.Abstractions;
 using Unosquare.WiringPi;
-using NUnit.Framework;
 using RaspberryPi;
 using RaspberryPi.Bluetooth;
 using RaspberryPiStates;
@@ -133,7 +132,7 @@ namespace RaspberryPiUnitTest
         #endregion
 
         #region bluetooth
-
+        /*
         [Test]
         public void bluetoothReceived()
         {
@@ -147,7 +146,7 @@ namespace RaspberryPiUnitTest
             _bluetooth = _states.getBT();
 
             _bluetooth.Received().SendData(Arg.Any<string>());
-        }
+        }*/
 
         #endregion
         }

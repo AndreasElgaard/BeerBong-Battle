@@ -10,11 +10,6 @@ bluetoothctl agent NoInputNoOutput
 
 echo "Bluetooth booted"
 
-sudo killall pulseaudio
-sleep 1
-pulseaudio --start
-
-
 sdptool add sp
 
 while true
