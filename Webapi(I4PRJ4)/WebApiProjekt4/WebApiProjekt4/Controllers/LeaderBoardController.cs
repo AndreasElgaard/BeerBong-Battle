@@ -134,7 +134,7 @@ namespace we.Controllers
         }
 
         [Route("InsertTopTimes")]
-        [HttpPatch]
+        [HttpPut]
         public async Task<IActionResult> InsertIntoLeaderBoard(int playerId)
         {
             var result = await unitOfWork_.LeaderBoard.InsertPlayer(playerId);
