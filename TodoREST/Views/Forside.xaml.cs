@@ -31,5 +31,12 @@ namespace TodoREST.Views
             await Navigation.PushAsync(new OpretBruger());
 
         }
+
+        async void GoToLokalspil(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LokaltSpil());
+        }
+
+
     }
 }

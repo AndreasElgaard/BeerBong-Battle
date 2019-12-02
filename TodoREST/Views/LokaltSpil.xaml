@@ -7,7 +7,7 @@
              x:Class="TodoREST.Views.LokaltSpil">
     <ContentPage.Content>
 
-        <Grid Margin ="16">
+        <!--<Grid Margin ="16">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -18,10 +18,10 @@
                 <Label Text ="Indtast antal spillere" />
 
                 <Entry Keyboard ="Numeric" Placeholder="Antal spillere" HorizontalTextAlignment="Center" IsTextPredictionEnabled="False"/>
-                
+                <Button Text = "Bekræft"/>
 
             </StackLayout>
             <Label Text= "Lokalt Spil" Grid.Row= "0" HorizontalOptions="CenterAndExpand" />
-        </Grid>
+        </Grid>-->
     </ContentPage.Content>
 </ContentPage>

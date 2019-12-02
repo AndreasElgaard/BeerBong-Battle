@@ -11,12 +11,16 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Views\LokaltSpil.xaml.cs">
       <DependentUpon>LokaltSpil.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SeSpillere.xaml.cs">
+      <DependentUpon>SeSpillere.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -28,6 +32,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LokaltSpil.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SeSpillere.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Playerlist.xaml">
