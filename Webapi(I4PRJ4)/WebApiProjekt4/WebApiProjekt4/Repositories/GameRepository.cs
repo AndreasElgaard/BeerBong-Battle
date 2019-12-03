@@ -65,7 +65,7 @@ namespace WebApiProjekt4.Repositories
                     Playerid = s.PlayerId,
                     Time = s.Time,
                     DateTime = s.DateTime
-                }).OrderBy(s => s.Time).First());
+                }).OrderByDescending(s => s.DateTime).First());
             }
 
 
