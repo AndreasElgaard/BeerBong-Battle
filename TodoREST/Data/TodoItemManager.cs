@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TodoREST.Data;
 using TodoREST.Models;
 
 namespace TodoREST
@@ -8,12 +9,14 @@ namespace TodoREST
 	public class TodoItemManager
 	{
 		IRestService restService;
+        private IRestServicePlayer restServicePlayer;
        
 
-        public TodoItemManager (IRestService service)
+        public TodoItemManager (IRestService service, IRestServicePlayer player)
 		{
 			restService = service;
-		}
+            restServicePlayer = player;
+        }
 
 		
 

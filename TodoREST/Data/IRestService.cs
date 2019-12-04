@@ -11,8 +11,6 @@ namespace TodoREST
 
         Task<bool> GetLoginDataAsync(LoginUser login);
 
-        Task AddPlayer(Player player);
-
         Task<bool> QueueGetPlayer(QueueModstander modstander);
 
         Task SaveOpretBrugerAsync(RegisterUser bruger);
@@ -23,15 +21,11 @@ namespace TodoREST
 
         Task<Game> CreateGame(Game game);
 
-        Task RemovePlayerQueue();
-
         Task AddPlayerToGame(Game game);
 
         Task AddStats(Stats stat);
 
         Task<List<WebsocketData>> GetWebsocketData();
-
-        Task<int> GetPlayerId(Player player);
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TodoREST.Data;
 using TodoREST.Models;
 using TodoREST.Views;
 using Xamarin.Forms;
@@ -30,7 +31,7 @@ namespace TodoREST
 
         public App ()
 		{
-			TodoManager = new TodoItemManager (new RestService ());
+			TodoManager = new TodoItemManager (new RestService (), new RestServicePlayer());
             
 			MainPage = new NavigationPage (new Forside ());
 		}
