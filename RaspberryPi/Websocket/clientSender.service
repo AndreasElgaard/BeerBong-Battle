@@ -1,0 +1,11 @@
+[Unit]
+Description=Service to start client sender to send to app. Service starts after websocket server starts
+Requires=After=pm2-pi.service
+
+[Service]
+ExecStart=node /home/pi/prj4/webapi/clientSender.js
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target
