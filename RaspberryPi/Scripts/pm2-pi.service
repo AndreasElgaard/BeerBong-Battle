@@ -1,6 +1,5 @@
 [Unit]
-Description=PM2 process manager
-Documentation=https://pm2.keymetrics.io/
+Description=PM2 process manager starts websocket server after network connection
 After=network.target
 
 [Service]
