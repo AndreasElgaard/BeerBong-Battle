@@ -13,14 +13,14 @@ namespace RaspberryPiStates
 {
     public class EmptyState : IRaspberryPiStates
     {
-        LaserSensorTop LaserTop = new LaserSensorTop();
+        //LaserSensorTop LaserTop = new LaserSensorTop();
         //Bluetooth bt = new Bluetooth();
-        JsonWriter writer = new JsonWriter();
+        //JsonWriter writer = new JsonWriter();
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
-            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, JsonWriter writer)
         {
             //Console.WriteLine("EmptyState");
-            if (LaserTop.Detected() == true)
+            if (context.LaserTop.Detected() == true)
             {
                 //bt.SendData("EmptyState");
                 context.setState(emptyState);

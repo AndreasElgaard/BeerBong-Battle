@@ -14,45 +14,52 @@ namespace RaspberryPiStates
 {
     public class FullState : IRaspberryPiStates
     {
-        LaserSensorTop LaserTop = new LaserSensorTop();
-        MagnetSensor Magnet = new MagnetSensor();
+        //LaserSensorTop LaserTop = new LaserSensorTop();
+       //MagnetSensor Magnet = new MagnetSensor();
         //Bluetooth bt = new Bluetooth();
-        JsonWriter writer = new JsonWriter();
+        //JsonWriter writer = new JsonWriter();
 
         public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
-            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState)
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, JsonWriter writer)
         {
-            //Console.WriteLine("Fullstate");
-            if (LaserTop.Detected() == false)
+            try
             {
-                //bt.SendData("Fullstate");
-                context.setState(fullState);
-                return; 
-            }
+                //Console.WriteLine("Fullstate");
+                if (context.LaserTop.Detected() == false)
+                {
+                    //bt.SendData("Fullstate");
+                    context.setState(fullState);
+                    return;
+                }
 
-            if (LaserTop.Detected() && Magnet.Detected() == true)
-            {
-                timer.StartTimer();
-                //Bluetooth
-                //bt.Init();
-                //bt.SendData("NotDoneState");
-                writer.JsonWriterFunc("NotDonestate", "0", "");
-                context.setState(notDoneState);
+                if (context.LaserTop.Detected() && context.Magnet.Detected() == true)
+                {
+                    timer.StartTimer();
+                    //Bluetooth
+                    //bt.Init();
+                    //bt.SendData("NotDoneState");
+                    writer.JsonWriterFunc("NotDonestate", "0", "");
+                    context.setState(notDoneState);
+                }
+                else
+                {
+                    throw new ArgumentException("Error In FullState");
+                }
             }
-            else
+            catch (ArgumentException)
             {
-                throw new ArgumentException("Error In FullState");
+                writer.JsonWriterFunc("Emptystate", "0", "Fullstate error");
+                context.setState(emptyState);
             }
+            //public Bluetooth getBT()
+            //{
+            //    return bt;
+            //}
+
+            //public void setBT(Bluetooth bt_)
+            //{
+            //    bt = bt_;
+            //}
         }
-        //public Bluetooth getBT()
-        //{
-        //    return bt;
-        //}
-
-        //public void setBT(Bluetooth bt_)
-        //{
-        //    bt = bt_;
-        //}
-
     }
 }

@@ -22,14 +22,15 @@ namespace RaspberryPii
     {
         static void Main(string[] args)
         {
-            Init();
+            //Init();
+            //Bluetooth bt = new Bluetooth();
+            //bt.Init();
+
             MyStopWatch timer = new MyStopWatch();
             Context context = new Context();
             IRaspberryPiStates emptyState = new EmptyState();
             IRaspberryPiStates fullState = new FullState();
             IRaspberryPiStates notDoneState = new NotDoneState();
-            //Bluetooth bt = new Bluetooth();
-            //bt.Init();
             JsonWriter writer = new JsonWriter();
             context.setState(emptyState);
             writer.JsonWriterFunc("Emptystate", "0", "Start");
@@ -38,39 +39,19 @@ namespace RaspberryPii
                    || ReferenceEquals(context.getState(), fullState)
                    || ReferenceEquals(context.getState(), notDoneState))
             {
-                try
-                {
-                    context.IsFull(timer, context, emptyState, fullState, notDoneState);
-                }
-                catch (ArgumentException)
-                {
-                    //bt.SendData("ErrorFullStateGoEmptyState");
-                    writer.JsonWriterFunc("Emptystate", "0", "Fullstate error");
-                    context.setState(emptyState);
-                }
-                catch (InvalidOperationException)
-                {
-                    //bt.SendData("TimeoutGoEmptyState");
-                    writer.JsonWriterFunc("Emptystate", "0", "Timeout");
-                    context.setState(emptyState);
-                }
-                catch (Exception)
-                {
-                    //bt.SendData("ErrorGoEmptyState");
-                    writer.JsonWriterFunc("Emptystate", "0", "ProgramCrash");
-                    context.setState(emptyState);
-                }
+                
+                context.IsFull(timer, context, emptyState, fullState, notDoneState, writer);
             }
 
-            void Init()
-            {
-                MagnetSensor Magnet = new MagnetSensor();
-                LaserSensorBottom LaserBot = new LaserSensorBottom();
-                LaserSensorTop LaserTop = new LaserSensorTop();
-                Magnet.Initiate();
-                LaserTop.Initiate();
-                LaserBot.Initiate();
-            }
+            //void Init()
+            //{
+            //    MagnetSensor Magnet = new MagnetSensor();
+            //    LaserSensorBottom LaserBot = new LaserSensorBottom();
+            //    LaserSensorTop LaserTop = new LaserSensorTop();
+            //    Magnet.Initiate();
+            //    LaserTop.Initiate();
+            //    LaserBot.Initiate();
+            //}
         }
     }
 }

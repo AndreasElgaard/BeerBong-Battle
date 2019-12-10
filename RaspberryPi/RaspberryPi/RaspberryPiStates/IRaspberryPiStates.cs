@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using RaspberryPi.Bluetooth;
+using RaspberryPi.Json_Writer;
 using Sensor;
 using StopWatch;
 
@@ -14,6 +15,6 @@ namespace RaspberryPiStates
     public interface IRaspberryPiStates
     {
         void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
-            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState);
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, JsonWriter writer);
     }
 }
