@@ -26,11 +26,11 @@ namespace WebApiProjekt4.Data.EFCore
             Player = new PlayerRepository(_context);
         }
 
-        public ILeaderBoardRepository LeaderBoard { get; private set; }
-        public IGameRepository Game { get; private set; }
-        public IQueueRepository Queue { get; private set; }
-        public IStatsRepository Stats { get; private set; }
-        public IPlayerRepository Player { get; private set; }
+        public ILeaderBoardRepository LeaderBoard { get; set; }
+        public IGameRepository Game { get; set; }
+        public IQueueRepository Queue { get; set; }
+        public IStatsRepository Stats { get; set; }
+        public IPlayerRepository Player { get; set; }
 
         public int Complete()
         {

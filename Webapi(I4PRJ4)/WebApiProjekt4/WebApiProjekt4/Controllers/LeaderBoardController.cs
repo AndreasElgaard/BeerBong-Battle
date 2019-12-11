@@ -28,7 +28,7 @@ namespace we.Controllers
         }
 
         [HttpGet("Get")]
-        public async Task<ActionResult<IEnumerable<LeaderBoard>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var LeaderBoards = await unitOfWork_.LeaderBoard.GetAll();
 
@@ -41,7 +41,7 @@ namespace we.Controllers
         }
 
         [HttpGet("Get/{Id}")]
-        public async Task<ActionResult<LeaderBoard>> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var LeaderBoard = await unitOfWork_.LeaderBoard.Get(id);
 

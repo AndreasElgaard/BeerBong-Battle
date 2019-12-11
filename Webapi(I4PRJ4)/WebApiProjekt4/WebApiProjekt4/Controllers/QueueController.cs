@@ -29,7 +29,7 @@ namespace we.Controllers
         }
 
         [HttpGet("Get")]
-        public async Task<ActionResult<IEnumerable<Queue>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var Queuee = await unitOfWork_.Queue.GetAll();
 
@@ -42,7 +42,7 @@ namespace we.Controllers
         }
 
         [HttpGet("Get/{id}")]
-        public async Task<ActionResult<Queue>> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var Queue = await unitOfWork_.Queue.Get(id);
 

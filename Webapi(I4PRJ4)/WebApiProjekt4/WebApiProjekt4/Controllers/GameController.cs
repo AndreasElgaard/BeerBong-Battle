@@ -30,7 +30,7 @@ namespace WebApiProjekt4.Controllers
 
         
         [HttpGet("/Get")]
-        public async Task<ActionResult<IEnumerable<Game>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var Games = await unitOfWork_.Game.GetAll();
 

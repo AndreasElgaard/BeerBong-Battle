@@ -31,7 +31,7 @@ namespace WebApiProjekt4.Controllers
      
      
         [HttpGet("Get")]
-        public async Task<ActionResult<IEnumerable<Stats>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var Statss = await unitOfWork_.Stats.GetAll();
      
@@ -44,7 +44,7 @@ namespace WebApiProjekt4.Controllers
         }
      
         [HttpGet("Get/{id}")]
-        public async Task<ActionResult<Stats>> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             var Stats = await unitOfWork_.Stats.Get(id);
      
