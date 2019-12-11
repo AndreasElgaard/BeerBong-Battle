@@ -52,11 +52,11 @@ namespace RaspberryPiUnitTest
 
             _context = Substitute.For<Context>();
             //_emptyState = new EmptyState();
-            _emptyState = Substitute.For<EmptyState>();
+            _emptyState = new EmptyState();
             //_fullState = new FullState();
-            _fullState = Substitute.For<FullState>();
+            _fullState = new FullState();
             //_notDoneState = new NotDoneState();
-            _notDoneState = Substitute.For<NotDoneState>();
+            _notDoneState = new NotDoneState();
 
             _writer = Substitute.For<IJsonWriter>();
 
@@ -191,6 +191,7 @@ namespace RaspberryPiUnitTest
         [Test]
         public void Emptystate_IsFull_Reveived()
         {
+            _emptyState = Substitute.For<EmptyState>();
             _context.setState(_emptyState);
 
             _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
@@ -199,8 +200,10 @@ namespace RaspberryPiUnitTest
         }
 
         [Test]
-        public void Fullstate_IsFull_Reveived()
+        public void NotDoneState_IsFull_Reveived()
         {
+            _notDoneState = Substitute.For<NotDoneState>();
+            
             _context.setState(_notDoneState);
 
             _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
@@ -209,8 +212,9 @@ namespace RaspberryPiUnitTest
         }
 
         [Test]
-        public void NotDonestate_IsFull_Reveived()
+        public void FullState_IsFull_Reveived()
         {
+            _fullState = Substitute.For<FullState>();
             _context.setState(_fullState);
 
             _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
