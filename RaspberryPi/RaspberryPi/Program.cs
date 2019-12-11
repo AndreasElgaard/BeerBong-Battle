@@ -24,10 +24,11 @@ namespace RaspberryPii
         {
             //Init();
             //Bluetooth bt = new Bluetooth();
-            //bt.Init();
-
+            
             MyStopWatch timer = new MyStopWatch();
+            
             Context context = new Context();
+            Init();
             IRaspberryPiStates emptyState = new EmptyState();
             IRaspberryPiStates fullState = new FullState();
             IRaspberryPiStates notDoneState = new NotDoneState();
@@ -39,19 +40,27 @@ namespace RaspberryPii
                    || ReferenceEquals(context.getState(), fullState)
                    || ReferenceEquals(context.getState(), notDoneState))
             {
+                try
+                {
+                    context.IsFull(timer, context, emptyState, fullState, notDoneState, writer);
+                }
+                catch (Exception)
+                {
+                    writer.JsonWriterFunc("EmptyState","","Program Crash");
+                    context.setState(emptyState);
+                }
                 
-                context.IsFull(timer, context, emptyState, fullState, notDoneState, writer);
             }
 
-            //void Init()
-            //{
-            //    MagnetSensor Magnet = new MagnetSensor();
-            //    LaserSensorBottom LaserBot = new LaserSensorBottom();
-            //    LaserSensorTop LaserTop = new LaserSensorTop();
-            //    Magnet.Initiate();
-            //    LaserTop.Initiate();
-            //    LaserBot.Initiate();
-            //}
+            void Init()
+            {
+                //MagnetSensor Magnet = new MagnetSensor();
+                //LaserSensorBottom LaserBot = new LaserSensorBottom();
+                //LaserSensorTop LaserTop = new LaserSensorTop();
+                context.Magnet.Initiate();
+                context.LaserTop.Initiate();
+                context.LaserBot.Initiate();
+            }
         }
     }
 }

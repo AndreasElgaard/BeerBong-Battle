@@ -7,6 +7,8 @@ using Unosquare.RaspberryIO.Abstractions;
 using Unosquare.WiringPi;
 using RaspberryPi;
 using RaspberryPi.Bluetooth;
+using RaspberryPi.Json_Writer;
+using RaspberryPi.Writer;
 using RaspberryPiStates;
 using Sensor;
 using StopWatch;
@@ -18,7 +20,7 @@ namespace RaspberryPiUnitTest
     {
         private IRaspberryPiStates _states;
         
-        private MyStopWatch _stopWatch;
+        private ITimer _stopWatch;
 
         private IBluetooth _bluetooth;
         
@@ -31,8 +33,8 @@ namespace RaspberryPiUnitTest
         private ISensor _laserBot;
         private ISensor _laserTop;
         private ISensor _magnet;
-        
-        
+
+        private IJsonWriter _writer;
 
         [SetUp]
         public void setup()
@@ -55,6 +57,13 @@ namespace RaspberryPiUnitTest
             _fullState = Substitute.For<FullState>();
             //_notDoneState = new NotDoneState();
             _notDoneState = Substitute.For<NotDoneState>();
+
+            _writer = Substitute.For<IJsonWriter>();
+
+            _context.LaserBot = _laserBot;
+            _context.LaserTop = _laserTop;
+            _context.Magnet = _magnet;
+            _context.jsonWriter = _writer;
         }
 
         #region States
@@ -97,7 +106,7 @@ namespace RaspberryPiUnitTest
         }
 
         [Test]
-        public void Test_EmptySate_returnsTrue_when_topAndBot_sensor_isFalse()
+        public void Test_Fullstate_returnsTrue_when_topAndBot_sensor_isFalse()
         {
             _context.setState(_emptyState);
             //_stopWatch.StartTimer();
@@ -105,9 +114,142 @@ namespace RaspberryPiUnitTest
             _laserBot.Detected().Returns(false);
             _laserTop.Detected().Returns(false);
             _magnet.Detected().Returns(false);
-            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState);
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+            Assert.That(_context.getState(), Is.EqualTo(_fullState));
+        }
+
+        [Test]
+        public void Test_NotDoneState_returnsTrue()
+        {
+            _context.setState(_fullState);
+            //_stopWatch.StartTimer();
+            //string result = _stopWatch.StopTimer();
+            _laserBot.Detected().Returns(false);
+            _laserTop.Detected().Returns(true);
+            _magnet.Detected().Returns(true);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+            Assert.That(_context.getState(), Is.EqualTo(_notDoneState));
+        }
+
+        [Test]
+        public void EmptyState_returnsTrue()
+        {
+            _context.setState(_notDoneState);
+            //_stopWatch.StartTimer();
+            //string result = _stopWatch.StopTimer();
+            _laserBot.Detected().Returns(true);
+            _laserTop.Detected().Returns(true);
+            _magnet.Detected().Returns(false);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
             Assert.That(_context.getState(), Is.EqualTo(_emptyState));
         }
+
+        [Test]
+        public void Empty_Stays_True()
+        {
+            _context.setState(_emptyState);
+            //_stopWatch.StartTimer();
+            //string result = _stopWatch.StopTimer();
+            _laserBot.Detected().Returns(true);
+            _laserTop.Detected().Returns(true);
+            _magnet.Detected().Returns(false);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+            Assert.That(_context.getState(), Is.EqualTo(_emptyState));
+        }
+
+        [Test]
+        public void FullState_Stays_True()
+        {
+            _context.setState(_fullState);
+            //_stopWatch.StartTimer();
+            //string result = _stopWatch.StopTimer();
+            _laserBot.Detected().Returns(false);
+            _laserTop.Detected().Returns(false);
+            _magnet.Detected().Returns(false);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+            Assert.That(_context.getState(), Is.EqualTo(_fullState));
+        }
+
+        [Test]
+        public void NotDone_Stays_True()
+        {
+            _context.setState(_notDoneState);
+            //_stopWatch.StartTimer();
+            //string result = _stopWatch.StopTimer();
+            _laserBot.Detected().Returns(false);
+            _laserTop.Detected().Returns(true);
+            _magnet.Detected().Returns(true);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+            Assert.That(_context.getState(), Is.EqualTo(_notDoneState));
+        }
+
+        [Test]
+        public void Emptystate_IsFull_Reveived()
+        {
+            _context.setState(_emptyState);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+
+            _emptyState.Received(1).IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+        }
+
+        [Test]
+        public void Fullstate_IsFull_Reveived()
+        {
+            _context.setState(_notDoneState);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+
+            _notDoneState.Received(1).IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+        }
+
+        [Test]
+        public void NotDonestate_IsFull_Reveived()
+        {
+            _context.setState(_fullState);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+
+            _fullState.Received(1).IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+        }
+
+        [Test]
+        public void FullState_Exception_Thrown()
+        {
+            _context.setState(_fullState);
+
+            _laserTop.Detected().Returns(true);
+            _laserBot.Detected().Returns(false);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+
+            _writer.Received().JsonWriterFunc("Emptystate", "0", "Fullstate error");
+        }
+
+        [Test]
+        public void NotDoneState_Exception_Timeout()
+        {
+            _stopWatch = Substitute.For<ITimer>();
+            _context.setState(_notDoneState);
+
+            _magnet.Detected().Returns(true);
+            _laserBot.Detected().Returns(true);
+
+            _stopWatch.GetTime().Returns(25.0);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+
+
+            _writer.Received().JsonWriterFunc("Emptystate", "0", "Timeout");
+        }
+        #endregion
+
+        #region Timer
 
         [TestCase("02.23")]
         public void Test_timer_returns_right_value(string a)
@@ -118,8 +260,8 @@ namespace RaspberryPiUnitTest
             Assert.That(a, Is.EqualTo(result));
         }
 
-        [TestCase("01.00")]
-        public void Test_get_time(string time)
+        [TestCase(1.0)]
+        public void Test_get_time(double time)
         {
             _stopWatch.StartTimer();
             Thread.Sleep(1000);
@@ -127,6 +269,69 @@ namespace RaspberryPiUnitTest
             _stopWatch.StopTimer();
 
             Assert.That(result, Is.EqualTo(01.00));
+        }
+
+
+
+        #endregion
+
+        #region Sensor
+
+        [Test]
+        public void LaserTop_Detected_Empty()
+        {
+            _context.setState(_emptyState);
+            //_stopWatch.StartTimer();
+            //string result = _stopWatch.StopTimer();
+            //_laserBot.Detected().Returns(false);
+            //_laserTop.Detected().Returns(false);
+            //_magnet.Detected().Returns(false);
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+
+            _laserTop.Received(1).Detected();
+        }
+
+        [Test]
+        public void LaserBot_Detected_NotDone()
+        {
+            _context.setState(_notDoneState);
+            //_stopWatch.StartTimer();
+            //string result = _stopWatch.StopTimer();
+            //_laserBot.Detected().Returns(false);
+            //_laserTop.Detected().Returns(false);
+            //_magnet.Detected().Returns(false);
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+
+            _laserBot.Received().Detected();
+        }
+
+        [Test]
+        public void Magnet_Detected_FullState()
+        {
+            _context.setState(_fullState);
+            //_stopWatch.StartTimer();
+            //string result = _stopWatch.StopTimer();
+            //_laserBot.Detected().Returns(false);
+            _laserTop.Detected().Returns(true);
+            //_magnet.Detected().Returns(false);
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+
+            _magnet.Received(1).Detected();
+        }
+
+        #endregion
+
+        #region Writer
+
+        [Test]
+        public void JsonWriter_Writer_Received()
+        {
+            _context.setState(_emptyState);
+            _laserTop.Detected().Returns(false);
+
+            _context.IsFull(_stopWatch, _context, _emptyState, _fullState, _notDoneState, _writer);
+
+            _writer.Received().JsonWriterFunc("Fullstate", "0", "");
         }
 
         #endregion
@@ -149,6 +354,6 @@ namespace RaspberryPiUnitTest
         }*/
 
         #endregion
-        }
+    }
 }
 

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using RaspberryPi.Bluetooth;
 using RaspberryPi.Json_Writer;
+using RaspberryPi.Writer;
 using Sensor;
 using StopWatch;
 
@@ -21,8 +22,8 @@ namespace RaspberryPiStates
         //JsonWriter writer = new JsonWriter();
        private double MAX_TIME = 20.00; 
 
-        public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
-            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, JsonWriter writer)
+        public void IsFull(ITimer timer, Context context, IRaspberryPiStates emptyState,
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, IJsonWriter writer)
         {
             try
             {

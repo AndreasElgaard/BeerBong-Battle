@@ -6,11 +6,11 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using RaspberryPi.Websocket;
+using RaspberryPi.Writer;
 
 namespace RaspberryPi.Json_Writer
 {
-    public class JsonWriter
+    public class JsonWriter : IJsonWriter
     {
         public void JsonWriterFunc(string context, string time, string comment)
         {

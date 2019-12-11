@@ -159,8 +159,8 @@
     <Compile Include="Sensor\MagnetSensor.cs" />
     <Compile Include="Timer\ITimer.cs" />
     <Compile Include="Timer\MyStopWatch.cs" />
-    <Compile Include="Websocket\Websocket.cs" />
     <Compile Include="Writer\Data.cs" />
+    <Compile Include="Writer\IJsonWriter.cs" />
     <Compile Include="Writer\JsonWriter.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,10 @@ namespace StopWatch
             time.Start();
         }
 
+        /// <summary>
+        /// Stop timer, og returner tid i en string
+        /// </summary>
+        /// <returns></returns>
         public string StopTimer()
         {
             string elapsedTime = null;
@@ -30,7 +34,10 @@ namespace StopWatch
 
             return elapsedTime;
         }
-
+        /// <summary>
+        /// Watchdog for NotDoneException
+        /// </summary>
+        /// <returns></returns>
         public double GetTime()
         {
             TimeSpan ts = TimeSpan.Zero;

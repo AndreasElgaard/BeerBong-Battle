@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RaspberryPi.Bluetooth;
 using RaspberryPi.Json_Writer;
+using RaspberryPi.Writer;
 using Sensor;
 using StopWatch;
 
@@ -14,20 +15,20 @@ namespace RaspberryPiStates
     public class Context
     {
         public IRaspberryPiStates _currentState;
-        public MagnetSensor Magnet;
-        public LaserSensorBottom LaserBot;
-        public LaserSensorTop LaserTop;
-        public JsonWriter jsonWriter;
+        public ISensor Magnet { set; get; }
+        public ISensor LaserBot { set; get; }
+        public ISensor LaserTop { set; get; }
+        public IJsonWriter jsonWriter { set; get; }
 
         public Context()
         {
             _currentState = new EmptyState();
             Magnet = new MagnetSensor();
-            Magnet.Initiate();
+            
             LaserBot = new LaserSensorBottom();
-            LaserBot.Initiate();
+            
             LaserTop = new LaserSensorTop();
-            LaserTop.Initiate();
+            
             jsonWriter = new JsonWriter();
         }
 
@@ -42,8 +43,8 @@ namespace RaspberryPiStates
             return _currentState;
         }
 
-        public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
-            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, JsonWriter writer)
+        public void IsFull(ITimer timer, Context context, IRaspberryPiStates emptyState,
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, IJsonWriter writer)
         {
             _currentState.IsFull(timer, context, emptyState, fullState, notDoneState, writer);
         }

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using RaspberryPi.Bluetooth;
 using RaspberryPi.Json_Writer;
+using RaspberryPi.Writer;
 using Sensor;
 using StopWatch;
 
@@ -16,8 +17,8 @@ namespace RaspberryPiStates
         //LaserSensorTop LaserTop = new LaserSensorTop();
         //Bluetooth bt = new Bluetooth();
         //JsonWriter writer = new JsonWriter();
-        public void IsFull(MyStopWatch timer, Context context, IRaspberryPiStates emptyState,
-            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, JsonWriter writer)
+        public void IsFull(ITimer timer, Context context, IRaspberryPiStates emptyState,
+            IRaspberryPiStates fullState, IRaspberryPiStates notDoneState, IJsonWriter writer)
         {
             //Console.WriteLine("EmptyState");
             if (context.LaserTop.Detected() == true)
