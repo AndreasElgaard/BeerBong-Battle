@@ -55,6 +55,11 @@ namespace WebApiProjekt4.Repositories
                     .ThenInclude(p => p.Stats)
                 .SingleAsync(g => g.GameId == Gameid);
 
+            if (game == null)
+            {
+                return null;
+            }
+
             var latest = new List<GameWinnerResult>();
 
             foreach (var player in game.Players)

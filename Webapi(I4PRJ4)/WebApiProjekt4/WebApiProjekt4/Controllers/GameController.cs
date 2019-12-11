@@ -97,15 +97,15 @@ namespace WebApiProjekt4.Controllers
         [HttpDelete("Remove")]
         public IActionResult Delete(int gameId)
         {
-            //try
-            //{
+            try
+            {
                 unitOfWork_.Game.Remove(gameId);
                 unitOfWork_.Complete();
-            //}
-            //catch
-            //{
-            //    return BadRequest(new { message = "Game Didn't exsist" });
-            //}
+            }
+            catch
+            {
+                return BadRequest(new { message = "Game Didn't exsist" });
+            }
 
 
             return Ok();

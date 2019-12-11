@@ -129,11 +129,15 @@ namespace we.Controllers
         {
             var result = await unitOfWork_.LeaderBoard.GetTopTimes();
 
+            if (result == null)
+            {
+                return BadRequest();
+            }
 
             return Ok(result);
         }
 
-        [Route("InsertTopTimes")]
+        [Route("InsertPlayerIntoLeaderBoard")]
         [HttpPut]
         public async Task<IActionResult> InsertIntoLeaderBoard(int playerId)
         {

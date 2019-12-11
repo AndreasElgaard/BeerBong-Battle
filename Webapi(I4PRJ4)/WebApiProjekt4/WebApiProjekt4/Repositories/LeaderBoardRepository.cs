@@ -30,6 +30,11 @@ namespace WebApiProjekt4.Repositories
                     .ThenInclude(s => s.Stats)
                 .FirstAsync();
 
+            if (Items == null)
+            {
+                return null;
+            }
+
             var Top = new List<TopTimes>();
 
             foreach (var player in Items.Players)
